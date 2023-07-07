@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 
 function LogIn() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-zinc-100">
       <main className="flex-grow">
-        <section className="flex justify-center items-center h-full">
-          <div>
+        <section className="flex justify-center items-center h-full place-content-center">
+          <div className=" border-zinc-400 p-8 shadow-2xl bg-gray-50 my-64 ">
             <form
               noValidate=""
               id="new_user"
@@ -22,19 +22,19 @@ function LogIn() {
                   alt="logo"
                 ></img>
               </div>
-              <h2 className="text-center text-3xl mt-5 mb-3 font-light">
+              <h2 className="text-center text-3xl mt-5 mb-3 font-light font-serif">
                 Sign In
               </h2>
               <div>
-                <div className="box-border h-10 w-160 p-4 solid neutral-800 rounded-md border-2 text-left mb-4 w-120 flex items-center">
-                  <input placeholder="Email address" id="user_email"></input>
+                <div className="box-border h-10 w-160 p-4 solid neutral-800 rounded-md border-2 text-left mb-4 w-120 flex items-center bg-pink-50">
+                  <input className="bg-pink-50 w-full" placeholder="Email address" id="user_email"></input>
                 </div>
-                <div className="box-border h-10 w-160 p-4 solid neutral-800 rounded-md border-2 text-left w-120 flex items-center">
-                  <input placeholder="Password" id="user_password"></input>
+                <div className="box-border h-10 w-160 p-4 solid neutral-800 rounded-md border-2 text-left w-120 flex items-center bg-pink-50">
+                  <input className="bg-pink-50 w-full" placeholder="Password" id="user_password"></input>
                 </div>
                 <div>
                   <div className="text-right font-extralight font-sans mr-2 p-1.5 mb-4">
-                    <input type="hidden" name="user[remember_me]" value="0" />
+                    <input  type="hidden" name="user[remember_me]" value="0" />
                     <label htmlFor="user_remember_me">
                       <input
                         className="mr-2"
@@ -56,20 +56,20 @@ function LogIn() {
                   data-disable-with="Sign in"
                   value="SIGN IN"
                 />
-                <ul className="text-center">
+                <ul className="text-center pt-1">
                   <li>
                     <a
-                      className=" text-[#00808C] text-base"
+                      className="text-[#00808C] text-base"
                       href="/forgot-password"
                     >
                       Forgot your password?
                     </a>
                   </li>
-                  <li className=" text-sm">
-                    <span>or sign in using a service</span>
-                    <div>
+                  <li className=" text-sm p-8 font-serif">
+                    <span class="hr"  >or sign in using a service</span>
+                    <div className=" border-solid border-2 border-gray-250 my-8 py-1 rounded-md">
                       <a
-                        className="font-semibold text-[#00808C] text-xs "
+                        className="font-semibold text-[#00808C] text-xs"
                         rel="nofollow"
                         data-method="post"
                         href="/auth/github"
@@ -78,11 +78,7 @@ function LogIn() {
                       </a>
                     </div>
                   </li>
-                  <li>
-                    <a className="text-center text-xs mt-5 font-light" href="#">
-                      Sign in using your email?
-                    </a>
-                  </li>
+             
                 </ul>
                 <div></div>
               </div>
@@ -120,3 +116,5 @@ function LogIn() {
   );
 }
 export default LogIn;
+
+
