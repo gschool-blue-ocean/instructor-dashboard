@@ -4,13 +4,12 @@ const SignUpForm = () => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
-	const [pass, setPass] = useState("");
-	const [userType, setUserType] = useState("");
-	const [cohort, setCohort] = useState("");
+	const [pass1, setPass1] = useState("");
+	const [pass2, setPass2] = useState("");
 
 	function handleSumbit(e) {
 		e.preventDefault();
-		//do registration stuff
+		//submit registration data and clear inputs
 	}
 
 	return (
@@ -50,37 +49,20 @@ const SignUpForm = () => {
 						className="p-1.5 text-xs border rounded-md focus:border-custom-500 focus:outline-none"
 					/>
 					<input
-						value={pass}
-						onChange={(e) => setPass(e.target.value)}
+						value={pass1}
+						onChange={(e) => setPass1(e.target.value)}
 						type="password"
 						placeholder="Password"
 						className="p-1.5 text-xs border rounded-md focus:border-custom-500  focus:outline-none"
 					/>
-					<select
-						value={userType}
-						onChange={(e) => setUserType(e.target.value)}
-						className="p-1.5 text-xs border rounded-md text-slate-400 focus:border-custom-500 mb-6 focus:outline-none"
-					>
-						<option value="" disabled>
-							Select User Type
-						</option>
-						<option value="student">Student</option>
-						<option value="instructor">Instructor</option>
-					</select>
-					{userType === "student" && (
-						<select
-							value={cohort}
-							onChange={(e) => setCohort(e.target.value)}
-							className="p-1.5 text-xs border rounded-md text-slate-400 focus:border-custom-500 mb-6 focus:outline-none"
-						>
-							<option value="" disabled>
-								Select Cohort
-							</option>
-							<option value="mcsp-22">mcsp-22</option>
-							<option value="mcsp-21">mcsp-21</option>
-							<option value="mcsp-20">mcsp-20</option>
-						</select>
-					)}
+					<input
+						value={pass2}
+						onChange={(e) => setPass2(e.target.value)}
+						type="password"
+						placeholder="Password"
+						className="p-1.5 text-xs border rounded-md focus:border-custom-500  focus:outline-none"
+					/>
+
 					<button className="bg-custom-500 rounded-full p-2">Submit</button>
 				</form>
 			</div>
