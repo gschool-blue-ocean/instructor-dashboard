@@ -51,11 +51,10 @@ const SignUpForm = () => {
 						placeholder="Password"
 						className="p-1.5 text-xs border rounded-md focus:border-custom-500  focus:outline-none"
 					/>
-					<label htmlFor="userType"></label>
 					<select
 						value={userType}
 						onChange={(e) => setUserType(e.target.value)}
-						className="p-1.5 text-sm border rounded-md focus:border-custom-500 mb-6 focus:outline-none"
+						className="p-1.5 text-xs border rounded-md text-slate-400 focus:border-custom-500 mb-6 focus:outline-none"
 					>
 						<option value="" disabled>
 							Select User Type
