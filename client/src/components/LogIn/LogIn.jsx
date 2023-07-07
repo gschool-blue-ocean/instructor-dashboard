@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../../context/authContext";
 
 function LogIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { signIn } = UserAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signIn(email, password);
+      navigate("/account");
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-zinc-100">
       <main className="flex-grow">
         <section className="flex justify-center items-center h-full place-content-center">
           <div className=" border-zinc-400 p-8 shadow-2xl bg-gray-50 my-64 ">
-            <form
-              noValidate=""
-              id="new_user"
-              action="/sign_in"
-              acceptCharset="UTF-8"
-              method="post"
-            >
+            <form onSubmit={handleSubmit}>
               <input name="utf8" type="hidden" value="✓" />
               <input type="hidden" />
               <div>
@@ -27,14 +41,28 @@ function LogIn() {
               </h2>
               <div>
                 <div className="box-border h-10 w-160 p-4 solid neutral-800 rounded-md border-2 text-left mb-4 w-120 flex items-center bg-pink-50">
-                  <input className="bg-pink-50 w-full" placeholder="Email address" id="user_email"></input>
+                  <input
+                    className="bg-pink-50 w-full"
+                    placeholder="Email address"
+                    id="user_email"
+                    value={email}
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
                 </div>
                 <div className="box-border h-10 w-160 p-4 solid neutral-800 rounded-md border-2 text-left w-120 flex items-center bg-pink-50">
-                  <input className="bg-pink-50 w-full" placeholder="Password" id="user_password"></input>
+                  <input
+                    className="bg-pink-50 w-full"
+                    placeholder="Password"
+                    id="user_password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  ></input>
                 </div>
                 <div>
                   <div className="text-right font-extralight font-sans mr-2 p-1.5 mb-4">
-                    <input  type="hidden" name="user[remember_me]" value="0" />
+                    <input type="hidden" name="user[remember_me]" value="0" />
                     <label htmlFor="user_remember_me">
                       <input
                         className="mr-2"
@@ -66,7 +94,7 @@ function LogIn() {
                     </a>
                   </li>
                   <li className=" text-sm p-8 font-serif">
-                    <span class="hr"  >or sign in using a service</span>
+                    <span className="hr">or sign in using a service</span>
                     <div className=" border-solid border-2 border-gray-250 my-8 py-1 rounded-md">
                       <a
                         className="font-semibold text-[#00808C] text-xs"
@@ -78,7 +106,6 @@ function LogIn() {
                       </a>
                     </div>
                   </li>
-             
                 </ul>
                 <div></div>
               </div>
@@ -116,5 +143,3 @@ function LogIn() {
   );
 }
 export default LogIn;
-
-
