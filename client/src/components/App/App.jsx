@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import LogIn from "../LogIn/LogIn.jsx";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
-import Signup from "../signin/login/Signup";
-import Login from "../signin/login/Login";
-import Account from "../signin/login/Account";
 import { AuthContextProvider } from "../../context/authContext";
+import LogIn from "../LogIn/LogIn";
+import SignUpForm from "../Sign-up Page/SignUpForm";
 
 const App = () => {
   return (
@@ -13,9 +11,8 @@ const App = () => {
       <h1 className="text-center text 3xl font-bold">Firebase auth</h1>
       <AuthContextProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/" element={<LogIn />} />
+          <Route path="/signup" element={<SignUpForm />} />
         </Routes>
       </AuthContextProvider>
     </div>
