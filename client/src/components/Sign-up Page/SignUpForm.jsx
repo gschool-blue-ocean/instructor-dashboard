@@ -28,34 +28,34 @@ const SignUpForm = () => {
 						onChange={(e) => setFirstName(e.target.value)}
 						type="text"
 						placeholder="First Name"
-						className="p-1 text-sm border rounded-md"
+						className="p-1.5 text-xs border rounded-md focus:border-custom-500 focus:outline-none"
 					/>
 					<input
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
 						type="text"
 						placeholder="Last Name"
-						className="p-1 text-sm border rounded-md"
+						className="p-1.5 text-xs border rounded-md focus:border-custom-500 focus:outline-none"
 					/>
 					<input
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						type="email"
 						placeholder="Email"
-						className="p-1 text-sm border rounded-md"
+						className="p-1.5 text-xs border rounded-md focus:border-custom-500 focus:outline-none"
 					/>
 					<input
 						value={pass}
 						onChange={(e) => setPass(e.target.value)}
 						type="password"
 						placeholder="Password"
-						className="p-1 text-sm border rounded-md"
+						className="p-1.5 text-xs border rounded-md focus:border-custom-500  focus:outline-none"
 					/>
 					<label htmlFor="userType"></label>
 					<select
 						value={userType}
 						onChange={(e) => setUserType(e.target.value)}
-						className="p-1 text-sm border rounded-md mb-6"
+						className="p-1.5 text-sm border rounded-md focus:border-custom-500 mb-6 focus:outline-none"
 					>
 						<option value="" disabled>
 							Select User Type
