@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "../../context/authContext";
 import LogIn from "../LogIn/LogIn";
 import SignUpForm from "../Sign-up Page/SignUpForm";
+import StudentOverview from "../Student-overview/StudentSummary";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LogIn />} />
           <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/studentoverview" element={<StudentOverview />} />
         </Routes>
       </AuthContextProvider>
     </div>
