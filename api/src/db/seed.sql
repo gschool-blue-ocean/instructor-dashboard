@@ -1,0 +1,13 @@
+-- --test insertions
+-- INSERT INTO mcsp (mcsp) VALUES (21)
+-- INSERT INTO student (first_name, last_name, email, mcsp_id)
+-- VALUES ('John', 'Doe', 'johndoe@example.com', 1);
+-- INSERT INTO student (first_name, last_name, email, mcsp_id)
+-- VALUES ('jane', 'Doe', 'janedoe@example.com', 1);
+-- INSERT INTO student (first_name, last_name, email, mcsp_id)
+-- VALUES ('steve', 'jobs', 'stevejobs@example.com', 1);
+-- INSERT INTO teacher (first_name, last_name, email)
+-- VALUES ('teacher1', 'Doe', 'teacher1@example.com');
+-- INSERT INTO teacher (first_name, last_name, email)
+-- VALUES ('teacher2', 'Doe', 'teacher2@example.com');
+-- INSERT INTO mcsp_teacher (mcsp_id, teacher_id) VALUES (1, 1);
