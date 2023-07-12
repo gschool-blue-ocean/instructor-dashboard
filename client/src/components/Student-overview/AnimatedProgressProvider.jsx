@@ -3,9 +3,10 @@ import { Animate } from "react-move";
 
 class AnimatedProgressProvider extends React.Component {
   interval = undefined;
+  timeout = undefined;
 
   state = {
-    isAnimated: false
+    isAnimated: true
   };
 
   static defaultProps = {
@@ -13,22 +14,28 @@ class AnimatedProgressProvider extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.repeat) {
-      this.interval = window.setInterval(() => {
-        this.setState({
-          isAnimated: !this.state.isAnimated
-        });
-      }, this.props.duration * 1000);
+    if (this.props.once) {
+      this.timeout = window.setTimeout(() => {
+        this.setState(
+          {
+            isAnimated: !this.state.isAnimated
+          },
+          () => {
+            this.startAnimation();
+          }
+        );
+      }, this.props.duration * 2000);
     } else {
-      this.setState({
-        isAnimated: !this.state.isAnimated
-      });
+      this.startAnimation();
     }
   }
-
-  componentWillUnmount() {
-    window.clearInterval(this.interval);
+  
+  startAnimation() {
+    this.setState({
+      isAnimated: !this.state.isAnimated
+    });
   }
+  
 
   render() {
     return (
