@@ -1,7 +1,7 @@
-import { it, expect, beforeAll, afterEach, afterAll } from "vitest";
-import request from "supertest";
-import server from "./server.js";
-import db from "./db/db.js";
+import { it, expect, beforeAll, afterEach, afterAll } from 'vitest'
+import request from 'supertest'
+import server from './server.js'
+import db from './db/db.js'
 
 // FIXME: Use docker in GitHub CI to setup a real database.
 
