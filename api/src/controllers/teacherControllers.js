@@ -79,3 +79,58 @@ export async function deleteTeacher(req, res, next) {
         next(error)
     }
 }
+
+export async function getMcspOverview(req, res, next) {
+    try {
+        const mcsp = req.params.mcsp
+        const totalAssignments = 40
+        const totalProjects = 21
+        const getProjectTotal = `SELECT COUNT(*) AS project_total FROM project WHERE mcsp = $1`
+        const getAssessmentAverage = `SELECT AVG(percent) AS average_percentage FROM assessment WHERE mcsp=$1`
+
+        const assignmentCountQuery = `
+        SELECT COUNT(*) AS assignment_count
+        FROM assignment
+        WHERE completed = true AND mcsp = $1
+      `
+        const pointsQuery = `
+        SELECT AVG(points) AS average_attendance_points
+        FROM attendance_points
+        WHERE mcsp = $1
+      `
+        const [
+            averageAssessmentPercentResult,
+            assignmentCountResult,
+            average_attendance_points,
+            projectTotalResult,
+        ] = await Promise.all([
+            db.query(getAssessmentAverage, [mcsp]),
+            db.query(assignmentCountQuery, [mcsp]),
+            db.query(pointsQuery, [mcsp]),
+            db.query(getProjectTotal, [mcsp]),
+        ])
+        const projectTotalNumber = projectTotalResult.rows[0].project_total
+        const assessmentAverage =
+            averageAssessmentPercentResult.rows[0].average_percentage
+        const assignmentCount = assignmentCountResult.rows[0].assignment_count
+        const attendancePoints =
+            average_attendance_points.rows[0].average_attendance_points
+        // console.log(pointsResult)
+        const mcspOverview = {
+            assessment_average: Number(Number(assessmentAverage).toFixed(2)),
+            assignment_completion_percentage: Number(
+                ((Number(assignmentCount) / totalAssignments) * 100).toFixed(2)
+            ),
+            average_attendance_points: Number(
+                Number(attendancePoints).toFixed(2)
+            ),
+            project_total: Number(
+                ((Number(projectTotalNumber) / totalProjects) * 100).toFixed(2)
+            ),
+        }
+
+        res.status(200).json(mcspOverview)
+    } catch (error) {
+        next(error)
+    }
+}

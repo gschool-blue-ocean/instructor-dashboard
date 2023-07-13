@@ -14,15 +14,35 @@ export async function createMcsp(req, res, next) {
     try {
         const userInputObj = req.body
         const newMcsp = userInputObj.mcsp
-        //this is NOT a forgein key
+        newMcsp.toUppercase()
+        //this is NOT a forgein key, its VARCHAR(20) UNIQUE though.
 
         const result = await db.query(
             'INSERT INTO mcsp (mcsp) VALUES ($1) RETURNING *',
             [newMcsp]
         )
 
-        const createdNewStudent = result.rows[0]
-        res.status(201).send(createdNewStudent)
+        const createdNewMcsp = result.rows[0]
+        res.status(201).send(createdNewMcsp)
+    } catch (error) {
+        next(error)
+    }
+}
+export async function updateMcsp(req, res, next) {
+    try {
+        const userInputObj = req.body
+        const mcspId = req.params.mcspId
+        const newMcsp = userInputObj.mcsp
+        newMcsp.toUppercase()
+        //this is NOT a forgein key
+
+        const result = await db.query(
+            'UPDATE mcsp SET mcsp = COALESCE($1, mcsp) WHERE mcsp_id = $2 RETURNING *',
+            [newMcsp, mcspId]
+        )
+
+        const updatedMcsp = result.rows[0]
+        res.status(201).send(updatedMcsp)
     } catch (error) {
         next(error)
     }

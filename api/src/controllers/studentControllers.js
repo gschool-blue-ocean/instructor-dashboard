@@ -25,7 +25,7 @@ export async function createStudent(req, res, next) {
         const newStudentMcsp = userInputObj.mcsp
 
         const result = await db.query(
-            'INSERT INTO student (first_name, last_name, email, mcsp) VALUES ($1, $2, $3, $4) RETURNING *',
+            'INSERT INTO student (first_name, last_name, email, mcsp) VALUES ($1, $2, $3, $4) RETURNING student_id',
             [
                 newStudentName,
                 newStudentLastName,
@@ -35,6 +35,15 @@ export async function createStudent(req, res, next) {
         )
 
         const createdNewStudent = result.rows[0]
+        const studentId = createdNewStudent.student_id
+        const studentMcsp = createdNewStudent.mcsp
+        studentMcsp.toUpperCase()
+        //creating a student will automatically make a attendance_points INSERT with the student_id
+        await db.query(
+            'INSERT INTO attendance_points (student_id, points, mcsp) VALUES ($1, 0, $2)',
+            [studentId, studentMcsp]
+        )
+
         res.status(201).send(createdNewStudent)
     } catch (error) {
         next(error)
@@ -102,6 +111,12 @@ export async function getStudentProject(req, res, next) {
 export async function getStudentOverview(req, res, next) {
     try {
         const studentId = req.params.studentId
+        const totalAssignments = 40
+        const totalProjects = 21
+
+        const getProjectTotal = `SELECT COUNT(*) AS project_total FROM project WHERE student_id = $1`
+
+        const getAssessmentAverage = `SELECT AVG(percent) AS average_percentage FROM assessment WHERE student_id=$1`
 
         const assignmentCountQuery = `
         SELECT COUNT(*) AS assignment_count
@@ -115,17 +130,32 @@ export async function getStudentOverview(req, res, next) {
         WHERE student_id = $1
       `
 
-        const [assignmentCountResult, pointsResult] = await Promise.all([
+        const [
+            averageAssessmentPercentResult,
+            assignmentCountResult,
+            pointsResult,
+            projectTotalResult,
+        ] = await Promise.all([
+            db.query(getAssessmentAverage, [studentId]),
             db.query(assignmentCountQuery, [studentId]),
             db.query(pointsQuery, [studentId]),
+            db.query(getProjectTotal, [studentId]),
         ])
 
+        const projectTotalNumber = projectTotalResult.rows[0].project_total
+        const assessmentAverage =
+            averageAssessmentPercentResult.rows[0].average_percentage
         const assignmentCount = assignmentCountResult.rows[0].assignment_count
         const attendancePoints = pointsResult.rows[0].points
-
         const studentOverview = {
-            assignment_count: assignmentCount,
+            assessment_average: Number(Number(assessmentAverage).toFixed(2)),
+            assignment_completion_percentage: Number(
+                ((Number(assignmentCount) / totalAssignments) * 100).toFixed(2)
+            ),
             attendance_points: attendancePoints,
+            project_total: Number(
+                ((Number(projectTotalNumber) / totalProjects) * 100).toFixed(2)
+            ),
         }
 
         res.status(200).json(studentOverview)

@@ -3,7 +3,7 @@ import {
     getAssignment,
     updatedAssignment,
     deleteAssignment,
-} from '../controllers/assignmentControllers.js'
+} from '../controllers/assignmentController.js'
 
 const router = express.Router()
 
