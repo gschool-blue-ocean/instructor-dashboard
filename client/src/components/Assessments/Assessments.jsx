@@ -21,7 +21,7 @@ function AssessDetails() {
             <td>{detail.Grade} </td>
         </tr>);
     return (
-        <section className="mt-8 min-h-screen bg-{#f1f5f9}"
+        <section className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
             style={{ maxWidth: "600px", minWidth: "344px" }}
         >
            <table>
