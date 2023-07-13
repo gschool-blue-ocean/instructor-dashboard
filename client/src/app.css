@@ -1,4 +1,4 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -9,6 +9,7 @@ body {
   box-sizing: border-box;
 }
 
+/*
 .Complete {
   text-decoration: line-through;
 }
@@ -19,17 +20,8 @@ body {
   color: green;
   padding: 2px;
   border: thin solid black;
-} */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+} 
+*/
 
 .checkbox-input {
   @apply hidden;
