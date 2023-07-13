@@ -3,7 +3,9 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "./AnimatedProgressProvider";
-
+import  AssessDetails  from "../Assessments/Assessments.jsx"
+import ProjectDetails from "../Projects/Projects";
+import AssignmentDetails from "../Assignment/Assignments";
 
 const StudentOverview = () => {
   const [studentName, setStudentName] = useState("studentName");
@@ -11,112 +13,30 @@ const StudentOverview = () => {
   const [assignmentsCompletion, setAssignmentCompletion] = useState(71);
   const [projectCompletion, setProjectCompletion] = useState(84);
   const [assessmentResults, setAssessmentResults] = useState(94.5);
+
   const [detailDisplayStatus, setDetailDisplayStatus] = useState(
     <div></div>
   );
 
   function detailDisplay() {
-    setDetailDisplayStatus(assignmentsCompletionDiv);
+    setDetailDisplayStatus(AssignmentDetails);
   }
   function detailDisplay2() {
-    setDetailDisplayStatus(projectCompletionDiv);
+    setDetailDisplayStatus(ProjectDetails);
   }
   function detailDisplay3() {
-    setDetailDisplayStatus(assessmentResultsDiv);
+    setDetailDisplayStatus(AssessDetails);
   }
   useEffect(() => {
     setDetailDisplayStatus(
-      <div></div>
-    ); // Call the detailDisplay function when the component mounts
+      
+    ); // This to trigger the animation
+   
   }, []);
 
-  var assignmentsCompletionDiv = (
-    <div>
-      <div className="border-t-4 border-black text-3xl p-5">
-        Assignment Summary
-      </div>
-      <div className="border-4 border-black h-1/2 w-4/5 ml-2 rounded-3xl divide-y divide-y-4 divide-black divide-solid text-3xl pt-5 ml-5">
-        Weekly Assignments(04)
-        <div class="line-through ...">
-          ✅ Mini Module: What is an Operating System 
-          <button className="rounded-lg border-solid border-2 border-black ml-64 my-3 p-2">
-            view
-          </button>
-        </div>
-
-        <div>
-        <input type="checkbox" class=" ring-2 text-6xl m-5 w-6 h-6 text-center" />
-        Mini Module: what is Docker
-          <button className="rounded-lg border-solid border-2 border-black ml-64 my-3 p-2">
-            
-            view
-          </button>
-        </div>
-        <div>
-          03
-          <button className="rounded-lg border-solid border-2 border-black ml-64 my-3 p-2">
-            view
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  var projectCompletionDiv = (
-    <div>
-      <div className="border-t-4 border-black text-3xl p-5"></div>
-      <div className="border-4 border-black h-1/2 w-4/5 ml-2 rounded-3xl divide-y divide-y-4 divide-black divide-solid text-3xl pt-5 ml-5">
-        Project(10)
-        <div>
-          01
-          <button className="rounded-lg border-solid border-2 border-black ml-64 my-3 p-2">
-            Feedback
-          </button>
-        </div>
-        <div>
-          02
-          <button className="rounded-lg  border-solid border-2 border-black ml-64 my-3 p-2">
-            Feedback
-          </button>
-        </div>
-        <div>
-          03
-          <button className="rounded-lg border-solid border-2 border-black ml-64 my-3 p-2">
-            Feedback
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-  var assessmentResultsDiv = (
-    <div>
-      <div class="rounded-lg border-solid border-4 border-black h-96 w-7/8 m-5 divide-y divide-y-4 divide-black divide-solid ">
-        <div className="text-center font-bold text-3xl">Assessment Results</div>
-        <div class="grid grid-cols-3 divide-x-4 divide-black ">
-          <div className="text-center font-bold p-5 text-3xl">Week </div>
-          <div className="text-center font-bold p-5 text-3xl">Assessment</div>
-          <div className="text-center font-bold p-5 text-3xl">Grade</div> 
-        </div>
-
-        <div class="grid grid-cols-3 divide-x-4 divide-black">
-          <div className="text-center font-bold p-5 text-3xl">2</div>
-          <div className="text-center font-bold p-5 text-3xl">DOM API Assessment</div>
-          <div className="text-center font-bold p-5 text-3xl">95%</div>
-        </div>
-
-        <div class="grid grid-cols-3 divide-x-4 divide-black ">
-          <div className="text-center font-bold p-5 text-3xl">6</div>
-          <div className="text-center font-bold p-5 text-3xl">Server Side Assessment</div>
-          <div className="text-center font-bold p-5 text-3xl">92%</div>
-        </div>
-
-        <div></div>
-      </div>
-    </div>
-  );
 
   return (
-    <section class="bg-slate-200 min-h-screen ">
+    <div class="">
       <p className="text-right m-3 font-bold text-3xl">{cohort}</p>
       <p class="text-left ml-5 font-bold text-3xl">
         Welcome back, {studentName}
@@ -126,9 +46,9 @@ const StudentOverview = () => {
         {" "}
         Track, manage and forecast your performance
       </p>
-      <div class="flex place-content-center">
+      <div class="flex place-content-center ">
         <div
-          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4"
+          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
           onClick={() => {
             detailDisplay();
           }}
@@ -157,7 +77,7 @@ const StudentOverview = () => {
           </div>
         </div>
         <div
-          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4"
+          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
           onClick={() => {
             detailDisplay2();
           }}
@@ -186,7 +106,7 @@ const StudentOverview = () => {
           </div>
         </div>
         <div
-          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4"
+          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
           onClick={() => {
             detailDisplay3();
           }}
@@ -214,7 +134,7 @@ const StudentOverview = () => {
             </AnimatedProgressProvider>
           </div>
         </div>
-        <div class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4">
+        <div class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96">
           <div class="text-center font-bold border-b-4 border-black">
             Points Accured
           </div>
@@ -240,8 +160,8 @@ const StudentOverview = () => {
           </div>
         </div>
       </div>
-      {detailDisplayStatus}
-    </section>
+      <div>   {detailDisplayStatus}</div>
+    </div>
   );
 };
 

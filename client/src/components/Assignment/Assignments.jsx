@@ -18,7 +18,7 @@ function AssignmentDetails() {
             <button data-id={detail.ID} onClick={handleClick}>View</button>
         </li>);
     return (
-        <section className="mt-8 min-h-screen bg-{#f1f5f9}"
+        <section className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
             style={{ maxWidth: "600px", minWidth: "344px" }}
         >
             <h1>Assignment Summary :</h1>

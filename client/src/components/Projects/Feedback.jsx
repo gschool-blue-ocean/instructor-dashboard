@@ -6,7 +6,7 @@ function Feedback() {
         Design: 4,
         Code_quality: 3,
         Feedback: "Feedback Text",
-        Input_disabled: false
+        Input_disabled: true
     };
 
     const [design, setDesign] = useState(project.Design);
