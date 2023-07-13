@@ -12,5 +12,8 @@
   "devDependencies": {
     "concurrently": "^7.1.0",
     "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "react-pro-sidebar": "^1.1.0-alpha.1"
   }
 }
