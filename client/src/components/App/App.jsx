@@ -10,6 +10,7 @@ import AssignmentDetails from "../Assignment/Assignments";
 import ProjectDetails from "../Projects/Projects";
 import Feedback from "../Projects/Feedback";
 import AssessDetails from "../Assessments/Assessments";
+import StudentCard from "../StudentCard";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
       </AuthContextProvider>
     </div>
   );
+
 };
 
 export default App;
