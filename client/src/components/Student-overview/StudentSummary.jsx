@@ -3,7 +3,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "./AnimatedProgressProvider";
-import ChangingProgressProvider from "./ChangingProgressProvider";
+
 
 const StudentOverview = () => {
   const [studentName, setStudentName] = useState("studentName");
@@ -12,7 +12,7 @@ const StudentOverview = () => {
   const [projectCompletion, setProjectCompletion] = useState(84);
   const [assessmentResults, setAssessmentResults] = useState(94.5);
   const [detailDisplayStatus, setDetailDisplayStatus] = useState(
-    <div className="border-t-4 border-black text-3xl p-5"></div>
+    <div></div>
   );
 
   function detailDisplay() {
@@ -26,7 +26,7 @@ const StudentOverview = () => {
   }
   useEffect(() => {
     setDetailDisplayStatus(
-      <div className="border-t-4 border-black text-3xl p-5"></div>
+      <div></div>
     ); // Call the detailDisplay function when the component mounts
   }, []);
 
@@ -116,7 +116,7 @@ const StudentOverview = () => {
   );
 
   return (
-    <section class="bg-gradient-to-r rounded-lg border-solid border-4 border-black	 h-screen m-4">
+    <section class="bg-slate-200 min-h-screen ">
       <p className="text-right m-3 font-bold text-3xl">{cohort}</p>
       <p class="text-left ml-5 font-bold text-3xl">
         Welcome back, {studentName}
@@ -128,7 +128,7 @@ const StudentOverview = () => {
       </p>
       <div class="flex place-content-center">
         <div
-          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-fit w-1/4"
+          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4"
           onClick={() => {
             detailDisplay();
           }}
@@ -157,7 +157,7 @@ const StudentOverview = () => {
           </div>
         </div>
         <div
-          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-fit w-1/4"
+          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4"
           onClick={() => {
             detailDisplay2();
           }}
@@ -186,7 +186,7 @@ const StudentOverview = () => {
           </div>
         </div>
         <div
-          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-fit w-1/4"
+          class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4"
           onClick={() => {
             detailDisplay3();
           }}
@@ -214,9 +214,9 @@ const StudentOverview = () => {
             </AnimatedProgressProvider>
           </div>
         </div>
-        <div class="text-center font-bold text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-fit w-1/4">
+        <div class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 min-h-fit w-1/4">
           <div class="text-center font-bold border-b-4 border-black">
-            Points Accured (Maximum Allowed: 50)
+            Points Accured
           </div>
 
           <div class="mt-5 mx-5 flex items-center">

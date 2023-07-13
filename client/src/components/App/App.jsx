@@ -9,7 +9,7 @@ import StudentOverview from "../Student-overview/StudentSummary";
 const App = () => {
   return (
     <div>
-      <h1 className="text-center text 3xl font-bold">Firebase auth</h1>
+      <h1 className="text-center text 3xl font-bold"></h1>
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<LogIn />} />
