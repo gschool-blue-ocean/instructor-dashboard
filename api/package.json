@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "start": "nodemon src/index.js",
     "test": "echo 'add tests'"
   },
   "devDependencies": {
