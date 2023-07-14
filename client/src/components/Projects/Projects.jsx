@@ -2,18 +2,6 @@ import React, { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import axios from "axios";
 
-const projectDetails = Object.freeze([
-	{ ID: 1, Project: "Browser Calculator", Status: "Complete" },
-	{ ID: 2, Project: "Guessing Game", Status: "Complete" },
-	{ ID: 3, Project: "FE Project", Status: "Complete" },
-	{ ID: 4, Project: "Server-Side Assessment", Status: "Incomplete" },
-	{ ID: 5, Project: "MVP", Status: "Complete" },
-	{ ID: 6, Project: "React", Status: "Complete" },
-	{ ID: 7, Project: "Front End Capstone", Status: "Complete" },
-	{ ID: 8, Project: "Server-Side Capstone", Status: "Complete" },
-	{ ID: 9, Project: "Blue Ocean", Status: "Incomplete" },
-]);
-
 function handleClick(e) {
 	let id = e.target.dataset.id;
 	console.log("id", id);
@@ -64,7 +52,7 @@ function ProjectDetails({ onclickFeedback }) {
 				>
 					<h1>Project Summary :</h1>
 					<div className="mx-auto bg-white drop-shadow-lg">
-						<h1>Class Projects({projectDetails.length})</h1>
+						<h1>Class Projects({projects.length})</h1>
 						<ul>
 							{projects.map((detail) => (
 								<li key={detail.ID}>
