@@ -171,8 +171,36 @@ export async function getStudentAssessment(req, res, next) {
             'SELECT * FROM assessment WHERE student_id = $1',
             [studentId]
         )
-        res.send(result.rows)
+
+        if (result.rows.length > 0) {
+            res.send(result.rows)
+        } else {
+            await insertAssessments(studentId)
+            const newResult = await db.query(
+                'SELECT * FROM assessment WHERE student_id = $1',
+                [studentId]
+            )
+            res.send(newResult.rows)
+        }
     } catch (error) {
         next(error)
     }
+}
+
+async function insertAssessments(studentId) {
+    const assessmentNames = []
+
+    // Generate 40 assessment names (assessment 1-40)
+    for (let i = 1; i <= 40; i++) {
+        assessmentNames.push(`Assessment ${i}`)
+    }
+
+    const insertPromises = assessmentNames.map(async (assessmentName) => {
+        await db.query(
+            'INSERT INTO assessment (student_id, assessment_name, percent, mcsp) VALUES ($1, $2, null, $3)',
+            [studentId, assessmentName, 'MCSP-21']
+        )
+    })
+
+    await Promise.all(insertPromises)
 }
