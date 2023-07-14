@@ -42,11 +42,11 @@ function ProjectDetails({ onclickFeedback }) {
 		<div>
 			{projects && (
 				<section
-					className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
+					className="mx-auto mt-8 bg-{#f1f5f9}"
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
 					<h1>Project Summary :</h1>
-					<div className="mx-auto bg-white drop-shadow-lg">
+					<div className="mx-auto bg-{#f1f5f9} drop-shadow-lg p-10">
 						<h1>Class Projects({projects.length})</h1>
 						<ul>
 							{projects.map((project) => (
