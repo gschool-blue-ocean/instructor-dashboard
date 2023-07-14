@@ -24,7 +24,7 @@ const StudentOverview = () => {
 		setDetailDisplayStatus(AssessDetails);
 	}
 	function detailDisplay4() {
-		setDetailDisplayStatus(<Feedback />);
+		setDetailDisplayStatus(<Feedback onclickBack={detailDisplay2} />);
 	}
 
 	return (

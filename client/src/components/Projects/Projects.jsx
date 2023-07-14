@@ -19,7 +19,6 @@ function handleClick(e) {
 }
 
 function ProjectDetails({ onclickFeedback }) {
-	console.log(onclickFeedback, typeof onclickFeedback);
 	// const arrDetails = projectDetails.map(detail => (
 	//     <li key={detail.ID} className={detail.Status}>
 	//         {detail.Project}
