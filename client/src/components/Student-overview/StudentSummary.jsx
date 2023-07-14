@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import "react-circular-progressbar/dist/styles.css";
 import AssessDetails from "../Assessments/Assessments.jsx";
 import ProjectDetails from "../Projects/Projects";
 import AssignmentDetails from "../Assignment/Assignments";
