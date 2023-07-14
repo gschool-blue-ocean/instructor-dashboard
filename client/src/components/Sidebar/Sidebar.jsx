@@ -29,7 +29,7 @@ function Sidebar({ showSidebar, setShowSidebar }) {
       id="sidebar"
       className={`sidebar ${
         showSidebar ? "show" : ""
-      } scroll-smooth bg-black w-60 ps-8 left-0 transition-left absolute duration-100`}
+      } w-60 left-0 transition-left absolute duration-100`}
     >
       <Menu className="h-screen text-white bg-zinc-600">
         <div>
