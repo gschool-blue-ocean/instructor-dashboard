@@ -10,7 +10,18 @@ export async function getProject(req, res, next) {
         next(error)
     }
 }
-
+export async function getStudentProject(req, res, next) {
+    try {
+        const studentId = req.params.studentId
+        const result = await db.query(
+            'SELECT * FROM project WHERE student_id = $1',
+            [studentId]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
 export async function updateProject(req, res, next) {
     try {
         const projectId = req.params.projectId
