@@ -63,13 +63,13 @@ section li:first-of-type{
   border-top: none;
   margin-top: 10px;
 }
-section button{justify-self: flex-end;}
 
-section button {
+section :is(button, a) {
   border: 2px solid black;
   border-radius: 5px;
   padding: 5px 20px;
   margin-right: 10px;
+  justify-self: flex-end;
 }
 
 #feedback .information{
@@ -139,3 +139,5 @@ table :is(th,td){
   text-align: left;
  }
  
+ 
+ /* dont use element selectors use something like student feedback class vs div element app. Use named custom classes then style based on classes or even use tailwind. Other components are styled with. The name of class is not important, the classes be unique i think */
