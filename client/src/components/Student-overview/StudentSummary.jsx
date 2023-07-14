@@ -53,7 +53,7 @@ const StudentOverview = () => {
 
 			<div className="flex place-content-center">
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay();
 					}}
@@ -86,7 +86,7 @@ const StudentOverview = () => {
 				</div>
 
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay2();
 					}}
@@ -119,7 +119,7 @@ const StudentOverview = () => {
 				</div>
 
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay3();
 					}}
