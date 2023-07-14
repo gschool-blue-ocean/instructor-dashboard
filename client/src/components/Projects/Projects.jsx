@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Feedback from "./Feedback";
+import axios from "axios";
 
 const projectDetails = Object.freeze([
 	{ ID: 1, Project: "Browser Calculator", Status: "Complete" },
@@ -19,6 +20,24 @@ function handleClick(e) {
 }
 
 function ProjectDetails({ onclickFeedback }) {
+	const [projects, setProjects] = useState(null);
+
+	async function fetchProjects() {
+		try {
+			const res = await axios.get(`/api/project`);
+			if (res.data.length > 0) {
+				setProjects(res.data);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	useEffect(() => {
+		fetchProjects();
+	}, []);
+
+	console.log(projects);
 	// const arrDetails = projectDetails.map(detail => (
 	//     <li key={detail.ID} className={detail.Status}>
 	//         {detail.Project}
