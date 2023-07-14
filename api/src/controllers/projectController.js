@@ -10,6 +10,24 @@ export async function getProject(req, res, next) {
         next(error)
     }
 }
+
+export async function updateProject(req, res, next) {
+    try {
+        const projectId = req.params.projectId
+        const projectFeedback = req.body.projectFeedback
+        const presentation_points = req.body.presentation_points
+
+        const result = await db.query(
+            'UPDATE project SET feedback = $1, presentation_points = $2 WHERE project_id = $3',
+            [projectFeedback, presentation_points, projectId]
+        )
+        const updatedProject = result.rows[0]
+        res.status(200).json(updatedProject)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export async function deleteProject(req, res, next) {
     try {
         const projectId = req.params.projectId
