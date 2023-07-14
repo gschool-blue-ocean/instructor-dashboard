@@ -3,7 +3,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "./AnimatedProgressProvider";
-import  AssessDetails  from "../Assessments/Assessments.jsx"
+import AssessDetails from "../Assessments/Assessments.jsx";
 import ProjectDetails from "../Projects/Projects";
 import AssignmentDetails from "../Assignment/Assignments";
 
@@ -14,9 +14,7 @@ const StudentOverview = () => {
   const [projectCompletion, setProjectCompletion] = useState(84);
   const [assessmentResults, setAssessmentResults] = useState(94.5);
 
-  const [detailDisplayStatus, setDetailDisplayStatus] = useState(
-    <div></div>
-  );
+  const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
   function detailDisplay() {
     setDetailDisplayStatus(AssignmentDetails);
@@ -28,12 +26,44 @@ const StudentOverview = () => {
     setDetailDisplayStatus(AssessDetails);
   }
   useEffect(() => {
-    setDetailDisplayStatus(
-      
-    ); // This to trigger the animation
-   
+    fetch("http://localhost:3000/api/student/overview/1")
+      .then((response) => response.json())
+      .then((data) => {
+        const assessmentAverage = data.assessment_average;
+        const assignmentCompletionPercentage =
+          data.assignment_completion_percentage;
+        const attendancePoints = data.attendance_points;
+        const projectTotal = data.project_total;
+
+        console.log(assessmentAverage);
+        console.log(assignmentCompletionPercentage);
+        console.log(attendancePoints);
+        console.log(projectTotal);
+        setAssignmentCompletion(assignmentCompletionPercentage);
+        setAssessmentResults(assessmentAverage);
+        setProjectCompletion(projectTotal);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:3000/api/student")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0].first_name)
+        const firstName = data[0].first_name;
+        const lastName = data[0].last_name;
+        const fullName = firstName + " " + lastName;
+        console.log("first name",firstName);
+        console.log(lastName);
+        setStudentName(fullName);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
   return (
     <div class="">
@@ -160,7 +190,7 @@ const StudentOverview = () => {
           </div>
         </div>
       </div>
-      <div>   {detailDisplayStatus}</div>
+      <div> {detailDisplayStatus}</div>
     </div>
   );
 };
