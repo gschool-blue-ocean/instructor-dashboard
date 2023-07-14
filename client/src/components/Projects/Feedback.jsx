@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Feedback() {
     const project = {
@@ -58,6 +59,7 @@ function Feedback() {
                     </p>
                 </div>
                 <div className="feedback_button">
+                    <Link to="/student_projects">Back to Projects</Link>
                     <button disabled ={project.Input_disabled}>Submit</button>
                 </div>
             </div>
