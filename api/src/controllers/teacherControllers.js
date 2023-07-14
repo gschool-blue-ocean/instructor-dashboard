@@ -83,6 +83,7 @@ export async function deleteTeacher(req, res, next) {
 export async function getMcspOverview(req, res, next) {
     try {
         const mcsp = req.params.mcsp
+        mcsp.toUpperCase()
         const totalAssignments = 40
         const totalProjects = 21
         const getProjectTotal = `SELECT COUNT(*) AS project_total FROM project WHERE mcsp = $1`
