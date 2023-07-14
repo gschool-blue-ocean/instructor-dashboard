@@ -38,33 +38,55 @@ function ProjectDetails({ onclickFeedback }) {
 	}, []);
 
 	console.log(projects);
-	// const arrDetails = projectDetails.map(detail => (
-	//     <li key={detail.ID} className={detail.Status}>
-	//         {detail.Project}
-	//     </li>
-	// ));
-	//   const [showFeedback, setShowfeedback] = useState(false);
 
-	const arrDetails = projectDetails.map((detail) => (
-		<li key={detail.ID} className={detail.Status}>
-			<p>{detail.Project} </p>
-			<button data-id={detail.ID} onClick={() => onclickFeedback()}>
-				Feedback
-			</button>
-		</li>
-	));
+	const handleCheckboxChange = async (event) => {
+		try {
+			console.log(event.target.getAttribute("data-project-id"));
+			const res = await axios.patch(
+				`/api/project/completion/${Number(
+					event.target.getAttribute("data-project-id")
+				)}`
+			);
+			if (res.status === 200) {
+				fetchProjects();
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	return (
 		<div>
-			<section
-				className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
-				style={{ maxWidth: "600px", minWidth: "344px" }}
-			>
-				<h1>Project Summary :</h1>
-				<div className="mx-auto bg-white drop-shadow-lg">
-					<h1>Class Projects({projectDetails.length})</h1>
-					<ul>{arrDetails}</ul>
-				</div>
-			</section>
+			{projects && (
+				<section
+					className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
+					style={{ maxWidth: "600px", minWidth: "344px" }}
+				>
+					<h1>Project Summary :</h1>
+					<div className="mx-auto bg-white drop-shadow-lg">
+						<h1>Class Projects({projectDetails.length})</h1>
+						<ul>
+							{projects.map((detail) => (
+								<li key={detail.ID}>
+									<form>
+										<input
+											data-project-id={detail.project_id}
+											type="checkbox"
+											checked={detail.completed}
+											disabled={false}
+											onChange={handleCheckboxChange}
+										/>
+									</form>
+									<p>{detail.Project || detail.project_name} </p>
+									<button data-id={detail.ID} onClick={() => onclickFeedback()}>
+										Feedback
+									</button>
+								</li>
+							))}
+						</ul>
+					</div>
+				</section>
+			)}
 		</div>
 	);
 }
