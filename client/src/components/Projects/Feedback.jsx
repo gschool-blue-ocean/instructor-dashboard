@@ -7,7 +7,8 @@ function Feedback() {
         Design: 4,
         Code_quality: 3,
         Feedback: "Feedback Text",
-        Input_disabled: true
+        Input_disabled: true,
+        Presentation_skills: 5
     };
 
     const [design, setDesign] = useState(project.Design);
@@ -23,7 +24,12 @@ function Feedback() {
     const [feedback, setFeedback] = useState(project.Feedback);
     const handleFeedbackChange = (events) => {
         setFeedback(event.target.value);  
-    }     
+    }   
+    
+    const [presentation, setPresentation] = useState(project.Presentation_skills);
+    const handlePresentationChange = (events) => {
+        setPresentation(event.target.value);  
+    }  
 
     return (
         <section id="feedback">
@@ -44,6 +50,17 @@ function Feedback() {
                     <p>
                         Code Quality: 
                         <select value={quality} onChange={handleQualityChange} disabled ={project.Input_disabled}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        Presentation Skills: 
+                        <select value={presentation} onChange={handlePresentationChange} disabled ={project.Input_disabled}>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

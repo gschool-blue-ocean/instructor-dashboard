@@ -1,4 +1,6 @@
 import React from "react";
+import ProjectDetails from "./Projects/Projects";
+
 
 const StudentCard = () => {
 	//eventually will receive cohort data and will conditionally render the name and color of the card based on their individual performance

@@ -163,3 +163,16 @@ export async function getStudentOverview(req, res, next) {
         next(error)
     }
 }
+
+export async function getStudentAssessment(req, res, next) {
+    try {
+        const studentId = req.params.studentId
+        const result = await db.query(
+            'SELECT * FROM assessment WHERE student_id = $1',
+            [studentId]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
