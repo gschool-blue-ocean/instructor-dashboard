@@ -28,27 +28,30 @@ const StudentOverview = () => {
 	}
 
 	return (
-		<div class="">
+		<div>
 			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
-			<p class="text-left ml-5 font-bold text-3xl">
+			<p className="text-left ml-5 font-bold text-3xl">
 				Welcome back, {studentName}
 			</p>
 
-			<p class="text-left ml-5 text-xl text-gray-400 font-bold">
+			<p className="text-left ml-5 text-xl text-gray-400 font-bold">
 				{" "}
 				Track, manage and forecast your performance
 			</p>
-			<div class="flex place-content-center ">
+			<div className="flex place-content-center ">
 				<div
-					class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
+					className="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
 					onClick={() => {
 						detailDisplay();
 					}}
 				>
-					<div class="text-center font-bold text-xl border-b-4 border-black">
+					<div className="text-center font-bold text-xl border-b-4 border-black">
 						Assignments Completion{" "}
 					</div>
-					<div class="mt-5 mx-5 flex justify-center" onClick={detailDisplay}>
+					<div
+						className="mt-5 mx-5 flex justify-center"
+						onClick={detailDisplay}
+					>
 						<ProgressBar
 							radius={100}
 							progress={assignmentsCompletion}
@@ -69,15 +72,18 @@ const StudentOverview = () => {
 					</div>
 				</div>
 				<div
-					class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
+					className="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
 					onClick={() => {
 						detailDisplay2();
 					}}
 				>
-					<div class="text-center font-bold border-b-4 border-black">
+					<div className="text-center font-bold border-b-4 border-black">
 						Project Completion
 					</div>
-					<div class="mt-5 mx-5 flex justify-center" onClick={detailDisplay}>
+					<div
+						className="mt-5 mx-5 flex justify-center"
+						onClick={detailDisplay}
+					>
 						<ProgressBar
 							radius={100}
 							progress={projectCompletion}
@@ -98,15 +104,18 @@ const StudentOverview = () => {
 					</div>
 				</div>
 				<div
-					class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
+					className="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96"
 					onClick={() => {
 						detailDisplay3();
 					}}
 				>
-					<div class="text-center font-bold border-b-4 border-black">
+					<div className="text-center font-bold border-b-4 border-black">
 						Assessment Results
 					</div>
-					<div class="mt-5 mx-5 flex justify-center" onClick={detailDisplay}>
+					<div
+						className="mt-5 mx-5 flex justify-center"
+						onClick={detailDisplay}
+					>
 						<ProgressBar
 							radius={100}
 							progress={assessmentResults}
@@ -126,12 +135,15 @@ const StudentOverview = () => {
 						</ProgressBar>
 					</div>
 				</div>
-				<div class="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96">
-					<div class="text-center font-bold border-b-4 border-black">
+				<div className="text-xl rounded-3xl border-solid border-4 border-black	py-8 m-2 h-1/4 w-96">
+					<div className="text-center font-bold border-b-4 border-black">
 						Points Accured
 					</div>
 
-					<div class="mt-5 mx-5 flex justify-center" onClick={detailDisplay}>
+					<div
+						className="mt-5 mx-5 flex justify-center"
+						onClick={detailDisplay}
+					>
 						<ProgressBar
 							radius={100}
 							progress={83.5}
