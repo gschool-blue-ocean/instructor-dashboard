@@ -39,6 +39,7 @@
 --     design INT CHECK (design >= 0 AND design <= 5),
 --     quality INT CHECK (quality >= 0 AND quality <= 5),
 --     feedback VARCHAR(800),
+--     completed BOOLEAN DEFAULT false,
 --     mcsp VARCHAR(20),
 --     presentation_points INT CHECK (design >= 0 AND design <= 5),
 --     FOREIGN KEY (student_id) REFERENCES student(student_id),
