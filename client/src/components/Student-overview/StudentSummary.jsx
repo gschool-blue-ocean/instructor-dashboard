@@ -146,7 +146,7 @@ const StudentOverview = () => {
 					>
 						<ProgressBar
 							radius={100}
-							progress={83.5}
+							progress={50}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
 							trackStrokeWidth={15}
@@ -158,7 +158,7 @@ const StudentOverview = () => {
 							trackTransition="0s ease"
 						>
 							<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none text-3xl">
-								<div>{83.5}%</div>
+								<div>{25}</div>
 							</div>
 						</ProgressBar>
 					</div>
