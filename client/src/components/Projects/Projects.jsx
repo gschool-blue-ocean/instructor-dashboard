@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import axios from "axios";
 
-function handleClick(e) {
-	let id = e.target.dataset.id;
-	console.log("id", id);
-}
-
 function ProjectDetails({ onclickFeedback }) {
 	const [projects, setProjects] = useState(null);
 
@@ -25,11 +20,11 @@ function ProjectDetails({ onclickFeedback }) {
 		fetchProjects();
 	}, []);
 
-	console.log(projects);
+	// console.log(projects);
 
 	const handleCheckboxChange = async (event) => {
 		try {
-			console.log(event.target.getAttribute("data-project-id"));
+			// console.log(event.target.getAttribute("data-project-id"));
 			const res = await axios.patch(
 				`/api/project/completion/${Number(
 					event.target.getAttribute("data-project-id")
@@ -54,19 +49,22 @@ function ProjectDetails({ onclickFeedback }) {
 					<div className="mx-auto bg-white drop-shadow-lg">
 						<h1>Class Projects({projects.length})</h1>
 						<ul>
-							{projects.map((detail) => (
-								<li key={detail.ID}>
+							{projects.map((project) => (
+								<li key={project.project_id}>
 									<form>
 										<input
-											data-project-id={detail.project_id}
+											data-project-id={project.project_id}
 											type="checkbox"
-											checked={detail.completed}
+											checked={project.completed}
 											disabled={false}
 											onChange={handleCheckboxChange}
 										/>
 									</form>
-									<p>{detail.Project || detail.project_name} </p>
-									<button data-id={detail.ID} onClick={() => onclickFeedback()}>
+									<p>{project.Project || project.project_name} </p>
+									<button
+										data-id={project.ID}
+										onClick={() => onclickFeedback()}
+									>
 										Feedback
 									</button>
 								</li>

@@ -30,7 +30,7 @@ function Feedback({ onclickBack }) {
 	const handlePresentationChange = (events) => {
 		setPresentation(event.target.value);
 	};
-	console.log(onclickBack);
+
 	return (
 		<section id="feedback">
 			<div>
@@ -94,7 +94,6 @@ function Feedback({ onclickBack }) {
 				<div className="feedback_button">
 					<button
 						onClick={() => {
-							console.log("click");
 							onclickBack();
 						}}
 					>
