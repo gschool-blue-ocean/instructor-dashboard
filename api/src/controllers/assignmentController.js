@@ -10,6 +10,18 @@ export async function getAssignment(req, res, next) {
         next(error)
     }
 }
+export async function getStudentAssignment(req, res, next) {
+    try {
+        const studentId = req.params.studentId
+        const result = await db.query(
+            'SELECT * FROM assignment WHERE student_id=$1',
+            [studentId]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
 
 export async function updatedAssignment(req, res, next) {
     try {
