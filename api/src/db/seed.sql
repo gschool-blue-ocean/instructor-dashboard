@@ -39,9 +39,4 @@
 --     (1, 3,'MCSP-21'),
 --     (2, 4,'MCSP-21'),
 --     (2, 2,'MCSP-21');
--- INSERT INTO assessment (student_id, assessment_name, mcsp)
--- VALUES
---     (1, 'Assessment A', 'MCSP-21'),
---     (1, 'Assessment B', 'MCSP-21'),
---     (2, 'Assessment C', 'MCSP-21'),
---     (2, 'Assessment D', 'MCSP-21');
+
