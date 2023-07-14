@@ -10,6 +10,6 @@ let Test = () => {
                 setUserId(userEmailsObj[0].first_name)
             })
     }, [userId])
-    return <h1>{userId} hello</h1>
+    return (<h1>{userId} hello</h1>)
 }
 export default Test
