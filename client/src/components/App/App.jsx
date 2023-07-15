@@ -13,24 +13,24 @@ import AssessDetails from "../Assessments/Assessments";
 import StudentCard from "../StudentCard";
 
 const App = () => {
-	return (
-		<div>
-			<h1 className="text-center text 3xl font-bold"></h1>
-			<AuthContextProvider>
-				<Routes>
-					<Route path="/" element={<Header />} />
-					{/* <Route path="/" element={<LogIn />} /> */}
-					<Route path="/signup" element={<SignUpForm />} />
-					<Route path="/studentoverview" element={<StudentOverview />} />
-					<Route path="/student_projects" element={<ProjectDetails />} />
-					<Route path="/student_assignments" element={<AssignmentDetails />} />
-					<Route path="/project_feedback" element={<Feedback />} />
-					<Route path="/student_assessment" element={<AssessDetails />} />
-					<Route path="/student_card" element={<StudentCard />} />
-				</Routes>
-			</AuthContextProvider>
-		</div>
-	);
+  return (
+    <div>
+      <h1 className="text-center text 3xl font-bold"></h1>
+      {<Header />}
+      <AuthContextProvider>
+        <Routes>
+          <Route path="/" element={<LogIn />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/studentoverview" element={<StudentOverview />} />
+          <Route path="/student_projects" element={<ProjectDetails />} />
+          <Route path="/student_assignments" element={<AssignmentDetails />} />
+          <Route path="/project_feedback" element={<Feedback />} />
+          <Route path="/student_assessment" element={<AssessDetails />} />
+          <Route path="/student_card" element={<StudentCard />} />
+        </Routes>
+      </AuthContextProvider>
+    </div>
+  );
 };
 
 export default App;
