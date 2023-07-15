@@ -1,22 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { PiBellDuotone } from "react-icons/pi";
 import Sidebar from "../Sidebar/Sidebar";
 import Filter from "../Filter/Filter";
 
-function Header() {
+const Header = forwardRef((props, ref) => {
   const [firstDropdownVisible, setFirstDropdownVisible] = useState(false);
   const [secondDropdownVisible, setSecondDropdownVisible] = useState(false);
   const [thirdDropdownVisible, setThirdDropdownVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [showSideBar, setShowSideBar] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filter, setFilter] = useState(false);
 
   const firstDropdownRef = useRef(null);
   const secondDropdownRef = useRef(null);
   const thirdDropdownRef = useRef(null);
-  const headerRef = useRef(null);
 
   const handleFirstDropdownToggle = () => {
     setFirstDropdownVisible(!firstDropdownVisible);
@@ -30,15 +28,11 @@ function Header() {
     setThirdDropdownVisible(!thirdDropdownVisible);
   };
 
-  const handleSidebar = () => {
-    setShowSideBar(!showSideBar);
-  };
-
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setFirstDropdownVisible(false);
     setThirdDropdownVisible(false);
-    setShowSideBar(false);
+    props.setShowSideBar(false);
   };
 
   const handleOutsideClick = (event) => {
@@ -83,23 +77,23 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    if (showSideBar) {
+    if (props.showSideBar) {
       document.body.classList.add("sidebar-open");
     } else {
       document.body.classList.remove("sidebar-open");
     }
-  }, [showSideBar]);
+  }, [props.showSideBar]);
 
   return (
     <div>
-      {showSideBar && (
-        <Sidebar showSidebar={showSideBar} setShowSidebar={setShowSideBar} />
+      {props.showSideBar && (
+        <Sidebar
+          showSidebar={props.showSideBar}
+          setShowSidebar={props.setShowSidebar}
+        />
       )}
-      <header
-        className={`flex p-2 ${showSideBar ? "pl-64" : ""}`}
-        ref={headerRef}
-      >
-        <div className="h-10 mr-2 pl-2" onClick={handleSidebar}>
+      <header className={`flex p-2 `}>
+        <div className="h-10 mr-2 pl-2" onClick={props.setShowSideBar}>
           <img
             src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
             alt="logo"
@@ -218,6 +212,6 @@ function Header() {
       </div>
     </div>
   );
-}
+});
 
 export default Header;
