@@ -30,21 +30,21 @@
 -- );
 
 
--- CREATE TABLE project (
---     project_id SERIAL PRIMARY KEY,
---     student_id INT,
---     teacher_id INT,
---     teacher_name VARCHAR(20),
---     project_name VARCHAR(50),
---     design INT CHECK (design >= 0 AND design <= 5),
---     quality INT CHECK (quality >= 0 AND quality <= 5),
---     feedback VARCHAR(800),
---     mcsp VARCHAR(20),
---     presentation_points INT CHECK (design >= 0 AND design <= 5),
---     FOREIGN KEY (student_id) REFERENCES student(student_id),
---     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
---     FOREIGN KEY (mcsp) REFERENCES mcsp(mcsp)
--- );
+CREATE TABLE project (
+    project_id SERIAL PRIMARY KEY,
+    student_id INT,
+    teacher_id INT,
+    teacher_name VARCHAR(20),
+    project_name VARCHAR(50),
+    design INT CHECK (design >= 0 AND design <= 5),
+    quality INT CHECK (quality >= 0 AND quality <= 5),
+    feedback VARCHAR(800),
+    mcsp VARCHAR(20),
+    presentation_points INT CHECK (design >= 0 AND design <= 5),
+    FOREIGN KEY (student_id) REFERENCES student(student_id),
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
+    FOREIGN KEY (mcsp) REFERENCES mcsp(mcsp)
+);
 
 -- -- 
 

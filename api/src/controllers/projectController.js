@@ -38,6 +38,25 @@ export async function updateProject(req, res, next) {
         next(error)
     }
 }
+export async function updateProjectCompletion(req, res, next) {
+    try {
+        const projectId = req.params.projectId
+
+        const result = await db.query(
+            'UPDATE project SET completed = NOT completed WHERE project_id = $1 RETURNING *',
+            [projectId]
+        )
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'project not found' })
+        }
+
+        const updatedProject = result.rows[0]
+        res.status(200).json(updatedProject)
+    } catch (error) {
+        next(error)
+    }
+}
 
 export async function deleteProject(req, res, next) {
     try {
