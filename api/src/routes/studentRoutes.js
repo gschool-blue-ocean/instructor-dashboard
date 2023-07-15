@@ -6,6 +6,7 @@ import {
     deleteStudent,
     getStudentProject,
     getStudentOverview,
+    getStudentAssessment,
 } from '../controllers/studentControllers.js'
 
 const router = express.Router()
@@ -16,5 +17,6 @@ router.get('/studentProject/:studentId', getStudentProject)
 router.post('/', createStudent)
 router.patch('/:studentId', updateStudent)
 router.delete('/:studentId', deleteStudent)
+router.get('/assessment/:studentId', getStudentAssessment)
 
 export default router
