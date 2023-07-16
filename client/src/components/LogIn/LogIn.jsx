@@ -94,16 +94,8 @@ function LogIn() {
                     </a>
                   </li>
                   <li className=" text-sm p-8 font-serif">
-                    <span className="hr">or sign in using a service</span>
-                    <div className=" border-solid border-2 border-gray-250 my-8 py-1 rounded-md">
-                      <a
-                        className="font-semibold text-[#00808C] text-xs"
-                        rel="nofollow"
-                        data-method="post"
-                        href="/auth/github"
-                      >
-                        GITHUB
-                      </a>
+                    <div className="w-full text-center mt-5">
+                      Or <Link to="/signup">Click Here</Link> to signup
                     </div>
                   </li>
                 </ul>

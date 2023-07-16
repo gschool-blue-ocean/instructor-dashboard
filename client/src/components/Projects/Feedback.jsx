@@ -30,11 +30,11 @@ function Feedback({ onclickBack }) {
 	const handlePresentationChange = (events) => {
 		setPresentation(event.target.value);
 	};
-	console.log(onclickBack);
+
 	return (
-		<section id="feedback">
-			<div>
-				<div className="information">
+		<section id="feedback" className="p-8">
+			<div className="p-10">
+				<div className="information mb-3">
 					<p>Project Name: {project.Project}</p>
 					<p>
 						Design:
@@ -94,7 +94,6 @@ function Feedback({ onclickBack }) {
 				<div className="feedback_button">
 					<button
 						onClick={() => {
-							console.log("click");
 							onclickBack();
 						}}
 					>

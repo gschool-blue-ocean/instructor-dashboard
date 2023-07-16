@@ -37,16 +37,7 @@ const App = () => {
       <AuthContextProvider>
         <div style={containerStyle}>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Header
-                  showSideBar={showSideBar}
-                  setShowSideBar={setShowSideBar}
-                />
-              }
-            />
-            {/* <Route path="/" element={<LogIn />} /> */}
+            <Route path="/" element={<LogIn />} />
             <Route path="/signup" element={<SignUpForm />} />
             <Route
               path="/studentoverview"
