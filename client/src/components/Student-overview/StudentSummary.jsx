@@ -12,11 +12,15 @@ const StudentOverview = () => {
   const [projectCompletion, setProjectCompletion] = useState(84);
   const [assessmentResults, setAssessmentResults] = useState(94.5);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  const [isAssignmentDetailsVisible, setIsAssignmentDetailsVisible] =
+    useState(false);
   const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
+  function toggleDetailDisplay() {
+    setIsAssignmentDetailsVisible(!isAssignmentDetailsVisible);
+  }
   function detailDisplay() {
-    setDetailDisplayStatus(AssignmentDetails);
+    setDetailDisplayStatus();
   }
   function detailDisplay2() {
     setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
@@ -63,7 +67,7 @@ const StudentOverview = () => {
           </div>
           <div
             className="mt-5 mx-5 flex justify-center"
-            onClick={detailDisplay}
+            onClick={toggleDetailDisplay}
           >
             <ProgressBar
               radius={100}
@@ -180,7 +184,7 @@ const StudentOverview = () => {
         </div>
       </div>
 
-      <div>{detailDisplayStatus}</div>
+      <div>{isAssignmentDetailsVisible ? <AssignmentDetails /> : ""}</div>
     </div>
   );
 };

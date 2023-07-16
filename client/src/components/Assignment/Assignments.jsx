@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // import View from "./View";
 
 const details = [
@@ -25,7 +26,9 @@ function handleClick(e) {
 
 function AssignmentDetails({ onclickFeedback }) {
   const [assignments, setAssignments] = useState(null);
-
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
   async function fetchAssignments() {
     try {
       const res = await axios.get(`/api/assignment`);
@@ -36,15 +39,11 @@ function AssignmentDetails({ onclickFeedback }) {
       console.log(err);
     }
   }
-  useEffect(() => {
-    fetchAssignments();
-  }, []);
-
   console.log(assignments);
-
   const handleCheckboxChange = async (event) => {
     try {
       console.log(event.target.getAttribute("data-assignment-id"));
+
       const res = await axios.patch(
         `/api/assignment/completion/${Number(
           event.target.getAttribute("data-assignment-id")
@@ -66,7 +65,9 @@ function AssignmentDetails({ onclickFeedback }) {
         disabled={false}
         onChange={handleCheckboxChange}
       />
-      <p>{detail.Assignment} </p>
+      <p className={detail.completed ? "line-through" : ""}>
+        {detail.Assignment}
+      </p>
       <button data-id={detail.ID} onClick={() => onclickFeedback()}>
         View
       </button>
