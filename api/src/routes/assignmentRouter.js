@@ -1,4 +1,4 @@
-import express from 'express'
+import express from "express";
 import {
     getAssignment,
     updatedAssignment,
@@ -6,11 +6,12 @@ import {
     getStudentAssignment,
 } from '../controllers/assignmentController.js'
 
-const router = express.Router()
+
+const router = express.Router();
 
 router.get('/', getAssignment)
 router.get('/student/:studentId', getStudentAssignment)
 router.patch('/completion/:assignmentId', updatedAssignment)
 router.delete('/:assignmentId', deleteAssignment)
 
-export default router
+export default router;
