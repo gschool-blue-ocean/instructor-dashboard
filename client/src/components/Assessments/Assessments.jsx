@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+
+
 
 const assessDetails = Object.freeze([
     { ID: 1, Week: '02', Assessment: 'DOM API Assessment', Grade: '95%' },
@@ -8,12 +12,35 @@ const assessDetails = Object.freeze([
 
 ]);
 
-function handleClick(e){
-    let id = e.target.dataset.id;
-    console.log("id", id);
-}
+
 
 function AssessDetails() {
+    // const [assessment, setAssessment] = useState(null);
+
+    async function fetchAssessment() {
+        try {
+            const res = await axios.get(`/api/assessment`);
+            if (res.data.length > 0) {
+                // setAssessment(res.data);
+
+    console.log(res.data)
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    fetchAssessment();
+    // useEffect(() => {
+    //  // fetchAssessment();
+    //     console.log("Command Line Test")
+    // }, []);
+
+    function handleClick(e){
+        let id = e.target.dataset.id;
+        console.log("id", id);
+    }
+
     const arrDetails = assessDetails.map(detail => 
         <tr key={detail.ID} >
             <td>{detail.Week} </td>
@@ -33,7 +60,9 @@ function AssessDetails() {
                         <th>Grade</th>
                     </tr>
                 </thead>
-                {arrDetails}
+                <tbody>
+                    {arrDetails}
+                </tbody>
            </table>
         </section>
     );

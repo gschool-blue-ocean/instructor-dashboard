@@ -12,19 +12,60 @@ const StudentOverview = () => {
 	const [projectCompletion, setProjectCompletion] = useState(84);
 	const [assessmentResults, setAssessmentResults] = useState(94.5);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
-	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
+useEffect(() => {
+    fetch("http://localhost:3000/api/student/overview/1")
+      .then((response) => response.json())
+      .then((data) => {
+        const assessmentAverage = data.assessment_average;
+        const assignmentCompletionPercentage =
+          data.assignment_completion_percentage;
+        const attendancePoints = data.attendance_points;
+        const projectTotal = data.project_total;
 
-	function detailDisplay() {
-		setDetailDisplayStatus(AssignmentDetails);
+        console.log(assessmentAverage);
+        console.log(assignmentCompletionPercentage);
+        console.log(attendancePoints);
+        console.log(projectTotal);
+        setAssignmentCompletion(assignmentCompletionPercentage);
+        setAssessmentResults(assessmentAverage);
+        setProjectCompletion(projectTotal);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+useEffect(() => {
+    fetch("http://localhost:3000/api/student")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0].first_name)
+        const firstName = data[0].first_name;
+        const lastName = data[0].last_name;
+        const fullName = firstName + " " + lastName;
+        console.log("first name",firstName);
+        console.log(lastName);
+        setStudentName(fullName);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+function detailDisplay() {
+		setDetailDisplayStatus(
+			<AssignmentDetails onclickFeedback={detailDisplay} />
+		);
 	}
-	function detailDisplay2() {
+function detailDisplay2() {
 		setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
 	}
-	function detailDisplay3() {
+function detailDisplay3() {
 		setDetailDisplayStatus(AssessDetails);
 	}
-	function detailDisplay4() {
+function detailDisplay4() {
 		setDetailDisplayStatus(<Feedback onclickBack={detailDisplay2} />);
 	}
 
@@ -39,6 +80,7 @@ const StudentOverview = () => {
 			window.removeEventListener("resize", handleResize);
 		};
 	}, []);
+
 
 	return (
 		<div>
@@ -161,7 +203,7 @@ const StudentOverview = () => {
 					>
 						<ProgressBar
 							radius={100}
-							progress={83.5}
+							progress={50}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
 							trackStrokeWidth={15}
@@ -173,7 +215,7 @@ const StudentOverview = () => {
 							trackTransition="0s ease"
 						>
 							<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none text-3xl">
-								<div>{83.5}%</div>
+								<div>{25}</div>
 							</div>
 						</ProgressBar>
 					</div>
