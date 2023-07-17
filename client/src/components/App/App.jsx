@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { AuthContextProvider, UserAuth } from "../../context/authContext";
+import {
+  AuthContextProvider,
+  UserAuth,
+  useRole,
+} from "../../context/authContext";
 import LogIn from "../LogIn/LogIn";
 import SignUpForm from "../Sign-up Page/SignUpForm";
 import StudentOverview from "../Student-overview/StudentSummary";
@@ -16,6 +20,7 @@ const App = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const navigate = useNavigate();
   const { user } = UserAuth();
+  const role = useRole();
 
   useEffect(() => {
     if (showSideBar) {
@@ -36,7 +41,7 @@ const App = () => {
   }
 
   if (user === null) {
-    // User is not logged in.
+    // StudentUser is not logged in.
     return (
       <Routes>
         <Route path="/" element={<LogIn />} />
@@ -44,31 +49,32 @@ const App = () => {
       </Routes>
     );
   }
-
-  return (
-    <div>
-      {showSideBar && (
-        <Sidebar showSidebar={showSideBar} setShowSidebar={setShowSideBar} />
-      )}
-      <h1 className="text-center text-3xl font-bold"></h1>
-      <div style={containerStyle}>
-        <Routes>
-          <Route
-            path="/studentoverview"
-            element={
-              <>
-                <Header
-                  showSideBar={showSideBar}
-                  setShowSideBar={setShowSideBar}
-                />
-                <StudentOverview />
-              </>
-            }
-          />
-          <Route path="/student_projects" element={<ProjectDetails />} />
-        </Routes>
+  if (role === "student") {
+    return (
+      <div>
+        {showSideBar && (
+          <Sidebar showSidebar={showSideBar} setShowSidebar={setShowSideBar} />
+        )}
+        <h1 className="text-center text-3xl font-bold"></h1>
+        <div style={containerStyle}>
+          <Routes>
+            <Route
+              path="/studentoverview"
+              element={
+                <>
+                  <Header
+                    showSideBar={showSideBar}
+                    setShowSideBar={setShowSideBar}
+                  />
+                  <StudentOverview />
+                </>
+              }
+            />
+            <Route path="/student_projects" element={<ProjectDetails />} />
+          </Routes>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 export default App;
