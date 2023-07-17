@@ -22,12 +22,13 @@ function AssignmentDetails({ onclickFeedback }) {
 		}
 	}
 	console.log(assignments);
+
 	const handleCheckboxChange = async (event) => {
 		try {
 			console.log(event.target.getAttribute("data-assignment-id"));
 
 			const res = await axios.patch(
-				`/api/assignment/${Number(
+				`/api/assignment/completion/${Number(
 					event.target.getAttribute("data-assignment-id")
 				)}`
 			);

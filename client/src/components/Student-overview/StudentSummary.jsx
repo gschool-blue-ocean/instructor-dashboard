@@ -16,7 +16,9 @@ const StudentOverview = () => {
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
 	function detailDisplay() {
-		setDetailDisplayStatus(AssignmentDetails);
+		setDetailDisplayStatus(
+			<AssignmentDetails onclickFeedback={detailDisplay} />
+		);
 	}
 	function detailDisplay2() {
 		setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
