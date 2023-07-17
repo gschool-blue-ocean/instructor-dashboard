@@ -78,6 +78,9 @@ const SignUpForm = () => {
 
           <button className="bg-custom-500 rounded-full p-2">Submit</button>
         </form>
+        <div className="w-full text-center mt-5">
+          Or <Link to="/">Click Here</Link> to login
+        </div>
       </div>
     </section>
   );
