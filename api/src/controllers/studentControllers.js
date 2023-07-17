@@ -1,4 +1,5 @@
 import pg from 'pg'
+import { assessmentNames, projectNames, assignmentNames } from './gradedWork.js'
 
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL })
 
@@ -23,6 +24,7 @@ export async function createStudent(req, res, next) {
         const newStudentLastName = capitalizeName(userInputObj.last_name)
         const newStudentEmail = userInputObj.email
         const newStudentMcsp = userInputObj.mcsp
+        // newStudentMcsp.toUpperCase()
 
         const result = await db.query(
             'INSERT INTO student (first_name, last_name, email, mcsp) VALUES ($1, $2, $3, $4) RETURNING student_id',
@@ -37,17 +39,56 @@ export async function createStudent(req, res, next) {
         const createdNewStudent = result.rows[0]
         const studentId = createdNewStudent.student_id
         const studentMcsp = createdNewStudent.mcsp
-        studentMcsp.toUpperCase()
+        // studentMcsp.toUpperCase()
         //creating a student will automatically make a attendance_points INSERT with the student_id
         await db.query(
             'INSERT INTO attendance_points (student_id, points, mcsp) VALUES ($1, 0, $2)',
             [studentId, studentMcsp]
         )
+        await insertAssessments(studentId)
+        await insertProjects(studentId)
+        await insertAssignments(studentId)
 
-        res.status(201).send(createdNewStudent)
+        res.status(201).send(result.rows[0])
     } catch (error) {
         next(error)
     }
+}
+async function insertAssessments(studentId) {
+    assessmentNames
+
+    const insertPromises = assessmentNames.map(async (assessmentName) => {
+        await db.query(
+            'INSERT INTO assessment (student_id, assessment_name, percent, mcsp) VALUES ($1, $2, null, $3)',
+            [studentId, assessmentName, 'MCSP-21']
+        )
+    })
+
+    await Promise.all(insertPromises)
+}
+async function insertProjects(studentId) {
+    projectNames
+
+    const insertPromises = projectNames.map(async (projectName) => {
+        await db.query(
+            'INSERT INTO project (student_id, project_name, mcsp) VALUES ($1, $2, $3)',
+            [studentId, projectName, 'MCSP-21']
+        )
+    })
+
+    await Promise.all(insertPromises)
+}
+async function insertAssignments(studentId) {
+    assignmentNames
+
+    const insertPromises = assignmentNames.map(async (assignmentName) => {
+        await db.query(
+            'INSERT INTO assignment (student_id, assignment_name, mcsp) VALUES ($1, $2, $3)',
+            [studentId, assignmentName, 'MCSP-21']
+        )
+    })
+
+    await Promise.all(insertPromises)
 }
 
 export async function updateStudent(req, res, next) {
@@ -172,35 +213,8 @@ export async function getStudentAssessment(req, res, next) {
             [studentId]
         )
 
-        if (result.rows.length > 0) {
-            res.send(result.rows)
-        } else {
-            await insertAssessments(studentId)
-            const newResult = await db.query(
-                'SELECT * FROM assessment WHERE student_id = $1',
-                [studentId]
-            )
-            res.send(newResult.rows)
-        }
+        res.send(result.rows[0])
     } catch (error) {
         next(error)
     }
-}
-
-async function insertAssessments(studentId) {
-    const assessmentNames = []
-
-    // Generate 40 assessment names (assessment 1-40)
-    for (let i = 1; i <= 40; i++) {
-        assessmentNames.push(`Assessment ${i}`)
-    }
-
-    const insertPromises = assessmentNames.map(async (assessmentName) => {
-        await db.query(
-            'INSERT INTO assessment (student_id, assessment_name, percent, mcsp) VALUES ($1, $2, null, $3)',
-            [studentId, assessmentName, 'MCSP-21']
-        )
-    })
-
-    await Promise.all(insertPromises)
 }

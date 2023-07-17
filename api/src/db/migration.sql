@@ -17,7 +17,6 @@
 --   email VARCHAR(100),
 --   mcsp VARCHAR(20),
 --   FOREIGN KEY (mcsp) REFERENCES mcsp(mcsp)
-
 -- );
 
 
