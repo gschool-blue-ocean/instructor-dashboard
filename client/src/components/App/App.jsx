@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import { AuthContextProvider } from "../../context/authContext";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { AuthContextProvider, UserAuth } from "../../context/authContext";
 import LogIn from "../LogIn/LogIn";
 import SignUpForm from "../Sign-up Page/SignUpForm";
 import StudentOverview from "../Student-overview/StudentSummary";
@@ -14,6 +14,8 @@ import Sidebar from "../Sidebar/Sidebar";
 
 const App = () => {
   const [showSideBar, setShowSideBar] = useState(false);
+  const navigate = useNavigate();
+  const { user } = UserAuth();
 
   useEffect(() => {
     if (showSideBar) {
@@ -28,41 +30,45 @@ const App = () => {
     transition: "margin-left 0.3s ease",
   };
 
+  if (user === undefined) {
+    // Still determining if the user is logged in.
+    return <div>Loading...</div>;
+  }
+
+  if (user === null) {
+    // User is not logged in.
+    return (
+      <Routes>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/signup" element={<SignUpForm />} />
+      </Routes>
+    );
+  }
+
   return (
     <div>
       {showSideBar && (
         <Sidebar showSidebar={showSideBar} setShowSidebar={setShowSideBar} />
       )}
       <h1 className="text-center text-3xl font-bold"></h1>
-      <AuthContextProvider>
-        <div style={containerStyle}>
-          <Routes>
-            <Route path="/" element={<LogIn />} />
-            <Route path="/signup" element={<SignUpForm />} />
-            <Route
-              path="/studentoverview"
-              element={
-                <>
-                  <Header
-                    showSideBar={showSideBar}
-                    setShowSideBar={setShowSideBar}
-                  />
-                  <StudentOverview />
-                </>
-              }
-            />
-            <Route path="/student_projects" element={<ProjectDetails />} />
-            <Route
-              path="/student_assignments"
-              element={<AssignmentDetails />}
-            />
-            <Route path="/project_feedback" element={<Feedback />} />
-            <Route path="/student_assessment" element={<AssessDetails />} />
-          </Routes>
-        </div>
-      </AuthContextProvider>
+      <div style={containerStyle}>
+        <Routes>
+          <Route
+            path="/studentoverview"
+            element={
+              <>
+                <Header
+                  showSideBar={showSideBar}
+                  setShowSideBar={setShowSideBar}
+                />
+                <StudentOverview />
+              </>
+            }
+          />
+          <Route path="/student_projects" element={<ProjectDetails />} />
+        </Routes>
+      </div>
     </div>
   );
 };
-
 export default App;
