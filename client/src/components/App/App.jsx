@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthContextProvider } from "../../context/authContext";
 import LogIn from "../LogIn/LogIn";
 import SignUpForm from "../Sign-up Page/SignUpForm";
@@ -9,11 +9,13 @@ import AssignmentDetails from "../Assignment/Assignments";
 import ProjectDetails from "../Projects/Projects";
 import Feedback from "../Projects/Feedback";
 import AssessDetails from "../Assessments/Assessments";
-import StudentCard from "../StudentCard";
-import Sidebar from "../Sidebar/Sidebar";
+// import StudentCard from "../StudentCard";
+// import Sidebar from "../Sidebar/Sidebar";
 
 const App = () => {
   const [showSideBar, setShowSideBar] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (showSideBar) {
@@ -21,7 +23,11 @@ const App = () => {
     } else {
       document.body.classList.remove("sidebar-open");
     }
-  }, [showSideBar]);
+
+    const isLogInOrSignUp =
+      location.pathname === "/" || location.pathname === "/signup";
+    setHideHeader(isLogInOrSignUp);
+  }, [showSideBar, location]);
 
   const containerStyle = {
     marginLeft: showSideBar ? "240px" : "0",
@@ -30,12 +36,12 @@ const App = () => {
 
   return (
     <div>
-      <div style={containerStyle}>
-        <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-      </div>
       <h1 className="text-center text-3xl font-bold"></h1>
       <AuthContextProvider>
         <div style={containerStyle}>
+          {hideHeader ? null : (
+            <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+          )}
           <Routes>
             <Route path="/" element={<LogIn />} />
             <Route path="/signup" element={<SignUpForm />} />
@@ -56,6 +62,7 @@ const App = () => {
             <Route path="/student_assessment" element={<AssessDetails />} />
           </Routes>
         </div>
+        <div style={containerStyle}></div>
       </AuthContextProvider>
     </div>
   );
