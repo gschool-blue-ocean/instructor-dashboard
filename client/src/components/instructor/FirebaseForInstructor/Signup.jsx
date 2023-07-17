@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../context/authContext";
+import ";
 
 const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
