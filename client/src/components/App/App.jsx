@@ -30,9 +30,9 @@ const App = () => {
 
   return (
     <div>
-      {showSideBar && (
-        <Sidebar showSidebar={showSideBar} setShowSidebar={setShowSideBar} />
-      )}
+      <div style={containerStyle}>
+        <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+      </div>
       <h1 className="text-center text-3xl font-bold"></h1>
       <AuthContextProvider>
         <div style={containerStyle}>
@@ -43,10 +43,6 @@ const App = () => {
               path="/studentoverview"
               element={
                 <>
-                  <Header
-                    showSideBar={showSideBar}
-                    setShowSideBar={setShowSideBar}
-                  />
                   <StudentOverview />
                 </>
               }
