@@ -18,7 +18,7 @@ function LogIn() {
 			if (role === "instructor") {
 				console.log("going to instructoroverview");
 				navigate("/instructoroverview");
-			} else if (role === "student") {
+			} else {
 				console.log("going to studentoverview");
 				navigate("/studentoverview");
 			}
