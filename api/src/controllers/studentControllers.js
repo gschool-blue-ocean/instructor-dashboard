@@ -213,17 +213,6 @@ export async function getStudentAssessment(req, res, next) {
             [studentId]
         )
 
-        // if (result.rows.length > 0) {
-        //     res.send(result.rows)
-        // } else {
-        //     // await insertAssessments(studentId)
-        //     // const newResult = await db.query(
-        //     //     'SELECT * FROM assessment WHERE student_id = $1',
-        //     //     [studentId]
-        //     // )
-        //     // res.send(newResult.rows)
-
-        // }
         res.send(result.rows[0])
     } catch (error) {
         next(error)

@@ -4,7 +4,9 @@ const db = new pg.Pool({ connectionString: process.env.DATABASE_URL })
 
 export async function getAssignment(req, res, next) {
     try {
-        const result = await db.query('SELECT * FROM assignment')
+        const result = await db.query(
+            'SELECT * FROM assignment ORDER BY assignment_id'
+        )
         res.send(result.rows)
     } catch (error) {
         next(error)
@@ -14,7 +16,7 @@ export async function getStudentAssignment(req, res, next) {
     try {
         const studentId = req.params.studentId
         const result = await db.query(
-            'SELECT * FROM assignment WHERE student_id=$1',
+            'SELECT * FROM assignment WHERE student_id=$1 ORDER BY assignment_id',
             [studentId]
         )
         res.send(result.rows)

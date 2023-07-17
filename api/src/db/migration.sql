@@ -34,7 +34,7 @@
 --     student_id INT,
 --     teacher_id INT,
 --     teacher_name VARCHAR(20),
---     project_name VARCHAR(150),
+--     project_name VARCHAR(50),
 --     design INT CHECK (design >= 0 AND design <= 5),
 --     quality INT CHECK (quality >= 0 AND quality <= 5),
 --     feedback VARCHAR(800),
@@ -50,7 +50,7 @@
 
 -- CREATE TABLE assignment(
 --     assignment_id SERIAL PRIMARY KEY,
---     assignment_name VARCHAR(150),
+--     assignment_name VARCHAR(50),
 --     student_id INT,
 --     completed BOOLEAN DEFAULT false,
 --     mcsp VARCHAR(20),
@@ -70,7 +70,7 @@
 -- CREATE TABLE assessment(
 --     assessment_id SERIAL PRIMARY KEY,
 --     student_id INT,
---     assessment_name VARCHAR(150),
+--     assessment_name VARCHAR(50),
 --     percent INT CHECK (percent >= 0 AND percent <= 100),
 --     mcsp VARCHAR(20),
 --     FOREIGN KEY (student_id) REFERENCES student(student_id),
