@@ -17,14 +17,13 @@ const SignUpForm = () => {
     e.preventDefault();
     setError("");
     try {
-      await createUser(email, pass1);
+      await createUser(email, pass1, "student");
       navigate("/studentoverview");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
     }
   };
-
   return (
     <section className="mt-8 min-h-screen bg-{#f1f5f9}">
       <div
