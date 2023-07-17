@@ -5,7 +5,7 @@ import mcspRouter from './routes/mcspRouter.js'
 import projectRouter from './routes/projectRouter.js'
 import assignmentRouter from './routes/assignmentRouter.js'
 import attendanceRouter from './routes/attendanceRouter.js'
-import assignmentRouter from './routes/assignmentRouter.js'
+import assessmentRouter from './routes/assessmentRouter.js'
 
 const app = express()
 app.use(express.json())

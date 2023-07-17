@@ -2,16 +2,14 @@ import express from 'express'
 import {
     getAssessment,
     deleteAssessment,
-    updateAssessment,
+    updatedAssessment,
     getStudentAssessment,
-    updateAssessmentCompletion,
-} from '../controllers/assesmentController.js'
+} from '../controllers/assessmentController.js'
 
 const router = express.Router()
 
 router.get('/', getAssessment)
-router.patch('/:AssessmentId', updateAssessment)
-router.patch('/completion/:AssessmentId', updateAssessmentCompletion)
+router.patch('/:AssessmentId', updatedAssessment)
 router.get('/:studentId', getStudentAssessment)
 router.delete('/:mcspId', deleteAssessment)
 
