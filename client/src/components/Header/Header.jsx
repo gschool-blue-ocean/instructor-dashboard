@@ -229,5 +229,5 @@ const Header = ({ showSideBar, setShowSideBar }) => {
       </div>
     </div>
   );
-});
+};
 export default Header;
