@@ -16,6 +16,7 @@ import AssessDetails from "../Assessments/Assessments";
 // import StudentCard from "../StudentCard";
 // import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
+import Instructorpage from "../instructor/Instructorpage";
 
 const App = () => {
 	const [showSideBar, setShowSideBar] = useState(false);
@@ -79,6 +80,13 @@ const App = () => {
 				</div>{" "}
 				<div style={containerStyle}></div>
 			</div>
+		);
+	}
+	if (role === "instructor") {
+		return (
+			<Routes>
+				<Route path="/instructoroverview" element={<Instructorpage />}></Route>
+			</Routes>
 		);
 	}
 };
