@@ -18,7 +18,7 @@ const SignUpForm = () => {
     setError("");
     try {
       await createUser(email, pass1);
-      navigate("/account");
+      navigate("/studentoverview");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
