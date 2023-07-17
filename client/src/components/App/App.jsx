@@ -9,8 +9,8 @@ import AssignmentDetails from "../Assignment/Assignments";
 import ProjectDetails from "../Projects/Projects";
 import Feedback from "../Projects/Feedback";
 import AssessDetails from "../Assessments/Assessments";
-import StudentCard from "../StudentCard";
-import Sidebar from "../Sidebar/Sidebar";
+// import StudentCard from "../StudentCard";
+// import Sidebar from "../Sidebar/Sidebar";
 
 const App = () => {
   const [showSideBar, setShowSideBar] = useState(false);
@@ -23,7 +23,11 @@ const App = () => {
     } else {
       document.body.classList.remove("sidebar-open");
     }
-  }, [showSideBar]);
+
+    const isLogInOrSignUp =
+      location.pathname === "/" || location.pathname === "/signup";
+    setHideHeader(isLogInOrSignUp);
+  }, [showSideBar, location]);
 
   const containerStyle = {
     marginLeft: showSideBar ? "240px" : "0",
@@ -47,9 +51,6 @@ const App = () => {
 
   return (
     <div>
-      {showSideBar && (
-        <Sidebar showSidebar={showSideBar} setShowSidebar={setShowSideBar} />
-      )}
       <h1 className="text-center text-3xl font-bold"></h1>
       <div style={containerStyle}>
         <Routes>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { PiBellDuotone } from "react-icons/pi";
 import Sidebar from "../Sidebar/Sidebar";
@@ -6,7 +6,7 @@ import Filter from "../Filter/Filter";
 import { UserAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
-const Header = forwardRef((props, ref) => {
+const Header = ({ showSideBar, setShowSideBar }) => {
   const [firstDropdownVisible, setFirstDropdownVisible] = useState(false);
   const [secondDropdownVisible, setSecondDropdownVisible] = useState(false);
   const [thirdDropdownVisible, setThirdDropdownVisible] = useState(false);
@@ -45,7 +45,10 @@ const Header = forwardRef((props, ref) => {
     setSelectedOption(option);
     setFirstDropdownVisible(false);
     setThirdDropdownVisible(false);
-    props.setShowSideBar(false);
+    setShowSideBar(false);
+  };
+  const handleLogoClick = () => {
+    setShowSideBar((prevShowSideBar) => !prevShowSideBar);
   };
 
   const handleOutsideClick = (event) => {
@@ -90,23 +93,18 @@ const Header = forwardRef((props, ref) => {
   }, []);
 
   useEffect(() => {
-    if (props.showSideBar) {
+    if (showSideBar) {
       document.body.classList.add("sidebar-open");
     } else {
       document.body.classList.remove("sidebar-open");
     }
-  }, [props.showSideBar]);
+  }, [showSideBar]);
 
   return (
     <div>
-      {props.showSideBar && (
-        <Sidebar
-          showSidebar={props.showSideBar}
-          setShowSidebar={props.setShowSidebar}
-        />
-      )}
+      {showSideBar && <Sidebar setShowSidebar={setShowSideBar} />}
       <header className={`flex p-2 `}>
-        <div className="h-10 mr-2 pl-2" onClick={props.setShowSideBar}>
+        <div className="h-10 mr-2 pl-2" onClick={handleLogoClick}>
           <img
             src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
             alt="logo"
