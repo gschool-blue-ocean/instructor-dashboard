@@ -76,7 +76,7 @@ function LogIn() {
                   </div>
                 </div>
               </div>
-              <div className="text-center">
+              <div className="text-center justify-self-center">
                 <input
                   className="text-sm	rounded-full bg-[#00808C] text-white w-80 py-2 pr-4 pl-4"
                   type="submit"
@@ -84,22 +84,36 @@ function LogIn() {
                   data-disable-with="Sign in"
                   value="SIGN IN"
                 />
-                <ul className="text-center pt-1">
-                  <li>
+                <div className=" block text-center pt-1 justify-center">
+                  <p>
                     <a
-                      className="text-[#00808C] text-base"
+                      className=" m-0 block text-[#00808C] border-transparent text-base"
                       href="/forgot-password"
                     >
                       Forgot your password?
                     </a>
-                  </li>
-                  <li className=" text-sm p-8 font-serif">
-                    <div className="w-full text-center mt-5">
-                      Or <Link to="/signup">Click Here</Link> to signup
+                  </p>
+                  <div>
+                    <div className="flex items-center py-4">
+                      <div class="flex-grow h-px bg-gray-400"></div>
+                      <span className="flex-shrink text-xl text-gray-500 px-4 italic font-light">
+                        Or
+                      </span>
+                      <div class="flex-grow h-px bg-gray-400"></div>
                     </div>
-                  </li>
-                </ul>
-                <div></div>
+                    <div className="justify-self-center text-center">
+                      <a
+                        className="m-0 font-semibold text-[#00808C] text-sm border-transparent font-serif"
+                        href="/signup"
+                      >
+                        Click Here
+                      </a>
+                      <div className="pt-8 justify-self-center text-sm border-transparent font-serif">
+                        <p>to signup</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>

@@ -4,7 +4,9 @@ const db = new pg.Pool({ connectionString: process.env.DATABASE_URL })
 
 export async function getProject(req, res, next) {
     try {
-        const result = await db.query('SELECT * FROM project')
+        const result = await db.query(
+            'SELECT * FROM project ORDER BY project_id'
+        )
         res.send(result.rows)
     } catch (error) {
         next(error)
@@ -14,7 +16,7 @@ export async function getStudentProject(req, res, next) {
     try {
         const studentId = req.params.studentId
         const result = await db.query(
-            'SELECT * FROM project WHERE student_id = $1',
+            'SELECT * FROM project WHERE student_id = $1 ORDER BY project_id',
             [studentId]
         )
         res.send(result.rows)
