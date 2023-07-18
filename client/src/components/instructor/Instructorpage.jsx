@@ -1,28 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/authContext";
+import ProgressBar from "react-customizable-progressbar";
+import StudentCard from "../StudentCard";
 
 const Instructorpage = () => {
 	const { user, logout } = UserAuth();
 	const navigate = useNavigate();
-
-	const handleLogout = async () => {
-		try {
-			await logout();
-			navigate("/");
-		} catch (e) {
-			console.log(e);
-		}
-	};
+	const [cohort, setCohort] = useState("mcsp-21");
+	const [cohortAssignments, setCohortAssignments] = useState(null);
+	const [cohortAssessments, setCohortAssessments] = useState(null);
+	const [cohortProjects, setCohortProjects] = useState(null);
 
 	return (
 		<div>
-			<button
-				className="cursor-pointer flex items-center ml-4 bg-white rounded-md shadow-lg px-4 py-2 text-gray-800 hover:bg-gray-200"
-				onClick={handleLogout}
-			>
-				Logout
-			</button>
+			<div>
+				<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
+				<p className="text-left ml-5 font-bold text-3xl">Welcome back,</p>
+
+				<p className="text-left ml-5 text-xl text-gray-400 font-bold">
+					Track, manage and forecast your performance
+				</p>
+
+				<div className="flex ">
+					<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-center font-bold text-xl border-b-4 border-black">
+							Assignments Completion
+						</div>
+						<div className="mt-5 mx-5 flex justify-center">
+							<ProgressBar
+								radius={100}
+								progress={cohortAssignments}
+								strokeWidth={15}
+								strokeColor="#5d9cec"
+								trackStrokeWidth={15}
+								trackStrokeColor="#e6e6e6"
+								trackStrokeLinecap="square"
+								pointerRadius={0}
+								initialAnimation={true}
+								transition="1.5s ease 0.5s"
+								trackTransition="0s ease"
+							>
+								<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none text-3xl">
+									<div>{cohortAssignments}%</div>
+								</div>
+							</ProgressBar>
+						</div>
+					</div>
+
+					<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-center font-bold border-b-4 border-black">
+							Project Completion
+						</div>
+						<div className="mt-5 mx-5 flex justify-center">
+							<ProgressBar
+								radius={100}
+								progress={cohortProjects}
+								strokeWidth={15}
+								strokeColor="#5d9cec"
+								trackStrokeWidth={15}
+								trackStrokeColor="#e6e6e6"
+								trackStrokeLinecap="square"
+								pointerRadius={0}
+								initialAnimation={true}
+								transition="1.5s ease 0.5s"
+								trackTransition="0s ease"
+							>
+								<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none text-3xl">
+									<div>{cohortProjects}%</div>
+								</div>
+							</ProgressBar>
+						</div>
+					</div>
+
+					<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-center font-bold border-b-4 border-black">
+							Assessment Results
+						</div>
+						<div className="mt-5 mx-5 flex justify-center">
+							<ProgressBar
+								radius={100}
+								progress={cohortAssessments}
+								strokeWidth={15}
+								strokeColor="#5d9cec"
+								trackStrokeWidth={15}
+								trackStrokeColor="#e6e6e6"
+								trackStrokeLinecap="square"
+								pointerRadius={0}
+								initialAnimation={true}
+								transition="1.5s ease 0.5s"
+								trackTransition="0s ease"
+							>
+								<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none text-3xl">
+									<div>{cohortAssessments}%</div>
+								</div>
+							</ProgressBar>
+						</div>
+					</div>
+				</div>
+
+				<StudentCard />
+			</div>
 		</div>
 	);
 };
