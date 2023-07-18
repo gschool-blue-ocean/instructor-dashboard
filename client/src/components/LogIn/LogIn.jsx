@@ -106,24 +106,22 @@ function LogIn() {
                   value="SIGN IN"
                 />
                 <div className=" block text-center pt-1 justify-center">
-                  <p>
-                    <div className="justify-center">
-                      <button
-                        className="m-0 block text-[#00808C] border-transparent text-base justify-center"
-                        onClick={handleResetPassword}
-                      >
-                        Forgot your password? Type your email into the email
-                        address box than click me.
-                      </button>
-                    </div>
-                  </p>
+                  <div className="justify-center">
+                    <button
+                      className="m-0 block text-[#00808C] border-transparent text-base justify-center"
+                      onClick={handleResetPassword}
+                    >
+                      Forgot your password? Type your email into the email
+                      address box than click me.
+                    </button>
+                  </div>
                   <div>
                     <div className="flex items-center py-4">
-                      <div class="flex-grow h-px bg-gray-400"></div>
+                      <div className="flex-grow h-px bg-gray-400"></div>
                       <span className="flex-shrink text-xl text-gray-500 px-4 italic font-light">
                         Or
                       </span>
-                      <div class="flex-grow h-px bg-gray-400"></div>
+                      <div className="flex-grow h-px bg-gray-400"></div>
                     </div>
                     <div className="justify-self-center text-center">
                       <a
