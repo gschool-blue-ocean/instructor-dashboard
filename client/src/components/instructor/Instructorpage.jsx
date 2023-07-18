@@ -14,7 +14,7 @@ const Instructorpage = () => {
 		try {
 			const res = await axios.get(`/api/mcsp/overview/${cohort}`);
 			if (res.data.length > 0) {
-				setCohort(res.data);
+				setCohortOverview(res.data);
 			}
 		} catch (err) {
 			console.log(err);
@@ -24,7 +24,7 @@ const Instructorpage = () => {
 	useEffect(() => {
 		fetchCohortOverview();
 	}, []);
-	console.log(co);
+	console.log(cohortOverview);
 	return (
 		<div>
 			<div>
