@@ -28,6 +28,18 @@ export async function getStudentsByMcsp(req, res, next) {
         next(error)
     }
 }
+export async function getStudentInfo(req, res, next) {
+    try {
+        const email = req.params.email
+        const result = await db.query(
+            'SELECT * FROM student WHERE email = $1 ORDER by student_id',
+            [email]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
 
 export async function createStudent(req, res, next) {
     try {

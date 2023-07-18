@@ -8,6 +8,7 @@ import {
     getStudentOverview,
     getStudentAssessment,
     getStudentsByMcsp,
+    getStudentInfo,
 } from '../controllers/studentControllers.js'
 
 const router = express.Router()
@@ -20,5 +21,6 @@ router.patch('/:studentId', updateStudent)
 router.delete('/:studentId', deleteStudent)
 router.get('/assessment/:studentId', getStudentAssessment)
 router.get('/mcsp/:mcsp', getStudentsByMcsp)
+router.get('/studentInfo/:email', getStudentInfo)
 
 export default router
