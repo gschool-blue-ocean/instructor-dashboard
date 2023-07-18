@@ -7,13 +7,23 @@ function LogIn() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { signIn, role } = UserAuth();
+  const { signIn, role, sendResetPasswordEmail } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await signIn(email, password);
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await sendResetPasswordEmail(email);
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -97,12 +107,15 @@ function LogIn() {
                 />
                 <div className=" block text-center pt-1 justify-center">
                   <p>
-                    <a
-                      className=" m-0 block text-[#00808C] border-transparent text-base"
-                      href="/forgot-password"
-                    >
-                      Forgot your password?
-                    </a>
+                    <div className="justify-center">
+                      <button
+                        className="m-0 block text-[#00808C] border-transparent text-base justify-center"
+                        onClick={handleResetPassword}
+                      >
+                        Forgot your password? Type your email into the email
+                        address box than click me.
+                      </button>
+                    </div>
                   </p>
                   <div>
                     <div className="flex items-center py-4">
@@ -120,7 +133,7 @@ function LogIn() {
                         Click Here
                       </a>
                       <div className="pt-8 justify-self-center text-sm border-transparent font-serif">
-                        <p>to signup</p>
+                        <p className="text-[#00808C]">To SignUp</p>
                       </div>
                     </div>
                   </div>
