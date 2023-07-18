@@ -16,6 +16,14 @@ export async function getStudents(req, res, next) {
         next(error)
     }
 }
+export async function getStudentsByMcsp(req, res, next) {
+    try {
+        const result = await db.query('SELECT * FROM student')
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
 
 export async function createStudent(req, res, next) {
     try {
