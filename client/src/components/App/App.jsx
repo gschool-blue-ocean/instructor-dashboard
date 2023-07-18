@@ -96,7 +96,7 @@ const App = () => {
 				</div>{" "}
 				<div style={containerStyle}></div>
 			</div>
-			};
+			}
   }
 };
 export default App;
