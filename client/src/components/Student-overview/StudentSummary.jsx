@@ -15,7 +15,7 @@ const StudentOverview = () => {
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/api/student/overview/1")
+		fetch("/api/student/overview/1")
 			.then((response) => response.json())
 			.then((data) => {
 				const assessmentAverage = data.assessment_average;
@@ -38,7 +38,7 @@ const StudentOverview = () => {
 	}, []);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/api/student")
+		fetch("/api/student")
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data[0].first_name);
