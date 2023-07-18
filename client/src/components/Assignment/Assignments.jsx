@@ -47,29 +47,30 @@ function AssignmentDetails({ onclickFeedback }) {
 					className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
-					<h1>Assignment Summary :</h1>
-					<div className="mx-auto bg-white drop-shadow-lg">
-						<h1>Week Assignment ({assignments.length})</h1>
-						<ul>
-							{assignments.map((detail) => (
-								<li key={detail.ID}>
-									<input
-										data-assignment-id={detail.assignment_id}
-										type="checkbox"
-										checked={detail.completed}
-										disabled={false}
-										onChange={handleCheckboxChange}
-									/>
-									<p className={detail.completed ? "line-through" : ""}>
-										{detail.assignment_name}
-									</p>
-									<button data-id={detail.ID} onClick={() => onclickFeedback()}>
-										View
-									</button>
-								</li>
-							))}
-						</ul>
+					<h1 style={{ color: "Orange" }}>Assignment Summary :</h1>
+						<div className="mx-auto p-2 bg-gray-300 drop-shadow-lg">
+						<h1 style={{ color: "DarkBlue" }}>Week Assignment ({assignments.length})</h1>
+					<ul>
+						{assignments.map((detail) => (
+						<li key={detail.ID}>
+							<input
+							data-assignment-id={detail.assignment_id}
+							type="checkbox"
+							checked={detail.completed}
+							disabled={false}
+							onChange={handleCheckboxChange}
+							/>
+							<p className={detail.completed ? "line-through" : ""}>
+							{detail.assignment_name}
+							</p>
+							<button data-id={detail.ID} onClick={() => onclickFeedback()}>
+							View
+							</button>
+						</li>
+						))}
+					</ul>
 					</div>
+
 				</section>
 			)}
 		</>
