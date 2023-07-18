@@ -79,6 +79,7 @@ const App = () => {
       </div>
     );
   }
+
   	if (role === "instructor") {
 		return (
 			<div>
