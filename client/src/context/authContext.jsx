@@ -6,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../../Firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -66,6 +67,10 @@ export const AuthContextProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const sendResetPasswordEmail = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log(currentUser);
@@ -95,7 +100,15 @@ export const AuthContextProvider = ({ children }) => {
   }, [navigate]);
   return (
     <UserContext.Provider
-      value={{ createUser, user, logout, signIn, role, isUserNew }}
+      value={{
+        createUser,
+        user,
+        logout,
+        signIn,
+        role,
+        isUserNew,
+        sendResetPasswordEmail,
+      }}
     >
       {children}
     </UserContext.Provider>
