@@ -8,10 +8,23 @@ const Instructorpage = () => {
 	const { user, logout } = UserAuth();
 	const navigate = useNavigate();
 	const [cohort, setCohort] = useState("mcsp-21");
-	const [cohortAssignments, setCohortAssignments] = useState(null);
-	const [cohortAssessments, setCohortAssessments] = useState(null);
-	const [cohortProjects, setCohortProjects] = useState(null);
+	const [cohortOverview, setCohortOverview] = useState(null);
 
+	async function fetchCohortOverview() {
+		try {
+			const res = await axios.get(`/api/mcsp/overview/${cohort}`);
+			if (res.data.length > 0) {
+				setCohort(res.data);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	useEffect(() => {
+		fetchCohortOverview();
+	}, []);
+	console.log(co);
 	return (
 		<div>
 			<div>
