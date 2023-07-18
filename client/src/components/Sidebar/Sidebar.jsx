@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu } from "react-pro-sidebar";
 import { AiFillHome } from "react-icons/ai";
-import { BsPersonFillAdd } from "react-icons/bs";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 
-function Sidebar({ showSidebar, setShowSidebar }) {
+function Sidebar({ showSidebar, setShowSidebar, role }) {
+  const handleOnClick = () => {
+    setShowSidebar(false);
+  };
+
   const handleOutsideClick = (event) => {
     const sidebarElement = document.getElementById("sidebar");
 
@@ -34,16 +39,22 @@ function Sidebar({ showSidebar, setShowSidebar }) {
       <Menu className="h-screen text-white bg-zinc-600">
         <div>
           <div className="overflow-y-auto scrollbar-medium scrollbar-thumb-transparent-900 scrollbar-track-blue-100 flex-col justify-start items-start h-[calc(100%-48px)] ">
-            <div className="flex items-center p-2 text-white bg-zinc-600 hover:text-opacity-60 md:hover:border md:hover:border-teal-800 md:hover:bg-teal-800">
+            <div
+              id="homelink"
+              onClick={handleOnClick}
+              className="flex items-center p-2 text-white bg-zinc-600 hover:text-opacity-60 md:hover:border md:hover:border-teal-800 md:hover:bg-teal-800"
+            >
               <AiFillHome className="w-7 h-7 mr-2" />
-              <a href="www.yahoo.com">Home</a>
+              <p>Home</p>
             </div>
           </div>
           <div>
-            <div className="flex items-center p-2 text-white bg-zinc-600 hover:text-opacity-60 md:hover:border md:hover:border-teal-800 md:hover:bg-teal-800">
-              <BsPersonFillAdd className="w-7 h-7 mr-2" />
-              <a>Add User</a>
-            </div>
+            <Link to="/AddStudent">
+              <div className="flex items-center p-2 text-white bg-zinc-600 hover:text-opacity-60 md:hover:border md:hover:border-teal-800 md:hover:bg-teal-800">
+                <BsFillPersonPlusFill className="w-7 h-7 mr-2" />
+                <p>Add User</p>
+              </div>
+            </Link>
           </div>
         </div>
       </Menu>

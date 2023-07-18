@@ -17,6 +17,7 @@ import AssessDetails from "../Assessments/Assessments";
 // import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
 import Instructorpage from "../instructor/Instructorpage";
+import AddStudent from "../AddStudent/AddStudent";
 
 const App = () => {
   const [showSideBar, setShowSideBar] = useState(false);
@@ -25,6 +26,8 @@ const App = () => {
   const { user, isUserNew } = UserAuth();
   const role = useRole();
   const location = useLocation();
+  const [addStudent, setAddStudent] = useState(false);
+  const [studentOverview, setShowStudentOverview] = useState(false);
 
   useEffect(() => {
     if (showSideBar) {
@@ -60,40 +63,43 @@ const App = () => {
       <div>
         <h1 className="text-center text-3xl font-bold"></h1>
         <div style={containerStyle}>
-          {hideHeader ? null : (
-            <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+          {role && hideHeader ? null : (
+            <Header
+              showSideBar={showSideBar}
+              setShowSideBar={setShowSideBar}
+              role={role}
+            />
           )}
           <Routes>
-            <Route
-              path="/studentoverview"
-              element={
-                <>
-                  <StudentOverview />
-                </>
-              }
-            />
+            <Route path="/addStudent" element={<AddStudent />} />
+            <Route path="/studentoverview" element={<StudentOverview />} />
             <Route path="/student_projects" element={<ProjectDetails />} />
           </Routes>
-        </div>{" "}
+        </div>
         <div style={containerStyle}></div>
       </div>
     );
   }
-  if (role === "instructor") {
+  if (role === "student") {
     return (
       <div>
         <h1 className="text-center text-3xl font-bold"></h1>
         <div style={containerStyle}>
-          {hideHeader ? null : (
-            <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+          {role && hideHeader ? null : (
+            <Header
+              showSideBar={showSideBar}
+              setShowSideBar={setShowSideBar}
+              role={role}
+            />
           )}
           <Routes>
+            <Route path="/addStudent" element={<AddStudent />} />
             <Route
               path="/instructoroverview"
               element={<Instructorpage />}
             ></Route>
           </Routes>
-        </div>{" "}
+        </div>
         <div style={containerStyle}></div>
       </div>
     );

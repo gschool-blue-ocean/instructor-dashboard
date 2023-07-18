@@ -8,7 +8,7 @@ function LogIn() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { signIn, role, sendResetPasswordEmail } = UserAuth();
-
+  const [hideLogin, setShowLogin] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
