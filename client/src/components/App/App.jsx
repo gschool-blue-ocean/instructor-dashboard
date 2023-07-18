@@ -79,24 +79,25 @@ const App = () => {
       </div>
     );
   }
-  if (role === "instructor") {
-    return (
-      <div>
-        <h1 className="text-center text-3xl font-bold"></h1>
-        <div style={containerStyle}>
-          {hideHeader ? null : (
-            <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-          )}
-          <Routes>
-            <Route
-              path="/instructoroverview"
-              element={<Instructorpage />}
-            ></Route>
-          </Routes>
-        </div>{" "}
-        <div style={containerStyle}></div>
-      </div>
-    );
+
+  	if (role === "instructor") {
+		return (
+			<div>
+				<h1 className="text-center text-3xl font-bold"></h1>
+				<div style={containerStyle}>
+					{hideHeader ? null : (
+						<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+					)}
+					<Routes>
+						<Route
+							path="/instructoroverview"
+							element={<Instructorpage />}
+						></Route>
+					</Routes>
+				</div>{" "}
+				<div style={containerStyle}></div>
+			</div>
+			)
   }
 };
 export default App;
