@@ -124,12 +124,13 @@ function LogIn() {
                       <div className="flex-grow h-px bg-gray-400"></div>
                     </div>
                     <div className="justify-self-center text-center">
-                      <a
+                      <Link
+                        to="/signup"
                         className="m-0 font-semibold text-[#00808C] text-sm border-transparent font-serif"
-                        href="/signup"
                       >
                         Click Here
-                      </a>
+                      </Link>
+
                       <div className="pt-8 justify-self-center text-sm border-transparent font-serif">
                         <p className="text-[#00808C]">To SignUp</p>
                       </div>
