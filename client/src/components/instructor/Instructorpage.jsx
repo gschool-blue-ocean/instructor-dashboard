@@ -14,10 +14,10 @@ const Instructorpage = () => {
 	async function fetchCohortOverview() {
 		try {
 			const res = await axios.get(`/api/mcsp/overview/${cohort}`);
-			console.log(res.data.length);
-			if (res.data.length > 0) {
+			console.log(res.data);
+			if (res.data) {
 				console.log(res.data);
-				setCohortOverview(res.data[0]);
+				setCohortOverview(res.data);
 			}
 		} catch (err) {
 			console.log(err);
