@@ -1,25 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../context/authContext";
+import { UserAuth, useRole } from "../../context/authContext";
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { signIn } = UserAuth();
+  const { signIn, role, sendResetPasswordEmail } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await signIn(email, password);
-      navigate("/studentoverview");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
     }
   };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await sendResetPasswordEmail(email);
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    if (role) {
+      if (role === "instructor") {
+        console.log("going to instructoroverview");
+        navigate("/instructoroverview");
+      } else {
+        console.log("going to studentoverview");
+        navigate("/studentoverview");
+      }
+    }
+  }, [role, navigate]);
 
   return (
     <div className="flex flex-col min-h-screen bg-zinc-100">
@@ -29,7 +50,7 @@ function LogIn() {
             <form onSubmit={handleSubmit}>
               <input name="utf8" type="hidden" value="✓" />
               <input type="hidden" />
-              <div>
+              <div className="flex justify-center items-center place-content-center">
                 <img
                   className="mr-20 ml-20 mt-14 w-60"
                   src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
@@ -85,31 +106,33 @@ function LogIn() {
                   value="SIGN IN"
                 />
                 <div className=" block text-center pt-1 justify-center">
-                  <p>
-                    <a
-                      className=" m-0 block text-[#00808C] border-transparent text-base"
-                      href="/forgot-password"
+                  <div className="justify-center">
+                    <button
+                      className="m-0 block text-[#00808C] border-transparent text-base justify-center"
+                      onClick={handleResetPassword}
                     >
-                      Forgot your password?
-                    </a>
-                  </p>
+                      Forgot your password? Type your email into the email
+                      address box than click me.
+                    </button>
+                  </div>
                   <div>
                     <div className="flex items-center py-4">
-                      <div class="flex-grow h-px bg-gray-400"></div>
+                      <div className="flex-grow h-px bg-gray-400"></div>
                       <span className="flex-shrink text-xl text-gray-500 px-4 italic font-light">
                         Or
                       </span>
-                      <div class="flex-grow h-px bg-gray-400"></div>
+                      <div className="flex-grow h-px bg-gray-400"></div>
                     </div>
                     <div className="justify-self-center text-center">
-                      <a
+                      <Link
+                        to="/signup"
                         className="m-0 font-semibold text-[#00808C] text-sm border-transparent font-serif"
-                        href="/signup"
                       >
                         Click Here
-                      </a>
+                      </Link>
+
                       <div className="pt-8 justify-self-center text-sm border-transparent font-serif">
-                        <p>to signup</p>
+                        <p className="text-[#00808C]">To SignUp</p>
                       </div>
                     </div>
                   </div>

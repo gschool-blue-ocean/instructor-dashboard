@@ -16,12 +16,13 @@ import AssessDetails from "../Assessments/Assessments";
 // import StudentCard from "../StudentCard";
 // import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
+import Instructorpage from "../instructor/Instructorpage";
 
 const App = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   const navigate = useNavigate();
-  const { user } = UserAuth();
+  const { user, isUserNew } = UserAuth();
   const role = useRole();
   const location = useLocation();
 
@@ -46,9 +47,7 @@ const App = () => {
     // Still determining if the user is logged in.
     return <div>Loading...</div>;
   }
-
-  if (user === null) {
-    // StudentUser is not logged in.
+  if (user === null || isUserNew || (user && !user.emailVerified)) {
     return (
       <Routes>
         <Route path="/" element={<LogIn />} />
@@ -56,7 +55,6 @@ const App = () => {
       </Routes>
     );
   }
-
   if (role === "student") {
     return (
       <div>
@@ -76,7 +74,26 @@ const App = () => {
             />
             <Route path="/student_projects" element={<ProjectDetails />} />
           </Routes>
-        </div>
+        </div>{" "}
+        <div style={containerStyle}></div>
+      </div>
+    );
+  }
+  if (role === "instructor") {
+    return (
+      <div>
+        <h1 className="text-center text-3xl font-bold"></h1>
+        <div style={containerStyle}>
+          {hideHeader ? null : (
+            <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+          )}
+          <Routes>
+            <Route
+              path="/instructoroverview"
+              element={<Instructorpage />}
+            ></Route>
+          </Routes>
+        </div>{" "}
         <div style={containerStyle}></div>
       </div>
     );
