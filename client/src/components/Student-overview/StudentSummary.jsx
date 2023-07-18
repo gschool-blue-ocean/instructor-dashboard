@@ -63,7 +63,7 @@ const StudentOverview = () => {
 		setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
 	}
 	function detailDisplay3() {
-		setDetailDisplayStatus(AssessDetails);
+		setDetailDisplayStatus(<AssessDetails />);
 	}
 	function detailDisplay4() {
 		setDetailDisplayStatus(<Feedback onclickBack={detailDisplay2} />);
@@ -168,10 +168,7 @@ const StudentOverview = () => {
 					<div className="text-center font-bold border-b-4 border-black">
 						Assessment Results
 					</div>
-					<div
-						className="mt-5 mx-5 flex justify-center"
-						onClick={detailDisplay}
-					>
+					<div className="mt-5 mx-5 flex justify-center">
 						<ProgressBar
 							radius={100}
 							progress={assessmentResults}
