@@ -15,6 +15,9 @@ export async function getAssessment(req, res, next) {
 export async function getStudentAssessment(req, res, next) {
     try {
         const studentId = req.params.studentId
+        console.log(studentID)
+        console.log('getStudentAssessment route')
+        
         const result = await db.query(
             'SELECT * FROM assessment WHERE student_id=$1 ORDER BY assessment_id',
             [studentId]
