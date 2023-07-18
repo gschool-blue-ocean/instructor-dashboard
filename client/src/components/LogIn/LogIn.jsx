@@ -1,25 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../context/authContext";
+import { UserAuth, useRole } from "../../context/authContext";
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { signIn } = UserAuth();
+  const { signIn, role, sendResetPasswordEmail } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await signIn(email, password);
-      navigate("/account");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
     }
   };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await sendResetPasswordEmail(email);
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    if (role) {
+      if (role === "instructor") {
+        console.log("going to instructoroverview");
+        navigate("/instructoroverview");
+      } else {
+        console.log("going to studentoverview");
+        navigate("/studentoverview");
+      }
+    }
+  }, [role, navigate]);
 
   return (
     <div className="flex flex-col min-h-screen bg-zinc-100">
@@ -29,7 +50,7 @@ function LogIn() {
             <form onSubmit={handleSubmit}>
               <input name="utf8" type="hidden" value="✓" />
               <input type="hidden" />
-              <div>
+              <div className="flex justify-center items-center place-content-center">
                 <img
                   className="mr-20 ml-20 mt-14 w-60"
                   src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
@@ -76,7 +97,7 @@ function LogIn() {
                   </div>
                 </div>
               </div>
-              <div className="text-center">
+              <div className="text-center justify-self-center">
                 <input
                   className="text-sm	rounded-full bg-[#00808C] text-white w-80 py-2 pr-4 pl-4"
                   type="submit"
@@ -84,22 +105,38 @@ function LogIn() {
                   data-disable-with="Sign in"
                   value="SIGN IN"
                 />
-                <ul className="text-center pt-1">
-                  <li>
-                    <a
-                      className="text-[#00808C] text-base"
-                      href="/forgot-password"
+                <div className=" block text-center pt-1 justify-center">
+                  <div className="justify-center">
+                    <button
+                      className="m-0 block text-[#00808C] border-transparent text-base justify-center"
+                      onClick={handleResetPassword}
                     >
-                      Forgot your password?
-                    </a>
-                  </li>
-                  <li className=" text-sm p-8 font-serif">
-                    <div className="w-full text-center mt-5">
-                      Or <Link to="/signup">Click Here</Link> to signup
+                      Forgot your password? Type your email into the email
+                      address box than click me.
+                    </button>
+                  </div>
+                  <div>
+                    <div className="flex items-center py-4">
+                      <div className="flex-grow h-px bg-gray-400"></div>
+                      <span className="flex-shrink text-xl text-gray-500 px-4 italic font-light">
+                        Or
+                      </span>
+                      <div className="flex-grow h-px bg-gray-400"></div>
                     </div>
-                  </li>
-                </ul>
-                <div></div>
+                    <div className="justify-self-center text-center">
+                      <Link
+                        to="/signup"
+                        className="m-0 font-semibold text-[#00808C] text-sm border-transparent font-serif"
+                      >
+                        Click Here
+                      </Link>
+
+                      <div className="pt-8 justify-self-center text-sm border-transparent font-serif">
+                        <p className="text-[#00808C]">To SignUp</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>

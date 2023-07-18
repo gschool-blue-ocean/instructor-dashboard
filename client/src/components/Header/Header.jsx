@@ -1,16 +1,29 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { PiBellDuotone } from "react-icons/pi";
 import Sidebar from "../Sidebar/Sidebar";
 import Filter from "../Filter/Filter";
+import { UserAuth } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
-const Header = forwardRef((props, ref) => {
+const Header = ({ showSideBar, setShowSideBar }) => {
   const [firstDropdownVisible, setFirstDropdownVisible] = useState(false);
   const [secondDropdownVisible, setSecondDropdownVisible] = useState(false);
   const [thirdDropdownVisible, setThirdDropdownVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [filter, setFilter] = useState(false);
+  const { user, logout } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const firstDropdownRef = useRef(null);
   const secondDropdownRef = useRef(null);
@@ -32,7 +45,10 @@ const Header = forwardRef((props, ref) => {
     setSelectedOption(option);
     setFirstDropdownVisible(false);
     setThirdDropdownVisible(false);
-    props.setShowSideBar(false);
+    setShowSideBar(false);
+  };
+  const handleLogoClick = () => {
+    setShowSideBar((prevShowSideBar) => !prevShowSideBar);
   };
 
   const handleOutsideClick = (event) => {
@@ -77,23 +93,18 @@ const Header = forwardRef((props, ref) => {
   }, []);
 
   useEffect(() => {
-    if (props.showSideBar) {
+    if (showSideBar) {
       document.body.classList.add("sidebar-open");
     } else {
       document.body.classList.remove("sidebar-open");
     }
-  }, [props.showSideBar]);
+  }, [showSideBar]);
 
   return (
     <div>
-      {props.showSideBar && (
-        <Sidebar
-          showSidebar={props.showSideBar}
-          setShowSidebar={props.setShowSidebar}
-        />
-      )}
+      {showSideBar && <Sidebar setShowSidebar={setShowSideBar} />}
       <header className={`flex p-2 `}>
-        <div className="h-10 mr-2 pl-2" onClick={props.setShowSideBar}>
+        <div className="h-10 mr-2 pl-2" onClick={handleLogoClick}>
           <img
             src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
             alt="logo"
@@ -205,6 +216,12 @@ const Header = forwardRef((props, ref) => {
               </ul>
             )}
           </div>
+          <button
+            className="cursor-pointer flex items-center ml-4 bg-white rounded-md shadow-lg px-4 py-2 text-gray-800 hover:bg-gray-200"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </header>
       <div className="flex ml-auto w-auto">
@@ -212,6 +229,5 @@ const Header = forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
-
+};
 export default Header;

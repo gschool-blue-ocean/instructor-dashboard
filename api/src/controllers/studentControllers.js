@@ -18,7 +18,11 @@ export async function getStudents(req, res, next) {
 }
 export async function getStudentsByMcsp(req, res, next) {
     try {
-        const result = await db.query('SELECT * FROM student')
+        const mcsp = req.params.mcsp.toUpperCase()
+        const result = await db.query(
+            'SELECT * FROM student WHERE mcsp = $1 ORDER by student_id',
+            [mcsp]
+        )
         res.send(result.rows)
     } catch (error) {
         next(error)
