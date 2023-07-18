@@ -47,7 +47,7 @@ export async function createStudent(req, res, next) {
         const newStudentName = capitalizeName(userInputObj.first_name)
         const newStudentLastName = capitalizeName(userInputObj.last_name)
         const newStudentEmail = userInputObj.email
-        const newStudentMcsp = userInputObj.mcsp
+        const newStudentMcsp = userInputObj.mcsp.toUpperCase()
         // newStudentMcsp.toUpperCase()
 
         const result = await db.query(
