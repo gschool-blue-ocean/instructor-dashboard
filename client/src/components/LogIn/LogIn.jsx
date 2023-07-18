@@ -50,7 +50,7 @@ function LogIn() {
             <form onSubmit={handleSubmit}>
               <input name="utf8" type="hidden" value="✓" />
               <input type="hidden" />
-              <div>
+              <div className="flex justify-center items-center place-content-center">
                 <img
                   className="mr-20 ml-20 mt-14 w-60"
                   src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
