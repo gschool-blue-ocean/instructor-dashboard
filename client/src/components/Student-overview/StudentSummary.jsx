@@ -12,60 +12,60 @@ const StudentOverview = () => {
 	const [projectCompletion, setProjectCompletion] = useState(84);
 	const [assessmentResults, setAssessmentResults] = useState(94.5);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
+	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
-useEffect(() => {
-    fetch("http://localhost:4000/api/student/overview/1")
-      .then((response) => response.json())
-      .then((data) => {
-        const assessmentAverage = data.assessment_average;
-        const assignmentCompletionPercentage =
-          data.assignment_completion_percentage;
-        const attendancePoints = data.attendance_points;
-        const projectTotal = data.project_total;
+	useEffect(() => {
+		fetch("http://localhost:3000/api/student/overview/1")
+			.then((response) => response.json())
+			.then((data) => {
+				const assessmentAverage = data.assessment_average;
+				const assignmentCompletionPercentage =
+					data.assignment_completion_percentage;
+				const attendancePoints = data.attendance_points;
+				const projectTotal = data.project_total;
 
-        //console.log(assessmentAverage);
-        //console.log(assignmentCompletionPercentage);
-        //console.log(attendancePoints);
-        //console.log(projectTotal);
-        setAssignmentCompletion(assignmentCompletionPercentage);
-        setAssessmentResults(assessmentAverage);
-        setProjectCompletion(projectTotal);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+				console.log(assessmentAverage);
+				console.log(assignmentCompletionPercentage);
+				console.log(attendancePoints);
+				console.log(projectTotal);
+				setAssignmentCompletion(assignmentCompletionPercentage);
+				setAssessmentResults(assessmentAverage);
+				setProjectCompletion(projectTotal);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+	}, []);
 
-useEffect(() => {
-    fetch("http://localhost:4000/api/student")
-      .then((response) => response.json())
-      .then((data) => {
-        //console.log(data[0].first_name)
-        const firstName = data[0].first_name;
-        const lastName = data[0].last_name;
-        const fullName = firstName + " " + lastName;
-        //console.log("first name",firstName);
-        console.log(lastName);
-        setStudentName(fullName);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+	useEffect(() => {
+		fetch("http://localhost:3000/api/student")
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data[0].first_name);
+				const firstName = data[0].first_name;
+				const lastName = data[0].last_name;
+				const fullName = firstName + " " + lastName;
+				console.log("first name", firstName);
+				console.log(lastName);
+				setStudentName(fullName);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+	}, []);
 
-function detailDisplay() {
+	function detailDisplay() {
 		setDetailDisplayStatus(
 			<AssignmentDetails onclickFeedback={detailDisplay} />
 		);
 	}
-function detailDisplay2() {
+	function detailDisplay2() {
 		setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
 	}
-function detailDisplay3() {
+	function detailDisplay3() {
 		setDetailDisplayStatus(AssessDetails);
 	}
-function detailDisplay4() {
+	function detailDisplay4() {
 		setDetailDisplayStatus(<Feedback onclickBack={detailDisplay2} />);
 	}
 
@@ -81,7 +81,6 @@ function detailDisplay4() {
 		};
 	}, []);
 
-
 	return (
 		<div>
 			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
@@ -93,7 +92,7 @@ function detailDisplay4() {
 				Track, manage and forecast your performance
 			</p>
 
-			<div className="flex place-content-center">
+			<div className="flex ">
 				<div
 					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import {
-	AuthContextProvider,
-	UserAuth,
-	useRole,
+  AuthContextProvider,
+  UserAuth,
+  useRole,
 } from "../../context/authContext";
 import LogIn from "../LogIn/LogIn";
 import SignUpForm from "../Sign-up Page/SignUpForm";
@@ -16,48 +16,71 @@ import AssessDetails from "../Assessments/Assessments";
 // import StudentCard from "../StudentCard";
 // import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
+import Instructorpage from "../instructor/Instructorpage";
 
 const App = () => {
-	const [showSideBar, setShowSideBar] = useState(false);
-	const [hideHeader, setHideHeader] = useState(false);
-	const navigate = useNavigate();
-	const { user } = UserAuth();
-	const role = useRole();
-	const location = useLocation();
+  const [showSideBar, setShowSideBar] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
+  const navigate = useNavigate();
+  const { user, isUserNew } = UserAuth();
+  const role = useRole();
+  const location = useLocation();
 
-	useEffect(() => {
-		if (showSideBar) {
-			document.body.classList.add("sidebar-open");
-		} else {
-			document.body.classList.remove("sidebar-open");
-		}
-		// Check if the current location corresponds to the LogIn or SignUpForm routes
-		const isLogInOrSignUp =
-			location.pathname === "/" || location.pathname === "/signup";
-		setHideHeader(isLogInOrSignUp);
-	}, [showSideBar, location]);
+  useEffect(() => {
+    if (showSideBar) {
+      document.body.classList.add("sidebar-open");
+    } else {
+      document.body.classList.remove("sidebar-open");
+    }
+    // Check if the current location corresponds to the LogIn or SignUpForm routes
+    const isLogInOrSignUp =
+      location.pathname === "/" || location.pathname === "/signup";
+    setHideHeader(isLogInOrSignUp);
+  }, [showSideBar, location]);
 
-	const containerStyle = {
-		marginLeft: showSideBar ? "240px" : "0",
-		transition: "margin-left 0.3s ease",
-	};
+  const containerStyle = {
+    marginLeft: showSideBar ? "240px" : "0",
+    transition: "margin-left 0.3s ease",
+  };
 
-	if (user === undefined) {
-		// Still determining if the user is logged in.
-		return <div>Loading...</div>;
-	}
+  if (user === undefined) {
+    // Still determining if the user is logged in.
+    return <div>Loading...</div>;
+  }
+  if (user === null || isUserNew || (user && !user.emailVerified)) {
+    return (
+      <Routes>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/signup" element={<SignUpForm />} />
+      </Routes>
+    );
+  }
+  if (role === "student") {
+    return (
+      <div>
+        <h1 className="text-center text-3xl font-bold"></h1>
+        <div style={containerStyle}>
+          {hideHeader ? null : (
+            <Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+          )}
+          <Routes>
+            <Route
+              path="/studentoverview"
+              element={
+                <>
+                  <StudentOverview />
+                </>
+              }
+            />
+            <Route path="/student_projects" element={<ProjectDetails />} />
+          </Routes>
+        </div>{" "}
+        <div style={containerStyle}></div>
+      </div>
+    );
+  }
 
-	if (user === null) {
-		// StudentUser is not logged in.
-		return (
-			<Routes>
-				<Route path="/" element={<LogIn />} />
-				<Route path="/signup" element={<SignUpForm />} />
-			</Routes>
-		);
-	}
-
-	if (role === "student") {
+  	if (role === "instructor") {
 		return (
 			<div>
 				<h1 className="text-center text-3xl font-bold"></h1>
@@ -67,19 +90,14 @@ const App = () => {
 					)}
 					<Routes>
 						<Route
-							path="/studentoverview"
-							element={
-								<>
-									<StudentOverview />
-								</>
-							}
-						/>
-						<Route path="/student_projects" element={<ProjectDetails />} />
+							path="/instructoroverview"
+							element={<Instructorpage />}
+						></Route>
 					</Routes>
 				</div>{" "}
 				<div style={containerStyle}></div>
 			</div>
-		);
-	}
+			)
+  }
 };
 export default App;
