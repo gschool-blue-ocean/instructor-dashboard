@@ -92,9 +92,9 @@ const StudentOverview = () => {
 				Track, manage and forecast your performance
 			</p>
 
-			<div className="flex ">
-				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+			<div className="card-container flex ">
+				<div 
+					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay();
 					}}
@@ -127,7 +127,7 @@ const StudentOverview = () => {
 				</div>
 
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay2();
 					}}
@@ -160,7 +160,7 @@ const StudentOverview = () => {
 				</div>
 
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay3();
 					}}
@@ -189,7 +189,7 @@ const StudentOverview = () => {
 					</div>
 				</div>
 
-				<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
+				<div className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
 					<div className="text-center font-bold border-b-4 border-black">
 						Points Accrued
 					</div>

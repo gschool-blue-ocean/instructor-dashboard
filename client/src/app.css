@@ -6,6 +6,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #5d677c;
+  color: #fcf8f5d8;
 }
 
 .checkbox-input {
@@ -64,6 +66,7 @@ section li {
   display: flex;
   padding: 10px;
   justify-content: space-between;
+  color:black;
 }
 
 section li:first-of-type {
@@ -77,6 +80,10 @@ section :is(button, a) {
   padding: 5px 20px;
   margin-right: 10px;
   justify-self: flex-end;
+}
+
+.section-divider {
+  border-bottom: 2px solid #000000; /* Add a bottom black border */
 }
 
 #feedback .information {
@@ -152,5 +159,14 @@ table td:nth-child(2) {
   text-align: left;
 }
 
+.card-container {
+  border-bottom: 4px solid black;
+  padding-bottom: 1em;
+  width: fit-content;
+}
 
+.card {
+  background-color: rgb(190, 132, 80);
+  color: black;
+}
 /* dont use element selectors use something like student feedback class vs div element app. Use named custom classes then style based on classes or even use tailwind. Other components are styled with. The name of class is not important, the classes be unique i think */
