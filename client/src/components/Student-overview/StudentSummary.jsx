@@ -15,7 +15,7 @@ const StudentOverview = () => {
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/api/student/overview/1")
+		fetch("/api/student/overview/1")
 			.then((response) => response.json())
 			.then((data) => {
 				const assessmentAverage = data.assessment_average;
@@ -38,7 +38,7 @@ const StudentOverview = () => {
 	}, []);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/api/student")
+		fetch("/api/student")
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data[0].first_name);
@@ -63,7 +63,7 @@ const StudentOverview = () => {
 		setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
 	}
 	function detailDisplay3() {
-		setDetailDisplayStatus(AssessDetails);
+		setDetailDisplayStatus(<AssessDetails />);
 	}
 	function detailDisplay4() {
 		setDetailDisplayStatus(<Feedback onclickBack={detailDisplay2} />);
@@ -168,10 +168,7 @@ const StudentOverview = () => {
 					<div className="text-center font-bold border-b-4 border-black">
 						Assessment Results
 					</div>
-					<div
-						className="mt-5 mx-5 flex justify-center"
-						onClick={detailDisplay}
-					>
+					<div className="mt-5 mx-5 flex justify-center">
 						<ProgressBar
 							radius={100}
 							progress={assessmentResults}
