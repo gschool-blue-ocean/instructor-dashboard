@@ -32,7 +32,6 @@ const App = () => {
 	function updateStudentInfo(info) {
 		setStudentInfo(info);
 	}
-	console.log("id", studentInfo);
 	useEffect(() => {
 		if (showSideBar) {
 			document.body.classList.add("sidebar-open");

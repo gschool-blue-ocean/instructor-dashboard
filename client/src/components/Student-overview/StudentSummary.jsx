@@ -5,10 +5,11 @@ import AssignmentDetails from "../Assignment/Assignments";
 import Feedback from "../Projects/Feedback";
 import ProgressBar from "react-customizable-progressbar";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	const params = useParams();
-
+	const id = Number(params.studentId) || "";
 	// console.log(studentInfo);
 	const [studentName, setStudentName] = useState(
 		studentInfo.first_name ? studentInfo.first_name : studentInfo
@@ -19,46 +20,47 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	const [assessmentResults, setAssessmentResults] = useState(94.5);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
-	console.log("studentInfo:", studentInfo);
+	// console.log("studentInfo:", studentInfo);
 
 	const loadStudentIdIfNone = async (e) => {
 		try {
-			console.log(params);
+			console.log(id, typeof id);
 
 			//fetch and set student ID
-			const res = await axios.get(`/api/student/${params}`);
-			console.log(res.data);
-			console.log("studentid", res.data[0]);
+			const res = await axios.get(`/api/student/id/${id}`);
+
 			if (res.data[0]) {
 				updateStudentInfo(res.data[0]);
 			}
 		} catch (e) {
-			setError(e.message);
 			console.log(e.message);
 		}
 	};
 
-	if (studentInfo === "Instructor") {
-		loadStudentIdIfNone();
-	}
-
 	useEffect(() => {
-		fetch(`/api/student/overview/${studentInfo.student_id}`)
-			.then((response) => response.json())
-			.then((data) => {
-				const assessmentAverage = data.assessment_average;
-				const assignmentCompletionPercentage =
-					data.assignment_completion_percentage;
-				const attendancePoints = data.attendance_points;
-				const projectTotal = data.project_total;
+		console.log(id);
+		if (id) {
+			console.log("getting student info...");
+			loadStudentIdIfNone();
+		}
+		if (studentInfo.student_id) {
+			fetch(`/api/student/overview/${studentInfo.student_id}`)
+				.then((response) => response.json())
+				.then((data) => {
+					const assessmentAverage = data.assessment_average;
+					const assignmentCompletionPercentage =
+						data.assignment_completion_percentage;
+					const attendancePoints = data.attendance_points;
+					const projectTotal = data.project_total;
 
-				setAssignmentCompletion(assignmentCompletionPercentage);
-				setAssessmentResults(assessmentAverage);
-				setProjectCompletion(projectTotal);
-			})
-			.catch((error) => {
-				console.error("Error:", error);
-			});
+					setAssignmentCompletion(assignmentCompletionPercentage);
+					setAssessmentResults(assessmentAverage);
+					setProjectCompletion(projectTotal);
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
+		}
 	}, []);
 
 	function detailDisplay() {
@@ -110,7 +112,8 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 		<div>
 			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
 			<p className="text-left ml-5 font-bold text-3xl">
-				Welcome back, {studentName}
+				Student Overview for:{" "}
+				{studentInfo.first_name + " " + studentInfo.last_name}
 			</p>
 
 			<p className="text-left ml-5 text-xl text-gray-400 font-bold">
