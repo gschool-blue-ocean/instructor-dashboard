@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import axios from "axios";
 
-function ProjectDetails({ onclickFeedback }) {
+function ProjectDetails({ onclickFeedback, studentInfo }) {
+	// console.log(studentInfo);
 	const [projects, setProjects] = useState(null);
 
 	async function fetchProjects() {
 		try {
-			const res = await axios.get(`/api/project`);
+			const res = await axios.get(`/api/project/${studentInfo.student_id}`);
 			if (res.data.length > 0) {
 				setProjects(res.data);
 			}
@@ -60,10 +61,12 @@ function ProjectDetails({ onclickFeedback }) {
 											onChange={handleCheckboxChange}
 										/>
 									</form>
-									<p>{project.Project || project.project_name} </p>
+									<p>{project.project_name} </p>
 									<button
-										data-id={project.ID}
-										onClick={() => onclickFeedback()}
+										data-project-id={project.project_id}
+										onClick={(e) =>
+											onclickFeedback(e.target.getAttribute("data-project-id"))
+										}
 									>
 										Feedback
 									</button>
