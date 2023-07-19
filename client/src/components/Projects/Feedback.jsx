@@ -32,12 +32,16 @@ function Feedback({ onclickBack }) {
 	};
 
 	return (
-		<section id="feedback" className="p-8">
-			<div className="p-10">
+		<section id="feedback" 
+			className="mx-auto bg-{#f1f5f9}" >
+
+			<h1 className="section-header">Project Feedback :</h1>
+			<div className="mx-auto p-2 bg-gray-300 drop-shadow-lg">
 				<div className="information mb-3">
-					<p>Project Name: {project.Project}</p>
-					<p>
-						Design:
+					<p><span className="label">Project Name:</span> {project.Project}</p>
+
+					<p className="score">
+						<span className="label">Design:</span>
 						<select
 							value={design}
 							onChange={handleDesignChange}
@@ -51,8 +55,8 @@ function Feedback({ onclickBack }) {
 						</select>
 					</p>
 
-					<p>
-						Code Quality:
+					<p className="score">
+						<span className="label">Code Quality:</span>
 						<select
 							value={quality}
 							onChange={handleQualityChange}
@@ -66,8 +70,8 @@ function Feedback({ onclickBack }) {
 						</select>
 					</p>
 
-					<p>
-						Presentation Skills:
+					<p className="score">
+						<span className="label">Presentation Skills:</span>
 						<select
 							value={presentation}
 							onChange={handlePresentationChange}
@@ -82,7 +86,7 @@ function Feedback({ onclickBack }) {
 					</p>
 				</div>
 				<div className="comment">
-					<p>Feedback:</p>
+					<p><span className="label">Feedback:</span></p>
 					<p>
 						<textarea
 							value={feedback}

@@ -82,8 +82,8 @@ const StudentOverview = () => {
 	}, []);
 
 	return (
-		<div>
-			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
+		<div className="background-main">
+			<p className="margin-right text-right font-bold text-3xl">{cohort}</p>
 			<p className="text-left ml-5 font-bold text-3xl">
 				Welcome back, {studentName}
 			</p>
@@ -99,7 +99,7 @@ const StudentOverview = () => {
 						detailDisplay();
 					}}
 				>
-					<div className="text-center font-bold text-xl border-b-4 border-black">
+					<div className="card-title text-center font-bold text-xl border-b-4 border-black">
 						Assignments Completion
 					</div>
 					<div
@@ -107,7 +107,7 @@ const StudentOverview = () => {
 						onClick={detailDisplay}
 					>
 						<ProgressBar
-							radius={100}
+							radius={75}
 							progress={assignmentsCompletion}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -132,7 +132,7 @@ const StudentOverview = () => {
 						detailDisplay2();
 					}}
 				>
-					<div className="text-center font-bold border-b-4 border-black">
+					<div className="card-title text-center font-bold border-b-4 border-black">
 						Project Completion
 					</div>
 					<div
@@ -140,7 +140,7 @@ const StudentOverview = () => {
 						onClick={detailDisplay}
 					>
 						<ProgressBar
-							radius={100}
+							radius={75}
 							progress={projectCompletion}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -165,12 +165,12 @@ const StudentOverview = () => {
 						detailDisplay3();
 					}}
 				>
-					<div className="text-center font-bold border-b-4 border-black">
+					<div className="card-title text-center font-bold border-b-4 border-black">
 						Assessment Results
 					</div>
 					<div className="mt-5 mx-5 flex justify-center">
 						<ProgressBar
-							radius={100}
+							radius={75}
 							progress={assessmentResults}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -189,8 +189,9 @@ const StudentOverview = () => {
 					</div>
 				</div>
 
-				<div className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
-					<div className="text-center font-bold border-b-4 border-black">
+				<div 
+					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
+					<div className="card-title text-center font-bold border-b-4 border-black">
 						Points Accrued
 					</div>
 					<div
@@ -198,7 +199,7 @@ const StudentOverview = () => {
 						onClick={detailDisplay}
 					>
 						<ProgressBar
-							radius={100}
+							radius={75}
 							progress={50}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -218,7 +219,7 @@ const StudentOverview = () => {
 				</div>
 			</div>
 
-			<div>{detailDisplayStatus}</div>
+			<div className="details">{detailDisplayStatus}</div>
 		</div>
 	);
 };

@@ -6,8 +6,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #5d677c;
   color: #fcf8f5d8;
+  height: fit-content;
 }
 
 .checkbox-input {
@@ -49,7 +49,6 @@ body {
 }
 
 section h1 {
-  ;
   padding: 5px 10px;
 }
 
@@ -59,7 +58,8 @@ section {
 
 section>div {
   border: 2px solid black;
-  border-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 section li {
@@ -67,10 +67,12 @@ section li {
   padding: 10px;
   justify-content: space-between;
   color:black;
+  border-top: thin solid black;
 }
 
+
 section li:first-of-type {
-  border-top: none;
+
   margin-top: 10px;
 }
 
@@ -86,19 +88,30 @@ section :is(button, a) {
   border-bottom: 2px solid #000000; /* Add a bottom black border */
 }
 
-#feedback .information {
-  display: flex;
-  justify-content: space-between;
+#feedback {
+  color: black;
+}
+
+#feedback select {
+  min-width: 50px;
+  margin-left: 10px;
+}
+.score {
+  text-align: right;
+  width: 230px;
+}
+
+.label {
+  /* background-color: black;
+  color: white;
+  min-width: 100px;
+  display: inline-block; */
 }
 
 .information p {
   padding: 5px 15px;
 }
 
-.information p:not(:first-of-type) {
-  border: 2px solid black;
-  border-radius: 5px;
-}
 
 .comment {
   display: flex;
@@ -160,13 +173,80 @@ table td:nth-child(2) {
 }
 
 .card-container {
-  border-bottom: 4px solid black;
   padding-bottom: 1em;
-  width: fit-content;
+  width: 100%;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  border-bottom: 5px solid black;
+  padding: 20px;
+}
+
+.filter{
+  background: rgba(248, 243, 243, 0.985);
+  color: #0d0f4a;
+  padding: 4px;
+  font-size: medium;
+  font-weight: bold;
+}
+.filter-label{
+  font-size: medium;
+  padding: 3px;
 }
 
 .card {
-  background-color: rgb(190, 132, 80);
+  background-color: #f09042dc;
   color: black;
+  min-width: 200px;
+  max-width: 300px;;
+
 }
-/* dont use element selectors use something like student feedback class vs div element app. Use named custom classes then style based on classes or even use tailwind. Other components are styled with. The name of class is not important, the classes be unique i think */
+.card-title {
+  min-height: 80px;
+}
+
+.mainHeader{
+  border-bottom: 1px solid #cfe1f68f;
+  width: 100%;
+}
+
+
+.checkbox-and-label {
+  display: flex;
+  align-items: center;
+}
+
+input[type=checkbox] {
+  width: 30px;
+  height: 30px;
+  margin: 0 20px 0 10px;
+} 
+
+
+.details {
+  background-color: rgba(255, 255, 255, 0.981);
+}
+
+.background-main {
+  background-color: #193960;
+}
+
+.filter-container{
+  justify-content: flex-end;
+  width: 100%; 
+  padding-top: 8px;
+}
+
+.section-header {
+  background-color: rgb(4, 4, 4);
+  color: white;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.margin-right {
+  margin-right: 1.25rem;
+}
+
+.click-sum {
+  color: pink;
+}

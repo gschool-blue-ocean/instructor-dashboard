@@ -43,7 +43,7 @@ function LogIn() {
   }, [role, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-100">
+    <div className="flex flex-col bg-zinc-100">
       <main className="flex-grow">
         <section className="flex justify-center items-center h-full place-content-center">
           <div className=" border-zinc-400 p-8 shadow-2xl bg-gray-50 my-64 ">

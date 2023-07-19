@@ -5,6 +5,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import Filter from "../Filter/Filter";
 import { UserAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import galvanizeLogo from "../../Images/galvanize_logo.png";
+
 
 const Header = ({ showSideBar, setShowSideBar }) => {
   const [firstDropdownVisible, setFirstDropdownVisible] = useState(false);
@@ -103,21 +105,21 @@ const Header = ({ showSideBar, setShowSideBar }) => {
   return (
     <div>
       {showSideBar && <Sidebar setShowSidebar={setShowSideBar} />}
-      <header className={`flex p-2 `}>
+      <header className={` background-main mainHeader flex p-2 `}>
         <div className="h-10 mr-2 pl-2" onClick={handleLogoClick}>
-          <img
-            src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
-            alt="logo"
-            className="h-10"
-          />
+        <img
+          src={galvanizeLogo}
+          alt="logo"
+          className="h-10"
+        />
         </div>
-        <div className="flex ml-auto w-auto h-10 px-2">
+        <div className=" flex ml-auto w-auto h-10 px-2">
           <div className="w-auto relative" ref={firstDropdownRef}>
             <div
               onClick={handleFirstDropdownToggle}
               className="cursor-pointer flex items-center ml-4"
             >
-              <IoMdArrowDropdown className="text-gray-800" size={24} />
+              <IoMdArrowDropdown className="text-white-800" size={24} />
               {selectedOption && <div className="ml-2">{selectedOption}</div>}
             </div>
             {firstDropdownVisible && (
@@ -163,7 +165,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
               onClick={handleThirdDropdownToggle}
               className="cursor-pointer flex items-center ml-4"
             >
-              <PiBellDuotone className="text-gray-800" />
+              <PiBellDuotone className="white" />
             </div>
             {thirdDropdownVisible && (
               <ul className="dropdown-menu absolute right-0 mt-2 py-2 w-40 bg-white rounded-md shadow-lg">
@@ -198,7 +200,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
                 </svg>
               </div>
               <span className="ml-2">Timothy Galloway</span>
-              <IoMdArrowDropdown className="text-gray-800" size={24} />
+              <IoMdArrowDropdown className="white" size={24} />
             </div>
             {secondDropdownVisible && (
               <ul className="dropdown-menu absolute right-0 mt-2 py-2 w-40 bg-white rounded-md shadow-lg">
@@ -224,7 +226,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
           </button>
         </div>
       </header>
-      <div className="flex ml-auto w-auto">
+      <div className="background-main filter-container flex ml-auto w-auto">
         <Filter />
       </div>
     </div>
