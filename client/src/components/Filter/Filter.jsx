@@ -1,81 +1,54 @@
-import React from "react";
-import { FaFilter } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
 
-function Filter() {
-  const period = ["One", "Two", "Three", "Four"];
-  // const from = ["One", "Two", "Three", "Four"];
-  // const to = ["One", "Two", "Three", "Four"];
-  const cohortName = ["One", "Two", "Three", "Four"];
-  const studentName = ["One", "Two", "Three", "Four"];
+function Filter({ onCohortSelection }) {
+  const [cohortName, setCohortName] = useState([]);
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    fetch(`/api/mcsp/`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCohortName(data.map((item) => item.mcsp));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const selectedCohort = selectRef.current.value;
+    onCohortSelection(selectedCohort);
+  }
 
   return (
-    <div className="flex ml-auto w-auto ">
-      <div>
-        <FaFilter />
-      </div>
-
-      <div className="flex-col text-xs text-center w-auto mb-4">
-        <p>Period:</p>
-        <input
-          list="period"
-          className="border-2 rounded border-black bg-transparent"
-        />
-        <datalist id="period">
-          {period.map((op) => (
-            <option key={op}>{op}</option>
-          ))}
-        </datalist>
-      </div>
-      {/* <div className="w-auto text-xs pr-4 pl-4 text-center flex-col mb-4">
-        <p>From:</p>
-        <input
-          list="from"
-          className="border-2 rounded border-black bg-transparent"
-        />
-        <datalist id="from">
-          {from.map((op) => (
-            <option key={op}>{op}</option>
-          ))}
-        </datalist>
-      </div> */}
-      {/* <div className="flex-col text-xs text-center w-auto mb-4">
-        <p>To:</p>
-        <input
-          list="to"
-          className="border-2 rounded border-black bg-transparent"
-        />
-        <datalist id="to">
-          {to.map((op) => (
-            <option key={op}>{op}</option>
-          ))}
-        </datalist>
-      </div> */}
-      <div className="flex-col text-xs pr-4 pl-4 text-center w-auto mb-4">
-        <p>Cohort Name:</p>
-        <input
-          list="cohortName"
-          className="border-2 border-black rounded bg-transparent"
-        />
-        <datalist id="cohortName">
-          {cohortName.map((op) => (
-            <option key={op}>{op}</option>
-          ))}
-        </datalist>
-      </div>
-      <div className="flex-col text-xs text-center w-auto mb-4">
-        <p>Student Name:</p>
-        <input
-          list="studentName"
-          className="border-2 border-black rounded bg-transparent"
-        />
-        <datalist id="studentName">
-          {studentName.map((op) => (
-            <option key={op}>{op}</option>
-          ))}
-        </datalist>
+    <div className="flex ml-auto w-auto m-0">
+      <div className="flex-col text-l pr-4 pl-4 text-left font-bold w-auto mb-4 mt-4">
+        <p className="ml-6">Cohort Name</p>
+        <form onSubmit={handleFormSubmit}>
+          <select
+            ref={selectRef}
+            className="border-2 border-black rounded bg-transparent py-2 px-4"
+          >
+            <option className="border border-black border-solid py-2 px-4" value="">
+              Select Cohort
+            </option>
+            {cohortName.map((op) => (
+              <option className="border border-black border-solid py-2 px-4" value={op} key={op}>
+                {op}
+              </option>
+            ))}
+          </select>
+          <button className="border border-black border-solid py-2 px-4 ml-2 rounded-md" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );
+  
 }
+
+
 
 export default Filter;

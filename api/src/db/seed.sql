@@ -1,5 +1,6 @@
 -- -- test insertions
--- INSERT INTO mcsp (mcsp) VALUES ('MCSP-21');
+-- INSERT INTO mcsp (mcsp) 
+-- VALUES ('MCSP-21');
 -- INSERT INTO student (first_name, last_name, email, mcsp)
 -- VALUES
 --     ('John', 'Doe', 'johndoe@example.com', 'MCSP-21'),

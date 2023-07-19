@@ -4,20 +4,39 @@ import { UserAuth } from "../../context/authContext";
 import ProgressBar from "react-customizable-progressbar";
 import StudentCard from "../StudentCard";
 import axios from "axios";
+import Filter from "../Filter/Filter";
 
 const Instructorpage = () => {
-	const { user, logout } = UserAuth();
 	const navigate = useNavigate();
 	const [cohort, setCohort] = useState("mcsp-21");
 	const [cohortOverview, setCohortOverview] = useState(null);
+	const [cohortStudents, setCohortStudents] = useState(null);
+   
+function onCohortSelection (cohort) {
+	setCohort(cohort);
+	console.log(cohort)
+	
+}
+
+console.log(cohort)
 
 	async function fetchCohortOverview() {
 		try {
 			const res = await axios.get(`/api/mcsp/overview/${cohort}`);
+			if (res.data) {
+				setCohortOverview(res.data);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	async function fetchCohortStudents() {
+		try {
+			const res = await axios.get(`/api/student/mcsp/${cohort}`);
 			console.log(res.data);
 			if (res.data) {
-				console.log(res.data);
-				setCohortOverview(res.data);
+				setCohortStudents(res.data);
 			}
 		} catch (err) {
 			console.log(err);
@@ -26,21 +45,25 @@ const Instructorpage = () => {
 
 	useEffect(() => {
 		fetchCohortOverview();
-	}, []);
-	console.log(cohortOverview);
+		fetchCohortStudents();
+	}, [cohort]);
+	console.log(cohortStudents);
+
 	return (
 		<div>
 			{cohortOverview && (
 				<div>
 					<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
-					<p className="text-left ml-5 font-bold text-3xl">Welcome back,</p>
-
-					<p className="text-left ml-5 text-xl text-gray-400 font-bold">
-						Track, manage and forecast your performance
+					<p className="text-left ml-5 font-bold text-3xl">
+						Welcome back, Instructor
 					</p>
 
+					<p className="text-left ml-5 text-xl text-gray-400 font-bold">
+						Track, manage and forecast cohort performance
+					</p>
+                    <Filter onCohortSelection={onCohortSelection}/>
 					<div className="flex ">
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
 							<div className="text-center font-bold text-xl border-b-4 border-black">
 								Assignments Completion
 							</div>
@@ -65,7 +88,7 @@ const Instructorpage = () => {
 							</div>
 						</div>
 
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 ">
 							<div className="text-center font-bold border-b-4 border-black">
 								Project Completion
 							</div>
@@ -90,7 +113,7 @@ const Instructorpage = () => {
 							</div>
 						</div>
 
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 ">
 							<div className="text-center font-bold border-b-4 border-black">
 								Assessment Results
 							</div>
@@ -116,7 +139,13 @@ const Instructorpage = () => {
 						</div>
 					</div>
 
-					<StudentCard />
+					{cohortStudents && (
+						<div className="flex flex-wrap mx-3 mt-4">
+							{cohortStudents.map((student) => {
+								return <StudentCard student={student} />;
+							})}
+						</div>
+					)}
 				</div>
 			)}
 		</div>

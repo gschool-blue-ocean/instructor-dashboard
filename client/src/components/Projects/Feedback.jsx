@@ -1,7 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-function Feedback({ onclickBack }) {
+function Feedback({ onclickBack, studentInfo, projectId }) {
+	const [projectFeedback, setProjectFeedback] = useState(null);
+
+	useEffect(() => {
+		fetchFeedback();
+	}, []);
+
+	async function fetchFeedback() {
+		try {
+			const res = await axios.get(`/api/project/id/${projectId}`);
+			if (res.data.length > 0) {
+				console.log(res.data);
+				setProjectFeedback(res.data[0]);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
 	const project = {
 		Project: "Project Name",
 		Design: 4,
@@ -11,97 +30,97 @@ function Feedback({ onclickBack }) {
 		Presentation_skills: 5,
 	};
 
-	const [design, setDesign] = useState(project.Design);
-	const handleDesignChange = (events) => {
-		setDesign(event.target.value);
-	};
+	//TODO: Add onChange functions that will update projectFeedback
 
-	const [quality, setQuality] = useState(project.Code_quality);
-	const handleQualityChange = (events) => {
-		setQuality(event.target.value);
-	};
+	// const [design, setDesign] = useState(project.Design);
+	// const handleDesignChange = (event) => {
+	// 	setDesign(event.target.value);
+	// };
 
-	const [feedback, setFeedback] = useState(project.Feedback);
-	const handleFeedbackChange = (events) => {
-		setFeedback(event.target.value);
-	};
+	// const [quality, setQuality] = useState(project.Code_quality);
+	// const handleQualityChange = (event) => {
+	// 	setQuality(event.target.value);
+	// };
 
-	const [presentation, setPresentation] = useState(project.Presentation_skills);
-	const handlePresentationChange = (events) => {
-		setPresentation(event.target.value);
-	};
+	// const [feedback, setFeedback] = useState(project.Feedback);
+	// const handleFeedbackChange = (event) => {
+	// 	setFeedback(event.target.value);
+	// };
+
+	// const [presentation, setPresentation] = useState(project.Presentation_skills);
+	// const handlePresentationChange = (event) => {
+	// 	setPresentation(event.target.value);
+	// };
 
 	return (
 		<section id="feedback" className="p-8">
-			<div className="p-10">
-				<div className="information mb-3">
-					<p>Project Name: {project.Project}</p>
-					<p>
-						Design:
-						<select
-							value={design}
-							onChange={handleDesignChange}
-							disabled={project.Input_disabled}
-						>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>
-					</p>
+			{projectFeedback && (
+				<div className="p-10">
+					<div className="information mb-3">
+						<p>Project Name: {projectFeedback.project_name}</p>
+						<p>
+							Design:
+							<select
+								value={projectFeedback.design}
+								disabled={studentInfo === "Instructor" ? false : true}
+							>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</p>
 
-					<p>
-						Code Quality:
-						<select
-							value={quality}
-							onChange={handleQualityChange}
-							disabled={project.Input_disabled}
-						>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>
-					</p>
+						<p>
+							Code Quality:
+							<select
+								value={projectFeedback.quality}
+								disabled={project.Input_disabled}
+							>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</p>
 
-					<p>
-						Presentation Skills:
-						<select
-							value={presentation}
-							onChange={handlePresentationChange}
-							disabled={project.Input_disabled}
+						<p>
+							Presentation Skills:
+							<select
+								value={projectFeedback.presentation_points}
+								disabled={project.Input_disabled}
+							>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</p>
+					</div>
+					<div className="comment">
+						<p>Feedback:</p>
+						<p>
+							<textarea
+								value={projectFeedback.feedback}
+								disabled={project.Input_disabled}
+							></textarea>
+						</p>
+					</div>
+					<div className="feedback_button">
+						<button
+							onClick={() => {
+								onclickBack();
+							}}
 						>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>
-					</p>
+							Back to Projects
+						</button>
+						<button disabled={project.Input_disabled}>Submit</button>
+					</div>
 				</div>
-				<div className="comment">
-					<p>Feedback:</p>
-					<p>
-						<textarea
-							value={feedback}
-							onChange={handleFeedbackChange}
-							disabled={project.Input_disabled}
-						></textarea>
-					</p>
-				</div>
-				<div className="feedback_button">
-					<button
-						onClick={() => {
-							onclickBack();
-						}}
-					>
-						Back to Projects
-					</button>
-					<button disabled={project.Input_disabled}>Submit</button>
-				</div>
-			</div>
+			)}
 		</section>
 	);
 }

@@ -1,33 +1,48 @@
 import React from "react";
 import ProjectDetails from "./Projects/Projects";
+import { Link, redirect } from "react-router-dom";
 
+const StudentCard = ({ student }) => {
+	const onStudentCardClick = async (e) => {
+		e.preventDefault();
+		console.log(student);
+		return redirect("/studentoverview");
 
-const StudentCard = () => {
-	//eventually will receive cohort data and will conditionally render the name and color of the card based on their individual performance
+		// setError("");
+		// try {
+		// 	//fetch and set student ID
+		// 	const res = await axios.get(
+		// 		`/api/student/studentInfo/${"johndoe@example.com"}`
+		// 	);
+		// 	console.log(res.data);
+		// 	console.log(
+		// 		"studenid",
+		// 		res.data[0].student_id,
+		// 		typeof res.data[0].student_id
+		// 	);
+		// 	if (res.data[0]) {
+		// 		updateStudentId(res.data[0]);
+		// 	}
+
+		// 	await signIn(email, password);
+		// } catch (e) {
+		// 	setError(e.message);
+		// 	console.log(e.message);
+		// }
+	};
 
 	return (
-		<div className="flex flex-wrap">
-			<div className="flex flex-col justify-between border rounded-lg h-28 w-32 mx-2 shadow-md hover:scale-105 transition duration-200 ease-in-out cursor-pointer">
-				<p className="text-sm text-center pt-2">John Kluse</p>
-				<p className="h-4 bg-yellow-300 rounded-b"></p>
+		<Link to={`/studentoverview/${student.student_id}`}>
+			<div
+				key={student.student_id}
+				className="flex flex-col justify-between border rounded-lg h-28 w-32 mx-2 shadow-md hover:scale-105 transition duration-200 ease-in-out cursor-pointer"
+			>
+				<p className="text-sm text-center pt-2">
+					{student.first_name + " " + student.last_name}
+				</p>
+				<p className="h-4 bg-orange-200 rounded-b"></p>
 			</div>
-			<div className="flex flex-col justify-between border rounded-lg h-28 w-32 mx-2 shadow-md hover:scale-105 transition duration-200 ease-in-out cursor-pointer">
-				<p className="text-sm text-center pt-2">Tim Galloway</p>
-				<p className="h-4 bg-green-500 rounded-b"></p>
-			</div>
-			<div className="flex flex-col justify-between border rounded-lg h-28 w-32 mx-2 shadow-md hover:scale-105 transition duration-200 ease-in-out cursor-pointer">
-				<p className="text-sm text-center pt-2">Dalton Andrews</p>
-				<p className="h-4 bg-green-500 rounded-b"></p>
-			</div>
-			<div className="flex flex-col justify-between border rounded-lg h-28 w-32 mx-2 shadow-md hover:scale-105 transition duration-200 ease-in-out cursor-pointer">
-				<p className="text-sm text-center pt-2">Joseph Carmeli</p>
-				<p className="h-4 bg-red-500 rounded-b"></p>
-			</div>
-			<div className="flex flex-col justify-between border rounded-lg h-28 w-32 mx-2 shadow-md hover:scale-105 transition duration-200 ease-in-out cursor-pointer">
-				<p className="text-sm text-center pt-2">Wei Chen</p>
-				<p className="h-4 bg-green-500 rounded-b"></p>
-			</div>
-		</div>
+		</Link>
 	);
 };
 

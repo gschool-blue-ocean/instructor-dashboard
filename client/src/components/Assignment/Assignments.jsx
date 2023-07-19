@@ -6,14 +6,16 @@ function handleClick(e) {
 	console.log("id", id);
 }
 
-function AssignmentDetails({ onclickFeedback }) {
+function AssignmentDetails({ onclickFeedback, studentInfo }) {
 	const [assignments, setAssignments] = useState(null);
 	useEffect(() => {
 		fetchAssignments();
 	}, []);
 	async function fetchAssignments() {
 		try {
-			const res = await axios.get(`/api/assignment`);
+			const res = await axios.get(
+				`/api/assignment/student/${studentInfo.student_id}`
+			);
 			if (res.data.length > 0) {
 				setAssignments(res.data);
 			}
@@ -21,7 +23,7 @@ function AssignmentDetails({ onclickFeedback }) {
 			console.log(err);
 		}
 	}
-	console.log(assignments);
+	// console.log(assignments);
 
 	const handleCheckboxChange = async (event) => {
 		try {
@@ -52,7 +54,7 @@ function AssignmentDetails({ onclickFeedback }) {
 						<h1>Week Assignment ({assignments.length})</h1>
 						<ul>
 							{assignments.map((detail) => (
-								<li key={detail.ID}>
+								<li key={detail.assignment_id}>
 									<input
 										data-assignment-id={detail.assignment_id}
 										type="checkbox"
