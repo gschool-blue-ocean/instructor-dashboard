@@ -32,6 +32,14 @@ const App = () => {
 	function updateStudentInfo(info) {
 		setStudentInfo(info);
 	}
+
+	const createStudent = useCallback(
+		(newStudent) => {
+			setStudents([...students, newStudent]);
+		},
+		[students]
+	);
+
 	useEffect(() => {
 		if (showSideBar) {
 			document.body.classList.add("sidebar-open");
@@ -117,7 +125,10 @@ const App = () => {
 								</>
 							}
 						/>
-						<Route path="addstudent" element={<AddStudent />} />
+						<Route
+							path="/addstudent"
+							element={<AddStudent createStudent={createStudent} role={role} />}
+						/>
 						<Route path="/" element={<Instructorpage />} />
 						<Route path="/instructoroverview" element={<Instructorpage />} />
 					</Routes>
