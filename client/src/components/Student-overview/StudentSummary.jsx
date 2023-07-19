@@ -4,8 +4,11 @@ import ProjectDetails from "../Projects/Projects";
 import AssignmentDetails from "../Assignment/Assignments";
 import Feedback from "../Projects/Feedback";
 import ProgressBar from "react-customizable-progressbar";
+import { useParams } from "react-router-dom";
 
-const StudentOverview = ({ studentInfo }) => {
+const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
+	const params = useParams();
+
 	// console.log(studentInfo);
 	const [studentName, setStudentName] = useState(
 		studentInfo.first_name ? studentInfo.first_name : studentInfo
@@ -16,6 +19,28 @@ const StudentOverview = ({ studentInfo }) => {
 	const [assessmentResults, setAssessmentResults] = useState(94.5);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
+	console.log("studentInfo:", studentInfo);
+
+	const loadStudentIdIfNone = async (e) => {
+		try {
+			console.log(params);
+
+			//fetch and set student ID
+			const res = await axios.get(`/api/student/${params}`);
+			console.log(res.data);
+			console.log("studentid", res.data[0]);
+			if (res.data[0]) {
+				updateStudentInfo(res.data[0]);
+			}
+		} catch (e) {
+			setError(e.message);
+			console.log(e.message);
+		}
+	};
+
+	if (studentInfo === "Instructor") {
+		loadStudentIdIfNone();
+	}
 
 	useEffect(() => {
 		fetch(`/api/student/overview/${studentInfo.student_id}`)

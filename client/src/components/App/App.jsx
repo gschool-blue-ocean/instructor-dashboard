@@ -27,8 +27,8 @@ const App = () => {
 	const location = useLocation();
 	const [studentInfo, setStudentInfo] = useState("Instructor");
 
-	function updateStudentId(id) {
-		setStudentInfo(id);
+	function updateStudentInfo(info) {
+		setStudentInfo(info);
 	}
 	console.log("id", studentInfo);
 	useEffect(() => {
@@ -55,7 +55,10 @@ const App = () => {
 	if (user === null || isUserNew || (user && !user.emailVerified)) {
 		return (
 			<Routes>
-				<Route path="/" element={<LogIn updateStudentId={updateStudentId} />} />
+				<Route
+					path="/"
+					element={<LogIn updateStudentId={updateStudentInfo} />}
+				/>
 				<Route path="/signup" element={<SignUpForm />} />
 			</Routes>
 		);
@@ -71,7 +74,10 @@ const App = () => {
 							path="/studentoverview"
 							element={
 								<>
-									<StudentOverview studentInfo={studentInfo} />
+									<StudentOverview
+										studentInfo={studentInfo}
+										updateStudentInfo={updateStudentInfo}
+									/>
 								</>
 							}
 						/>
@@ -79,7 +85,10 @@ const App = () => {
 							path="/"
 							element={
 								<>
-									<StudentOverview studentInfo={studentInfo} />
+									<StudentOverview
+										studentInfo={studentInfo}
+										updateStudentInfo={updateStudentInfo}
+									/>
 								</>
 							}
 						/>
@@ -97,10 +106,13 @@ const App = () => {
 					<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
 					<Routes>
 						<Route
-							path="/studentoverview"
+							path="/studentoverview/:studentId"
 							element={
 								<>
-									<StudentOverview />
+									<StudentOverview
+										studentInfo={studentInfo}
+										updateStudentInfo={updateStudentInfo}
+									/>
 								</>
 							}
 						/>

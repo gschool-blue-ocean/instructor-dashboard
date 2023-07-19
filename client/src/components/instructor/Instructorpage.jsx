@@ -6,7 +6,6 @@ import StudentCard from "../StudentCard";
 import axios from "axios";
 
 const Instructorpage = () => {
-	const { user, logout } = UserAuth();
 	const navigate = useNavigate();
 	const [cohort, setCohort] = useState("mcsp-21");
 	const [cohortOverview, setCohortOverview] = useState(null);
@@ -46,14 +45,16 @@ const Instructorpage = () => {
 			{cohortOverview && (
 				<div>
 					<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
-					<p className="text-left ml-5 font-bold text-3xl">Welcome back,</p>
+					<p className="text-left ml-5 font-bold text-3xl">
+						Welcome back, Instructor
+					</p>
 
 					<p className="text-left ml-5 text-xl text-gray-400 font-bold">
-						Track, manage and forecast your performance
+						Track, manage and forecast cohort performance
 					</p>
 
 					<div className="flex ">
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
 							<div className="text-center font-bold text-xl border-b-4 border-black">
 								Assignments Completion
 							</div>
@@ -78,7 +79,7 @@ const Instructorpage = () => {
 							</div>
 						</div>
 
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 ">
 							<div className="text-center font-bold border-b-4 border-black">
 								Project Completion
 							</div>
@@ -103,7 +104,7 @@ const Instructorpage = () => {
 							</div>
 						</div>
 
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 ">
 							<div className="text-center font-bold border-b-4 border-black">
 								Assessment Results
 							</div>
@@ -130,7 +131,7 @@ const Instructorpage = () => {
 					</div>
 
 					{cohortStudents && (
-						<div className="flex flex-wrap">
+						<div className="flex flex-wrap mx-3 mt-4">
 							{cohortStudents.map((student) => {
 								return <StudentCard student={student} />;
 							})}
