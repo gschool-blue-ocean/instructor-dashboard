@@ -1,22 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const AddStudent = () => {
+const AddStudent = ({ createStudent, role }) => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
+	const [MCSP, setMCSP] = useState("");
+	const navigate = useNavigate();
+	const [error, setError] = useState("");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setError("");
+
 		try {
-			//send post request to create user on table
+			const studentData = {
+				first_name: firstName,
+				last_name: lastName,
+				email: email,
+				mcsp: MCSP,
+			};
+			const res = await axios.post("/api/student", studentData);
+			if (res.data) {
+				createStudent(res.data);
+				if (role === "instructor") {
+					console.log("going to instructoroverview");
+					navigate("/instructoroverview");
+				}
+			}
 		} catch (e) {
 			setError(e.message);
 			console.log(e.message);
 		}
 	};
+
 	return (
 		<form
+			onSubmit={handleSubmit}
 			className="flex flex-col gap-2 mx-auto mt-12"
 			style={{ maxWidth: "500px", minWidth: "344px" }}
 		>
@@ -33,6 +53,13 @@ const AddStudent = () => {
 				onChange={(e) => setLastName(e.target.value)}
 				type="text"
 				placeholder="Last Name"
+				className="p-1.5 text-xs border-2 rounded-md focus:border-custom-500 focus:outline-none"
+			/>
+			<input
+				value={MCSP}
+				onChange={(e) => setMCSP(e.target.value)}
+				type="text"
+				placeholder="MCSP"
 				className="p-1.5 text-xs border-2 rounded-md focus:border-custom-500 focus:outline-none"
 			/>
 			<input

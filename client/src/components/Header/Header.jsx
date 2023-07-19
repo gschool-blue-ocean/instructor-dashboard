@@ -227,7 +227,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
         </div>
       </header>
       <div className="background-main filter-container flex ml-auto w-auto">
-        <Filter />
+        {/* <Filter /> */}
       </div>
     </div>
   );

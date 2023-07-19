@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function AssessDetails() {
+function AssessDetails({ studentInfo }) {
+	// console.log(studentInfo);
 	const [assessments, setAssessments] = useState([]);
 
 	useEffect(() => {
 		async function fetchAssessment() {
 			try {
-				const res = await axios.get(`/api/assessment/${1}`);
+				const res = await axios.get(
+					`/api/assessment/${studentInfo.student_id}`
+				);
 				if (res.data.length > 0) {
 					setAssessments(res.data);
 				}

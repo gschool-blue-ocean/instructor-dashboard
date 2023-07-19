@@ -1,48 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth, useRole } from "../../context/authContext";
+import axios from "axios";
 
-function LogIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { signIn, role, sendResetPasswordEmail } = UserAuth();
+function LogIn({ updateStudentId }) {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
+	const { signIn, role, sendResetPasswordEmail } = UserAuth();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await signIn(email, password);
-    } catch (e) {
-      setError(e.message);
-      console.log(e.message);
-    }
-  };
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setError("");
+		try {
+			//fetch and set student ID
+			const res = await axios.get(
+				`/api/student/studentInfo/${"janesmith@example.com"}`
+			);
+			console.log(res.data);
+			console.log(
+				"studenid",
+				res.data[0].student_id,
+				typeof res.data[0].student_id
+			);
+			if (res.data[0]) {
+				updateStudentId(res.data[0]);
+			}
 
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
-    try {
-      await sendResetPasswordEmail(email);
-    } catch (e) {
-      setError(e.message);
-      console.log(e.message);
-    }
-  };
+			await signIn(email, password);
+		} catch (e) {
+			setError(e.message);
+			console.log(e.message);
+		}
+	};
 
-  useEffect(() => {
-    if (role) {
-      if (role === "instructor") {
-        console.log("going to instructoroverview");
-        navigate("/instructoroverview");
-      } else {
-        console.log("going to studentoverview");
-        navigate("/studentoverview");
-      }
-    }
-  }, [role, navigate]);
+	const handleResetPassword = async (e) => {
+		e.preventDefault();
+		try {
+			await sendResetPasswordEmail(email);
+		} catch (e) {
+			setError(e.message);
+			console.log(e.message);
+		}
+	};
 
-  return (
+	useEffect(() => {
+		if (role) {
+			if (role === "instructor") {
+				console.log("going to instructoroverview");
+				navigate("/instructoroverview");
+			} else {
+				console.log("going to studentoverview");
+				navigate("/studentoverview");
+			}
+		}
+	}, [role, navigate]);
+
+
+return (
     <div className="flex flex-col bg-zinc-100">
       <main className="flex-grow">
         <section className="flex justify-center items-center h-full place-content-center">
@@ -131,44 +147,44 @@ function LogIn() {
                         Click Here
                       </Link>
 
-                      <div className="pt-8 justify-self-center text-sm border-transparent font-serif">
-                        <p className="text-[#00808C]">To SignUp</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </section>
-      </main>
+											<div className="pt-8 justify-self-center text-sm border-transparent font-serif">
+												<p className="text-[#00808C]">To SignUp</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</section>
+			</main>
 
-      <footer className="py-4">
-        <div className="flex justify-center text-xs">
-          <span>© 2013 - 2023 Galvanize, Inc.</span>
-          <ul className="ml-4 mr-4">
-            <li className="inline-block mr-4">
-              <a target="_blank" href="http://www.galvanize.com/privacy">
-                Privacy Policy
-              </a>
-            </li>
-            <li className="inline-block mr-4">
-              <a target="_blank" href="http://www.galvanize.com/terms-of-use">
-                Terms of Use
-              </a>
-            </li>
-            <li className="inline-block mr-4">
-              <a target="_blank" href="http://www.galvanize.com">
-                Galvanize
-              </a>
-            </li>
-            <li className="inline-block mr-4">
-              <a href="mailto:info@galvanize.com">info@galvanize.com</a>
-            </li>
-          </ul>
-        </div>
-      </footer>
-    </div>
-  );
+			<footer className="py-4">
+				<div className="flex justify-center text-xs">
+					<span>© 2013 - 2023 Galvanize, Inc.</span>
+					<ul className="ml-4 mr-4">
+						<li className="inline-block mr-4">
+							<a target="_blank" href="http://www.galvanize.com/privacy">
+								Privacy Policy
+							</a>
+						</li>
+						<li className="inline-block mr-4">
+							<a target="_blank" href="http://www.galvanize.com/terms-of-use">
+								Terms of Use
+							</a>
+						</li>
+						<li className="inline-block mr-4">
+							<a target="_blank" href="http://www.galvanize.com">
+								Galvanize
+							</a>
+						</li>
+						<li className="inline-block mr-4">
+							<a href="mailto:info@galvanize.com">info@galvanize.com</a>
+						</li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+	);
 }
 export default LogIn;

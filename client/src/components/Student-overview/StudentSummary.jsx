@@ -4,69 +4,96 @@ import ProjectDetails from "../Projects/Projects";
 import AssignmentDetails from "../Assignment/Assignments";
 import Feedback from "../Projects/Feedback";
 import ProgressBar from "react-customizable-progressbar";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const StudentOverview = () => {
-	const [studentName, setStudentName] = useState("studentName");
+const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
+	const params = useParams();
+	const id = Number(params.studentId) || "";
+	// console.log(studentInfo);
+	const [studentName, setStudentName] = useState(
+		studentInfo.first_name ? studentInfo.first_name : studentInfo
+	);
 	const [cohort, setCohort] = useState("MCSP21- March 27, 2023");
 	const [assignmentsCompletion, setAssignmentCompletion] = useState(71);
 	const [projectCompletion, setProjectCompletion] = useState(84);
 	const [assessmentResults, setAssessmentResults] = useState(94.5);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
+	// console.log("studentInfo:", studentInfo);
+
+	const loadStudentIdIfNone = async (e) => {
+		try {
+			console.log(id, typeof id);
+
+			//fetch and set student ID
+			const res = await axios.get(`/api/student/id/${id}`);
+
+			if (res.data[0]) {
+				updateStudentInfo(res.data[0]);
+			}
+		} catch (e) {
+			console.log(e.message);
+		}
+	};
 
 	useEffect(() => {
-		fetch("/api/student/overview/1")
-			.then((response) => response.json())
-			.then((data) => {
-				const assessmentAverage = data.assessment_average;
-				const assignmentCompletionPercentage =
-					data.assignment_completion_percentage;
-				const attendancePoints = data.attendance_points;
-				const projectTotal = data.project_total;
+		console.log(id);
+		if (id) {
+			console.log("getting student info...");
+			loadStudentIdIfNone();
+		}
+		if (studentInfo.student_id) {
+			fetch(`/api/student/overview/${studentInfo.student_id}`)
+				.then((response) => response.json())
+				.then((data) => {
+					const assessmentAverage = data.assessment_average;
+					const assignmentCompletionPercentage =
+						data.assignment_completion_percentage;
+					const attendancePoints = data.attendance_points;
+					const projectTotal = data.project_total;
 
-				console.log(assessmentAverage);
-				console.log(assignmentCompletionPercentage);
-				console.log(attendancePoints);
-				console.log(projectTotal);
-				setAssignmentCompletion(assignmentCompletionPercentage);
-				setAssessmentResults(assessmentAverage);
-				setProjectCompletion(projectTotal);
-			})
-			.catch((error) => {
-				console.error("Error:", error);
-			});
-	}, []);
-
-	useEffect(() => {
-		fetch("/api/student")
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data[0].first_name);
-				const firstName = data[0].first_name;
-				const lastName = data[0].last_name;
-				const fullName = firstName + " " + lastName;
-				console.log("first name", firstName);
-				console.log(lastName);
-				setStudentName(fullName);
-			})
-			.catch((error) => {
-				console.error("Error:", error);
-			});
+					setAssignmentCompletion(assignmentCompletionPercentage);
+					setAssessmentResults(assessmentAverage);
+					setProjectCompletion(projectTotal);
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
+		}
 	}, []);
 
 	function detailDisplay() {
 		setDetailDisplayStatus(
-			<AssignmentDetails onclickFeedback={detailDisplay} />
+			<AssignmentDetails
+				onclickFeedback={detailDisplay}
+				studentInfo={studentInfo}
+			/>
 		);
 	}
 	function detailDisplay2() {
-		setDetailDisplayStatus(<ProjectDetails onclickFeedback={detailDisplay4} />);
+		setDetailDisplayStatus(
+			<ProjectDetails
+				onclickFeedback={detailDisplay4}
+				studentInfo={studentInfo}
+			/>
+		);
 	}
 	function detailDisplay3() {
-		setDetailDisplayStatus(<AssessDetails />);
+		setDetailDisplayStatus(<AssessDetails studentInfo={studentInfo} />);
 	}
-	function detailDisplay4() {
-		setDetailDisplayStatus(<Feedback onclickBack={detailDisplay2} />);
+	function detailDisplay4(projectId) {
+		setDetailDisplayStatus(
+			<Feedback
+				onclickBack={detailDisplay2}
+				studentInfo={studentInfo}
+				projectId={projectId}
+			/>
+		);
+	}
+
+	function clearDetails() {
+		setDetailDisplayStatus(<div></div>);
 	}
 
 	useEffect(() => {
@@ -85,7 +112,8 @@ const StudentOverview = () => {
 		<div className="background-main">
 			<p className="margin-right text-right font-bold text-3xl">{cohort}</p>
 			<p className="text-left ml-5 font-bold text-3xl">
-				Welcome back, {studentName}
+				Student Overview for:{" "}
+				{studentInfo.first_name + " " + studentInfo.last_name}
 			</p>
 
 			<p className="text-left ml-5 text-xl text-gray-400 font-bold">
@@ -194,10 +222,7 @@ const StudentOverview = () => {
 					<div className="card-title text-center font-bold border-b-4 border-black">
 						Points Accrued
 					</div>
-					<div
-						className="mt-5 mx-5 flex justify-center"
-						onClick={detailDisplay}
-					>
+					<div className="mt-5 mx-5 flex justify-center" onClick={clearDetails}>
 						<ProgressBar
 							radius={75}
 							progress={50}

@@ -28,6 +28,30 @@ export async function getStudentsByMcsp(req, res, next) {
         next(error)
     }
 }
+export async function getStudentInfo(req, res, next) {
+    try {
+        const email = req.params.email
+        const result = await db.query(
+            'SELECT * FROM student WHERE email = $1 ORDER by student_id',
+            [email]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
+export async function getStudentById(req, res, next) {
+    try {
+        const studentId = req.params.studentId
+        const result = await db.query(
+            'SELECT * FROM student WHERE student_id = $1',
+            [studentId]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
 
 export async function createStudent(req, res, next) {
     try {
@@ -35,7 +59,7 @@ export async function createStudent(req, res, next) {
         const newStudentName = capitalizeName(userInputObj.first_name)
         const newStudentLastName = capitalizeName(userInputObj.last_name)
         const newStudentEmail = userInputObj.email
-        const newStudentMcsp = userInputObj.mcsp
+        const newStudentMcsp = userInputObj.mcsp.toUpperCase()
         // newStudentMcsp.toUpperCase()
 
         const result = await db.query(
@@ -57,46 +81,46 @@ export async function createStudent(req, res, next) {
             'INSERT INTO attendance_points (student_id, points, mcsp) VALUES ($1, 0, $2)',
             [studentId, studentMcsp]
         )
-        await insertAssessments(studentId)
-        await insertProjects(studentId)
-        await insertAssignments(studentId)
+        await insertAssessments(studentId, studentMcsp)
+        await insertProjects(studentId, studentMcsp)
+        await insertAssignments(studentId, studentMcsp)
 
         res.status(201).send(result.rows[0])
     } catch (error) {
         next(error)
     }
 }
-async function insertAssessments(studentId) {
+async function insertAssessments(studentId, studentMcsp) {
     assessmentNames
 
     const insertPromises = assessmentNames.map(async (assessmentName) => {
         await db.query(
             'INSERT INTO assessment (student_id, assessment_name, percent, mcsp) VALUES ($1, $2, null, $3)',
-            [studentId, assessmentName, 'MCSP-21']
+            [studentId, assessmentName, studentMcsp]
         )
     })
 
     await Promise.all(insertPromises)
 }
-async function insertProjects(studentId) {
+async function insertProjects(studentId, studentMcsp) {
     projectNames
 
     const insertPromises = projectNames.map(async (projectName) => {
         await db.query(
             'INSERT INTO project (student_id, project_name, mcsp) VALUES ($1, $2, $3)',
-            [studentId, projectName, 'MCSP-21']
+            [studentId, projectName, studentMcsp]
         )
     })
 
     await Promise.all(insertPromises)
 }
-async function insertAssignments(studentId) {
+async function insertAssignments(studentId, studentMcsp) {
     assignmentNames
 
     const insertPromises = assignmentNames.map(async (assignmentName) => {
         await db.query(
             'INSERT INTO assignment (student_id, assignment_name, mcsp) VALUES ($1, $2, $3)',
-            [studentId, assignmentName, 'MCSP-21']
+            [studentId, assignmentName, studentMcsp]
         )
     })
 
