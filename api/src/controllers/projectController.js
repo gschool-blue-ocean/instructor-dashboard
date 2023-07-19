@@ -79,3 +79,16 @@ export async function deleteProject(req, res, next) {
         next(error)
     }
 }
+
+export async function getProjectByProjectId(req, res, next) {
+    try {
+        const project_id = req.params.project_id
+        const result = await db.query(
+            'SELECT * FROM project WHERE project_id = $1 ',
+            [project_id]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
