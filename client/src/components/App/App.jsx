@@ -65,12 +65,18 @@ const App = () => {
 			<div>
 				<h1 className="text-center text-3xl font-bold"></h1>
 				<div style={containerStyle}>
-					{hideHeader ? null : (
-						<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-					)}
+					<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
 					<Routes>
 						<Route
 							path="/studentoverview"
+							element={
+								<>
+									<StudentOverview studentInfo={studentInfo} />
+								</>
+							}
+						/>
+						<Route
+							path="/"
 							element={
 								<>
 									<StudentOverview studentInfo={studentInfo} />
