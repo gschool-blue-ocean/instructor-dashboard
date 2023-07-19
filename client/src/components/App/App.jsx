@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import {
 	AuthContextProvider,
@@ -16,8 +16,9 @@ import AssessDetails from "../Assessments/Assessments";
 // import StudentCard from "../StudentCard";
 // import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
-import Instructorpage from "../instructor/Instructorpage";
 import AddStudent from "../AddStudent";
+import Instructorpage from "../instructor/Instructorpage";
+
 const App = () => {
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [hideHeader, setHideHeader] = useState(false);
@@ -26,6 +27,7 @@ const App = () => {
 	const role = useRole();
 	const location = useLocation();
 	const [studentInfo, setStudentInfo] = useState("Instructor");
+	const [students, setStudents] = useState([]);
 
 	function updateStudentInfo(info) {
 		setStudentInfo(info);
