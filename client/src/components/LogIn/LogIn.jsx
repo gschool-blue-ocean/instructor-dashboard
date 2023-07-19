@@ -16,7 +16,7 @@ function LogIn({ updateStudentId }) {
 		try {
 			//fetch and set student ID
 			const res = await axios.get(
-				`/api/student/studentInfo/${"johndoe@example.com"}`
+				`/api/student/studentInfo/${"janesmith@example.com"}`
 			);
 			console.log(res.data);
 			console.log(

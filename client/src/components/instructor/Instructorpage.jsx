@@ -4,6 +4,7 @@ import { UserAuth } from "../../context/authContext";
 import ProgressBar from "react-customizable-progressbar";
 import StudentCard from "../StudentCard";
 import axios from "axios";
+import Filter from "../Filter/Filter";
 
 const Instructorpage = () => {
 	const { user, logout } = UserAuth();
@@ -11,6 +12,14 @@ const Instructorpage = () => {
 	const [cohort, setCohort] = useState("mcsp-21");
 	const [cohortOverview, setCohortOverview] = useState(null);
 	const [cohortStudents, setCohortStudents] = useState(null);
+   
+function onCohortSelection (cohort) {
+	setCohort(cohort);
+	console.log(cohort)
+	
+}
+
+console.log(cohort)
 
 	async function fetchCohortOverview() {
 		try {
@@ -38,7 +47,7 @@ const Instructorpage = () => {
 	useEffect(() => {
 		fetchCohortOverview();
 		fetchCohortStudents();
-	}, []);
+	}, [cohort]);
 	console.log(cohortStudents);
 
 	return (
@@ -51,7 +60,7 @@ const Instructorpage = () => {
 					<p className="text-left ml-5 text-xl text-gray-400 font-bold">
 						Track, manage and forecast your performance
 					</p>
-
+                    <Filter onCohortSelection={onCohortSelection}/>
 					<div className="flex ">
 						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer">
 							<div className="text-center font-bold text-xl border-b-4 border-black">
