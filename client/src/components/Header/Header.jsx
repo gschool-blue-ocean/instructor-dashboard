@@ -225,7 +225,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
         </div>
       </header>
       <div className="flex ml-auto w-auto">
-        <Filter />
+        {/* <Filter /> */}
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import {
-	AuthContextProvider,
-	UserAuth,
-	useRole,
+  AuthContextProvider,
+  UserAuth,
+  useRole,
 } from "../../context/authContext";
 import LogIn from "../LogIn/LogIn";
 import SignUpForm from "../Sign-up Page/SignUpForm";
@@ -13,10 +13,9 @@ import AssignmentDetails from "../Assignment/Assignments";
 import ProjectDetails from "../Projects/Projects";
 import Feedback from "../Projects/Feedback";
 import AssessDetails from "../Assessments/Assessments";
-// import StudentCard from "../StudentCard";
-// import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
 import AddStudent from "../AddStudent";
+import Filter from "../Filter/Filter";
 import Instructorpage from "../instructor/Instructorpage";
 
 const App = () => {
@@ -52,10 +51,10 @@ const App = () => {
 		setHideHeader(isLogInOrSignUp);
 	}, [showSideBar, location]);
 
-	const containerStyle = {
-		marginLeft: showSideBar ? "240px" : "0",
-		transition: "margin-left 0.3s ease",
-	};
+  const containerStyle = {
+    marginLeft: showSideBar ? "240px" : "0",
+    transition: "margin-left 0.3s ease",
+  };
 
 	if (user === undefined) {
 		// Still determining if the user is logged in.
