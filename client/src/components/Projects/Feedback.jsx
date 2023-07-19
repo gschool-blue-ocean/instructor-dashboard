@@ -14,7 +14,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 			//TODO:
 			//this API endpoint actually queries the studentID
 			//update endpoint path when endpoint exists
-			const res = await axios.get(`/api/project/${projectId}`);
+			const res = await axios.get(`/api/project/id/${projectId}`);
 			if (res.data.length > 0) {
 				//once the above API is created, update below to res.data
 				setProjectFeedback(res.data[0]);
