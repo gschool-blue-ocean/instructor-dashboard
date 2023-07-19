@@ -25,7 +25,12 @@ const App = () => {
 	const { user, isUserNew } = UserAuth();
 	const role = useRole();
 	const location = useLocation();
+	const [studentInfo, setStudentInfo] = useState("Instructor");
 
+	function updateStudentId(id) {
+		setStudentInfo(id);
+	}
+	console.log("id", studentInfo);
 	useEffect(() => {
 		if (showSideBar) {
 			document.body.classList.add("sidebar-open");
@@ -50,7 +55,7 @@ const App = () => {
 	if (user === null || isUserNew || (user && !user.emailVerified)) {
 		return (
 			<Routes>
-				<Route path="/" element={<LogIn />} />
+				<Route path="/" element={<LogIn updateStudentId={updateStudentId} />} />
 				<Route path="/signup" element={<SignUpForm />} />
 			</Routes>
 		);
@@ -68,7 +73,7 @@ const App = () => {
 							path="/studentoverview"
 							element={
 								<>
-									<StudentOverview />
+									<StudentOverview studentInfo={studentInfo} />
 								</>
 							}
 						/>
