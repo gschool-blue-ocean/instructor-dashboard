@@ -40,6 +40,18 @@ export async function getStudentInfo(req, res, next) {
         next(error)
     }
 }
+export async function getStudentById(req, res, next) {
+    try {
+        const studentId = req.params.studentId
+        const result = await db.query(
+            'SELECT * FROM student WHERE student_id = $1',
+            [studentId]
+        )
+        res.send(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
 
 export async function createStudent(req, res, next) {
     try {
