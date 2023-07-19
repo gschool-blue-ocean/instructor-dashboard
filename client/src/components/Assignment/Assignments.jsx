@@ -46,12 +46,12 @@ function AssignmentDetails({ onclickFeedback, studentInfo }) {
 		<>
 			{assignments && (
 				<section
-					className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
+					className="mx-auto bg-{#f1f5f9}"
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
-					<h1>Assignment Summary :</h1>
-					<div className="mx-auto bg-white drop-shadow-lg">
-						<h1>Week Assignment ({assignments.length})</h1>
+					<h1 className="section-header">Assignment Summary :</h1>
+					<div className="mx-auto p-2 bg-gray-200 drop-shadow-lg">
+						<h1 style={{ color: "DarkSlateBlue" }}>Week Assignment ({assignments.length})</h1>
 						<ul>
 							{assignments.map((detail) => (
 								<li key={detail.assignment_id}>
@@ -66,7 +66,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo }) {
 										{detail.assignment_name}
 									</p>
 									<button data-id={detail.ID} onClick={() => onclickFeedback()}>
-										View
+									View
 									</button>
 								</li>
 							))}

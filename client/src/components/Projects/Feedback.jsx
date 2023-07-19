@@ -53,13 +53,17 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 	// };
 
 	return (
-		<section id="feedback" className="p-8">
-			{projectFeedback && (
-				<div className="p-10">
-					<div className="information mb-3">
-						<p>Project Name: {projectFeedback.project_name}</p>
-						<p>
-							Design:
+		
+		<section id="feedback" className="mx-auto bg-{#f1f5f9}" >
+		
+		{projectFeedback && (
+			<>
+				<h1 className="section-header">Project Feedback :</h1>
+				<div className="mx-auto p-2 bg-gray-300 drop-shadow-lg">
+				<div className="information mb-3">
+						<p classname="label">Project Name: {projectFeedback.project_name}</p>
+						<p className="score">
+						<span className="label">Design:</span>
 							<select
 								value={projectFeedback.design}
 								disabled={studentInfo === "Instructor" ? false : true}
@@ -72,8 +76,8 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 							</select>
 						</p>
 
-						<p>
-							Code Quality:
+						<p className="score">
+						<span className="label">Code Quality:</span>
 							<select
 								value={projectFeedback.quality}
 								disabled={project.Input_disabled}
@@ -86,8 +90,8 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 							</select>
 						</p>
 
-						<p>
-							Presentation Skills:
+						<p className="score">
+						<span className="label">Presentation Skills:</span>
 							<select
 								value={projectFeedback.presentation_points}
 								disabled={project.Input_disabled}
@@ -101,7 +105,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 						</p>
 					</div>
 					<div className="comment">
-						<p>Feedback:</p>
+					<p><span className="label">Feedback:</span></p>
 						<p>
 							<textarea
 								value={projectFeedback.feedback}
@@ -120,7 +124,9 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 						<button disabled={project.Input_disabled}>Submit</button>
 					</div>
 				</div>
+			</>
 			)}
+
 		</section>
 	);
 }

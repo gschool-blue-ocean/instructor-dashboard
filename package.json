@@ -11,7 +11,8 @@
   },
   "devDependencies": {
     "concurrently": "^7.1.0",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "react-pro-sidebar": "^1.1.0-alpha.1"
