@@ -11,10 +11,12 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 
 	async function fetchFeedback() {
 		try {
+			//TODO:
 			//this API endpoint actually queries the studentID
 			//update endpoint path when endpoint exists
 			const res = await axios.get(`/api/project/${projectId}`);
 			if (res.data.length > 0) {
+				//once the above API is created, update below to res.data
 				setProjectFeedback(res.data[0]);
 			}
 		} catch (err) {
@@ -31,25 +33,27 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 		Presentation_skills: 5,
 	};
 
-	const [design, setDesign] = useState(project.Design);
-	const handleDesignChange = (event) => {
-		setDesign(event.target.value);
-	};
+	//TODO: Add onChange functions that will update projectFeedback
 
-	const [quality, setQuality] = useState(project.Code_quality);
-	const handleQualityChange = (event) => {
-		setQuality(event.target.value);
-	};
+	// const [design, setDesign] = useState(project.Design);
+	// const handleDesignChange = (event) => {
+	// 	setDesign(event.target.value);
+	// };
 
-	const [feedback, setFeedback] = useState(project.Feedback);
-	const handleFeedbackChange = (event) => {
-		setFeedback(event.target.value);
-	};
+	// const [quality, setQuality] = useState(project.Code_quality);
+	// const handleQualityChange = (event) => {
+	// 	setQuality(event.target.value);
+	// };
 
-	const [presentation, setPresentation] = useState(project.Presentation_skills);
-	const handlePresentationChange = (event) => {
-		setPresentation(event.target.value);
-	};
+	// const [feedback, setFeedback] = useState(project.Feedback);
+	// const handleFeedbackChange = (event) => {
+	// 	setFeedback(event.target.value);
+	// };
+
+	// const [presentation, setPresentation] = useState(project.Presentation_skills);
+	// const handlePresentationChange = (event) => {
+	// 	setPresentation(event.target.value);
+	// };
 
 	return (
 		<section id="feedback" className="p-8">
@@ -60,8 +64,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 						<p>
 							Design:
 							<select
-								value={design}
-								onChange={handleDesignChange}
+								value={projectFeedback.design}
 								disabled={studentInfo === "Instructor" ? false : true}
 							>
 								<option value="1">1</option>
@@ -75,8 +78,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 						<p>
 							Code Quality:
 							<select
-								value={quality}
-								onChange={handleQualityChange}
+								value={projectFeedback.quality}
 								disabled={project.Input_disabled}
 							>
 								<option value="1">1</option>
@@ -90,8 +92,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 						<p>
 							Presentation Skills:
 							<select
-								value={presentation}
-								onChange={handlePresentationChange}
+								value={projectFeedback.presentation_points}
 								disabled={project.Input_disabled}
 							>
 								<option value="1">1</option>
@@ -106,8 +107,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 						<p>Feedback:</p>
 						<p>
 							<textarea
-								value={feedback}
-								onChange={handleFeedbackChange}
+								value={projectFeedback.feedback}
 								disabled={project.Input_disabled}
 							></textarea>
 						</p>
