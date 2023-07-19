@@ -17,7 +17,7 @@ import AssessDetails from "../Assessments/Assessments";
 // import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
 import Instructorpage from "../instructor/Instructorpage";
-
+import AddStudent from "../AddStudent";
 const App = () => {
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [hideHeader, setHideHeader] = useState(false);
@@ -88,9 +88,7 @@ const App = () => {
 			<div>
 				<h1 className="text-center text-3xl font-bold"></h1>
 				<div style={containerStyle}>
-					{hideHeader ? null : (
-						<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-					)}
+					<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
 					<Routes>
 						<Route
 							path="/studentoverview"
@@ -100,6 +98,8 @@ const App = () => {
 								</>
 							}
 						/>
+						<Route path="addstudent" element={<AddStudent />} />
+						<Route path="/" element={<Instructorpage />} />
 						<Route path="/instructoroverview" element={<Instructorpage />} />
 					</Routes>
 				</div>{" "}
