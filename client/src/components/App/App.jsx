@@ -72,7 +72,6 @@ const App = () => {
 								</>
 							}
 						/>
-						<Route path="/student_projects" element={<ProjectDetails />} />
 					</Routes>
 				</div>{" "}
 				<div style={containerStyle}></div>
@@ -89,9 +88,14 @@ const App = () => {
 					)}
 					<Routes>
 						<Route
-							path="/instructoroverview"
-							element={<Instructorpage />}
-						></Route>
+							path="/studentoverview"
+							element={
+								<>
+									<StudentOverview />
+								</>
+							}
+						/>
+						<Route path="/instructoroverview" element={<Instructorpage />} />
 					</Routes>
 				</div>{" "}
 				<div style={containerStyle}></div>

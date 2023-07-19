@@ -10,14 +10,25 @@ const Instructorpage = () => {
 	const navigate = useNavigate();
 	const [cohort, setCohort] = useState("mcsp-21");
 	const [cohortOverview, setCohortOverview] = useState(null);
+	const [cohortStudents, setCohortStudents] = useState(null);
 
 	async function fetchCohortOverview() {
 		try {
 			const res = await axios.get(`/api/mcsp/overview/${cohort}`);
+			if (res.data) {
+				setCohortOverview(res.data);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	async function fetchCohortStudents() {
+		try {
+			const res = await axios.get(`/api/student/mcsp/${cohort}`);
 			console.log(res.data);
 			if (res.data) {
-				console.log(res.data);
-				setCohortOverview(res.data);
+				setCohortStudents(res.data);
 			}
 		} catch (err) {
 			console.log(err);
@@ -26,8 +37,10 @@ const Instructorpage = () => {
 
 	useEffect(() => {
 		fetchCohortOverview();
+		fetchCohortStudents();
 	}, []);
-	console.log(cohortOverview);
+	console.log(cohortStudents);
+
 	return (
 		<div>
 			{cohortOverview && (
@@ -116,7 +129,13 @@ const Instructorpage = () => {
 						</div>
 					</div>
 
-					<StudentCard />
+					{cohortStudents && (
+						<div className="flex flex-wrap">
+							{cohortStudents.map((student) => {
+								return <StudentCard student={student} />;
+							})}
+						</div>
+					)}
 				</div>
 			)}
 		</div>
