@@ -24,7 +24,7 @@ const SignUpForm = () => {
     }
   };
   return (
-    <section className="mt-8 bg-{#f1f5f9}">
+    <section className="mt-8 min-h-screen bg-{#f1f5f9}">
       <div
         className="w-2/5 mx-auto p-12 bg-white drop-shadow-lg"
         style={{ maxWidth: "500px", minWidth: "344px" }}

@@ -30,22 +30,28 @@ function AssessDetails({ studentInfo }) {
 	return (
 		<div>
 			<section
-				className="mx-auto bg-{#f1f5f9}"
+				className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
 				style={{ maxWidth: "600px", minWidth: "344px" }}
 			>
-					<h1 className="section-header">Assessment Summary :</h1>
-					<div className="  mx-auto  bg-gray-300 drop-shadow-lg p-2">
-						<h1 style={{ color: "DarkSlateBlue" }}>Assessment Results({assessments.length})</h1>
-						<ul>
-							{assessments.map((detail) => (
-								<li key={detail.assessment_id}>
-									<p>{detail.mcsp}</p>
-									<p>{detail.assessment_name}</p>
-									<p>{detail.percent}</p>
-								</li>
-							))}
-						</ul>
-				</div>
+				<table>
+					<caption>Assessment Results</caption>
+					<thead>
+						<tr>
+							<th>MCSP</th>
+							<th>Assessment</th>
+							<th>Grade</th>
+						</tr>
+					</thead>
+					<tbody>
+						{assessments.map((detail) => (
+							<tr key={detail.assessment_id}>
+								<td>{detail.mcsp}</td>
+								<td>{detail.assessment_name}</td>
+								<td>{detail.percent}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
 			</section>
 		</div>
 	);
