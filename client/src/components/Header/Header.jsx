@@ -6,7 +6,7 @@ import Filter from "../Filter/Filter";
 import { UserAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ showSideBar, setShowSideBar }) => {
+const Header = ({ showSideBar, setShowSideBar, studentHeaderInfo }) => {
   const [firstDropdownVisible, setFirstDropdownVisible] = useState(false);
   const [secondDropdownVisible, setSecondDropdownVisible] = useState(false);
   const [thirdDropdownVisible, setThirdDropdownVisible] = useState(false);
@@ -25,6 +25,15 @@ const Header = ({ showSideBar, setShowSideBar }) => {
     }
   };
 
+  console.log(studentHeaderInfo);
+
+  const studentInitials = () => {
+    if (studentHeaderInfo.first_name && studentHeaderInfo.last_name) {
+      return studentHeaderInfo.first_name[0] + studentHeaderInfo.last_name[0];
+    }
+    return "";
+  };
+  console.log(studentInitials());
   const firstDropdownRef = useRef(null);
   const secondDropdownRef = useRef(null);
   const thirdDropdownRef = useRef(null);
@@ -124,13 +133,15 @@ const Header = ({ showSideBar, setShowSideBar }) => {
               <ul className="dropdown-menu absolute right-0 mt-2 py-2 w-40 bg-white rounded-md shadow-lg">
                 <li>
                   <a
-                    onClick={() => handleOptionClick("Test0")}
+                    onClick={() => handleOptionClick(studentHeaderInfo.mcsp)}
                     className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 ${
-                      selectedOption === "Test0" ? "bg-gray-200" : ""
+                      selectedOption === studentHeaderInfo.mcsp
+                        ? "bg-gray-200"
+                        : ""
                     }`}
                     href="#"
                   >
-                    Test0
+                    {studentHeaderInfo.mcsp}
                   </a>
                 </li>
                 <li>
@@ -172,50 +183,45 @@ const Header = ({ showSideBar, setShowSideBar }) => {
                     My Account
                   </a>
                   <span className="account-email block text-gray-600">
-                    timgalloway03@gmail.com
+                    {studentHeaderInfo.email}
                   </span>
                 </li>
               </ul>
             )}
           </div>
-          <div className="w-auto relative" ref={secondDropdownRef}>
-            <div
-              onMouseOver={handleSecondDropdownToggle}
-              className="cursor-pointer flex items-center ml-4"
-            >
-              <div className="user-avatar">
-                <svg viewBox="0 0 80 80">
-                  <text
-                    fill="#FFFFFF"
-                    className="text-white"
-                    fontSize="36"
-                    fontWeight="400"
-                  >
-                    <tspan textAnchor="middle" x="40" y="53">
-                      TG
-                    </tspan>
-                  </text>
-                </svg>
+          {user && (
+            <div className="w-auto relative" ref={secondDropdownRef}>
+              <div
+                onMouseOver={handleSecondDropdownToggle}
+                className="cursor-pointer flex items-center ml-4"
+              >
+                <div className=" border-solid border-2 px-2 rounded-full border-black">
+                  <p>{studentInitials()}</p>
+                </div>
+                <span className="ml-2">
+                  {studentHeaderInfo.first_name +
+                    " " +
+                    studentHeaderInfo.last_name}
+                </span>
+                <IoMdArrowDropdown className="text-gray-800" size={24} />
               </div>
-              <span className="ml-2">Timothy Galloway</span>
-              <IoMdArrowDropdown className="text-gray-800" size={24} />
+              {secondDropdownVisible && (
+                <ul className="dropdown-menu absolute right-0 mt-2 py-2 w-40 bg-white rounded-md shadow-lg">
+                  <li className="item">
+                    <a
+                      target="_blank"
+                      href="https://auth.galvanize.com/account"
+                    >
+                      My Account
+                    </a>
+                    <span className="account-email block text-gray-600">
+                      {studentHeaderInfo.email}
+                    </span>
+                  </li>
+                </ul>
+              )}
             </div>
-            {secondDropdownVisible && (
-              <ul className="dropdown-menu absolute right-0 mt-2 py-2 w-40 bg-white rounded-md shadow-lg">
-                <li className="item">
-                  <a target="_blank" href="https://auth.galvanize.com/account">
-                    My Account
-                  </a>
-                  <span className="account-email block text-gray-600">
-                    timgalloway03@gmail.com
-                  </span>
-                </li>
-                <li className="item">
-                  <a href="/sign_out">Sign Out</a>
-                </li>
-              </ul>
-            )}
-          </div>
+          )}
           <button
             className="cursor-pointer flex items-center ml-4 bg-white rounded-md shadow-lg px-4 py-2 text-gray-800 hover:bg-gray-200"
             onClick={handleLogout}
@@ -230,4 +236,5 @@ const Header = ({ showSideBar, setShowSideBar }) => {
     </div>
   );
 };
+
 export default Header;
