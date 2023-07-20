@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import axios from "axios";
 
-function ProjectDetails({ onclickFeedback, studentInfo }) {
+function ProjectDetails({ onclickFeedback, studentInfo, getOverview }) {
 	// console.log(studentInfo);
 	const [projects, setProjects] = useState(null);
 
@@ -33,6 +33,7 @@ function ProjectDetails({ onclickFeedback, studentInfo }) {
 			);
 			if (res.status === 200) {
 				fetchProjects();
+				getOverview();
 			}
 		} catch (err) {
 			console.log(err);
