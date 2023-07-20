@@ -92,7 +92,7 @@ function AssessDetails({ studentInfo, getOverview }) {
 												onChange={handleChange}
 											/>
 										</div>
-										{role !== "instructor" && (
+										{role === "instructor" && (
 											<button
 												className="ml-3 bg-orange-200 hover:bg-orange-300"
 												type="submit"
