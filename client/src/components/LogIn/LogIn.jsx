@@ -15,9 +15,7 @@ function LogIn({ updateStudentId }) {
 		setError("");
 		try {
 			//fetch and set student ID
-			const res = await axios.get(
-				`/api/student/studentInfo/${"janesmith@example.com"}`
-			);
+			const res = await axios.get(`/api/student/studentInfo/${email}`);
 			console.log(res.data);
 			console.log(
 				"studenid",
