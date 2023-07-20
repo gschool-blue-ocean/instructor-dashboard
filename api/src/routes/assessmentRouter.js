@@ -9,7 +9,7 @@ import {
 const router = express.Router()
 
 router.get('/', getAssessment)
-router.patch('/:AssessmentId', updatedAssessment)
+router.patch('/:assessmentId', updatedAssessment)
 router.get('/:studentId', getStudentAssessment)
 router.delete('/:mcspId', deleteAssessment)
 
