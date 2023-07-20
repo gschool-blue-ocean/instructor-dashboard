@@ -13,10 +13,9 @@ import AssignmentDetails from "../Assignment/Assignments";
 import ProjectDetails from "../Projects/Projects";
 import Feedback from "../Projects/Feedback";
 import AssessDetails from "../Assessments/Assessments";
-// import StudentCard from "../StudentCard";
-// import Sidebar from "../Sidebar/Sidebar";
 import Sidebar from "../Sidebar/Sidebar";
 import AddStudent from "../AddStudent";
+import Filter from "../Filter/Filter";
 import Instructorpage from "../instructor/Instructorpage";
 
 const App = () => {

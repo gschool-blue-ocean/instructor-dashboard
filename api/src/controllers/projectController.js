@@ -29,10 +29,12 @@ export async function updateProject(req, res, next) {
         const projectId = req.params.projectId
         const projectFeedback = req.body.projectFeedback
         const presentation_points = req.body.presentation_points
+        const design = req.body.design_points
+        const quality = req.body.quality_points
 
         const result = await db.query(
-            'UPDATE project SET feedback = $1, presentation_points = $2 WHERE project_id = $3',
-            [projectFeedback, presentation_points, projectId]
+            'UPDATE project SET feedback = $1, presentation_points = $2 design = $3, quality = $4 WHERE project_id = $5',
+            [projectFeedback, presentation_points, design, quality, projectId]
         )
         const updatedProject = result.rows[0]
         res.status(200).json(updatedProject)
