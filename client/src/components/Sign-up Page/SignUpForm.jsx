@@ -26,12 +26,12 @@ const SignUpForm = () => {
   return (
     <section className="mt-8 min-h-screen bg-{#f1f5f9}">
       <div
-        className="w-2/5 mx-auto p-12 bg-white drop-shadow-lg"
+        className="w-2/5 mx-auto p-12 drop-shadow-lg"
         style={{ maxWidth: "500px", minWidth: "344px" }}
       >
         <div className="flex flex-col items-center">
           <img
-            src="../Images/galvanize_logo.png"
+            src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
             alt="Galvanize Inc. logo"
             className="h-12 w-64"
           />
