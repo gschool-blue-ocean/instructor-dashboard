@@ -127,7 +127,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				{studentInfo.first_name + " " + studentInfo.last_name}
 			</p>
 
-			<p className="text-left ml-5 text-xl text-gray-400 font-bold">
+			<p className="text-left ml-5 text-xl text-gray-400 font-bold mb-6">
 				Track, manage and forecast your performance
 			</p>
 

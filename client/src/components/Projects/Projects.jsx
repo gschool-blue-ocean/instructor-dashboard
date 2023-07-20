@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import axios from "axios";
+import { useRole } from "../../context/authContext";
 
 function ProjectDetails({ onclickFeedback, studentInfo, getOverview }) {
 	// console.log(studentInfo);
 	const [projects, setProjects] = useState(null);
+	const role = useRole();
 
 	async function fetchProjects() {
 		try {
@@ -58,7 +60,7 @@ function ProjectDetails({ onclickFeedback, studentInfo, getOverview }) {
 											data-project-id={project.project_id}
 											type="checkbox"
 											checked={project.completed}
-											disabled={false}
+											disabled={role === "instructor" ? false : true}
 											onChange={handleCheckboxChange}
 										/>
 									</form>

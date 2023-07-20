@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useRole } from "../../context/authContext";
 import axios from "axios";
 
 function AssessDetails({ studentInfo, getOverview }) {
 	const [assessments, setAssessments] = useState([]);
 	const [assessmentData, setAssessmentData] = useState({});
+	const role = useRole();
 
 	useEffect(() => {
 		async function fetchAssessment() {
@@ -47,10 +49,9 @@ function AssessDetails({ studentInfo, getOverview }) {
 			let data = {
 				percent: assessmentData[assignmentId],
 			};
-			console.log(data);
 
 			await axios.patch(`/api/assessment/${Number(assignmentId)}`, data);
-			// Handle successful update
+			getOverview();
 		} catch (error) {
 			console.error("Error updating assessment:", error);
 		}
@@ -85,20 +86,20 @@ function AssessDetails({ studentInfo, getOverview }) {
 												type="number"
 												min={0}
 												max={100}
-												disabled={false}
+												disabled={role === "instructor" ? true : false}
 												className="border-2 rounded-md p-2 m-2"
 												value={assessmentData[test.assessment_id] || ""}
 												onChange={handleChange}
 											/>
 										</div>
-										{
+										{role !== "instructor" && (
 											<button
 												className="ml-3 bg-orange-200 hover:bg-orange-300"
 												type="submit"
 											>
 												Submit
 											</button>
-										}
+										)}
 									</form>
 								</li>
 							))}
