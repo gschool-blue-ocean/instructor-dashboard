@@ -110,7 +110,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 
 	return (
 		<div className="border-t-2 border-slate-400  bg-[#02497f]" >
-			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
+			<p className="text-right m-3 font-bold text-3xl text-gray-200">{cohort}</p>
 			<p className="text-left ml-5 font-bold text-3xl text-gray-200">
 				Student Overview for:{" "}
 				{studentInfo.first_name + " " + studentInfo.last_name}
@@ -122,7 +122,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 
 			<div className="flex ">
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844] cursor-pointer"
 					onClick={() => {
 						detailDisplay();
 					}}
@@ -155,7 +155,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844] cursor-pointer"
 					onClick={() => {
 						detailDisplay2();
 					}}
@@ -188,7 +188,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 
 				<div
-					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844] cursor-pointer"
 					onClick={() => {
 						detailDisplay3();
 					}}
@@ -217,7 +217,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 					</div>
 				</div>
 
-				<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
+				<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844]">
 					<div className="text-center font-bold border-b-4 border-black">
 						Points Accrued
 					</div>
@@ -235,7 +235,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 							transition="1.5s ease 0.5s"
 							trackTransition="0s ease"
 						>
-							<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none text-3xl">
+							<div className="flex justify-center items-center absolute top-0 w-full h-full mx-auto select-none  text-3xl">
 								<div>{25}</div>
 							</div>
 						</ProgressBar>

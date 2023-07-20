@@ -106,9 +106,10 @@ const App = () => {
 			</div>
 		);
 	}
+
 	if (role === "instructor") {
 		return (
-			<div className="bg-gray-200">
+			<div className="">
 				<h1 className="text-center text-3xl font-bold"></h1>
 				<div style={containerStyle}>
 					<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
