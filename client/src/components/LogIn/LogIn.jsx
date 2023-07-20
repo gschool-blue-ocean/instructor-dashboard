@@ -9,26 +9,23 @@ function LogIn({ updateStudentId, updateStudentHeader }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { signIn, role, sendResetPasswordEmail } = UserAuth();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      //fetch and set student ID
-      const res = await axios.get(
-        `/api/student/studentInfo/${"johndoe@example.com"}`
-      );
-      console.log(res.data[0]);
-      console.log(
-        "studenid",
-        res.data[0].student_id,
-        typeof res.data[0].student_id
-      );
-      if (res.data[0]) {
-        updateStudentId(res.data[0]);
-        updateStudentHeader(res.data[0]);
-        console.log(res.data);
-      }
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setError("");
+		try {
+			//fetch and set student ID
+			const res = await axios.get(`/api/student/studentInfo/${email}`);
+			console.log(res.data);
+			console.log(
+				"studenid",
+				res.data[0].student_id,
+				typeof res.data[0].student_id
+			);
+			if (res.data[0]) {
+				updateStudentId(res.data[0]);
+        updateStudentHeader(res.data[0]);
+			}
       await signIn(email, password);
     } catch (e) {
       setError(e.message);

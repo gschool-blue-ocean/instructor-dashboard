@@ -6,7 +6,7 @@ function handleClick(e) {
 	console.log("id", id);
 }
 
-function AssignmentDetails({ onclickFeedback, studentInfo }) {
+function AssignmentDetails({ onclickFeedback, studentInfo, getOverview }) {
 	const [assignments, setAssignments] = useState(null);
 	useEffect(() => {
 		fetchAssignments();
@@ -16,6 +16,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo }) {
 			const res = await axios.get(
 				`/api/assignment/student/${studentInfo.student_id}`
 			);
+
 			if (res.data.length > 0) {
 				setAssignments(res.data);
 			}
@@ -27,7 +28,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo }) {
 
 	const handleCheckboxChange = async (event) => {
 		try {
-			console.log(event.target.getAttribute("data-assignment-id"));
+			// console.log(event.target.getAttribute("data-assignment-id"));
 
 			const res = await axios.patch(
 				`/api/assignment/completion/${Number(
@@ -36,6 +37,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo }) {
 			);
 			if (res.status === 200) {
 				fetchAssignments();
+				getOverview();
 			}
 		} catch (err) {
 			console.log(err);

@@ -15,9 +15,9 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 		studentInfo.first_name ? studentInfo.first_name : studentInfo
 	);
 	const [cohort, setCohort] = useState("MCSP21- March 27, 2023");
-	const [assignmentsCompletion, setAssignmentCompletion] = useState(71);
-	const [projectCompletion, setProjectCompletion] = useState(84);
-	const [assessmentResults, setAssessmentResults] = useState(94.5);
+	const [assignmentsCompletion, setAssignmentCompletion] = useState(0);
+	const [projectCompletion, setProjectCompletion] = useState(0);
+	const [assessmentResults, setAssessmentResults] = useState(0);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [detailDisplayStatus, setDetailDisplayStatus] = useState(<div></div>);
 	// console.log("studentInfo:", studentInfo);
@@ -36,6 +36,24 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 			console.log(e.message);
 		}
 	};
+	function getOverview() {
+		fetch(`/api/student/overview/${studentInfo.student_id}`)
+			.then((response) => response.json())
+			.then((data) => {
+				const assessmentAverage = data.assessment_average;
+				const assignmentCompletionPercentage =
+					data.assignment_completion_percentage;
+				const attendancePoints = data.attendance_points;
+				const projectTotal = data.project_total;
+
+				setAssignmentCompletion(assignmentCompletionPercentage);
+				setAssessmentResults(assessmentAverage);
+				setProjectCompletion(projectTotal);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+	}
 
 	useEffect(() => {
 		console.log(id);
@@ -44,22 +62,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 			loadStudentIdIfNone();
 		}
 		if (studentInfo.student_id) {
-			fetch(`/api/student/overview/${studentInfo.student_id}`)
-				.then((response) => response.json())
-				.then((data) => {
-					const assessmentAverage = data.assessment_average;
-					const assignmentCompletionPercentage =
-						data.assignment_completion_percentage;
-					const attendancePoints = data.attendance_points;
-					const projectTotal = data.project_total;
-
-					setAssignmentCompletion(assignmentCompletionPercentage);
-					setAssessmentResults(assessmentAverage);
-					setProjectCompletion(projectTotal);
-				})
-				.catch((error) => {
-					console.error("Error:", error);
-				});
+			getOverview();
 		}
 	}, []);
 
@@ -68,6 +71,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 			<AssignmentDetails
 				onclickFeedback={detailDisplay}
 				studentInfo={studentInfo}
+				getOverview={getOverview}
 			/>
 		);
 	}
@@ -76,6 +80,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 			<ProjectDetails
 				onclickFeedback={detailDisplay4}
 				studentInfo={studentInfo}
+				getOverview={getOverview}
 			/>
 		);
 	}
