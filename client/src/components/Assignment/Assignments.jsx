@@ -51,12 +51,14 @@ function AssignmentDetails({ onclickFeedback, studentInfo, getOverview }) {
 		<>
 			{assignments && (
 				<section
-					className="mx-auto mt-8 min-h-screen bg-{#f1f5f9}"
+					className="mx-auto mt-8 min-h-screen bg-{#f1f5f9} "
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
-					<h1>Assignment Summary :</h1>
-					<div className="mx-auto drop-shadow-lg">
-						<h1>Week Assignment ({assignments.length})</h1>
+					<h1 className="font-bold">Assignment Summary :</h1>
+					<div className="mx-auto drop-shadow-lg p-10">
+						<h1 className="font-bold">
+							Week Assignment ({assignments.length})
+						</h1>
 						<ul>
 							{assignments.map((detail) => (
 								<li key={detail.assignment_id}>
@@ -66,6 +68,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo, getOverview }) {
 										checked={detail.completed}
 										disabled={role === "instructor" ? false : true}
 										onChange={handleCheckboxChange}
+										className="w-3 h-3 transform scale-150"
 									/>
 									<p className={detail.completed ? "line-through" : ""}>
 										{detail.assignment_name}
