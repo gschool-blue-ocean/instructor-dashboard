@@ -61,7 +61,9 @@ function ProjectDetails({ onclickFeedback, studentInfo }) {
 											onChange={handleCheckboxChange}
 										/>
 									</form>
-									<p>{project.project_name} </p>
+									<p className={project.completed ? "line-through" : ""}>
+										{project.project_name}{" "}
+									</p>
 									<button
 										data-project-id={project.project_id}
 										onClick={(e) =>

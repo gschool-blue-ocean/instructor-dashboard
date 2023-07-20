@@ -53,9 +53,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 		try {
 			console.log(feedbackData);
 			await axios.patch(`/api/project/${projectId}`, feedbackData);
-			// Handle the response if needed
-
-			// Do any additional logic or handling after the successful response
+			onclickBack();
 		} catch (error) {
 			console.error("Error updating feedback:", error);
 		}
