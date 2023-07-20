@@ -109,8 +109,8 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	}, []);
 
 	return (
-		<div className="background-main">
-			<p className="margin-right text-right font-bold text-3xl">{cohort}</p>
+		<div>
+			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
 			<p className="text-left ml-5 font-bold text-3xl">
 				Student Overview for:{" "}
 				{studentInfo.first_name + " " + studentInfo.last_name}
@@ -120,14 +120,14 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				Track, manage and forecast your performance
 			</p>
 
-			<div className="card-container flex ">
-				<div 
-					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+			<div className="flex ">
+				<div
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay();
 					}}
 				>
-					<div className="card-title text-center font-bold text-xl border-b-4 border-black">
+					<div className="text-center font-bold text-xl border-b-4 border-black">
 						Assignments Completion
 					</div>
 					<div
@@ -135,7 +135,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 						onClick={detailDisplay}
 					>
 						<ProgressBar
-							radius={75}
+							radius={100}
 							progress={assignmentsCompletion}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -155,12 +155,12 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 
 				<div
-					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay2();
 					}}
 				>
-					<div className="card-title text-center font-bold border-b-4 border-black">
+					<div className="text-center font-bold border-b-4 border-black">
 						Project Completion
 					</div>
 					<div
@@ -168,7 +168,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 						onClick={detailDisplay}
 					>
 						<ProgressBar
-							radius={75}
+							radius={100}
 							progress={projectCompletion}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -188,17 +188,17 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 
 				<div
-					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
+					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 cursor-pointer"
 					onClick={() => {
 						detailDisplay3();
 					}}
 				>
-					<div className="card-title text-center font-bold border-b-4 border-black">
+					<div className="text-center font-bold border-b-4 border-black">
 						Assessment Results
 					</div>
 					<div className="mt-5 mx-5 flex justify-center">
 						<ProgressBar
-							radius={75}
+							radius={100}
 							progress={assessmentResults}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -217,14 +217,13 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 					</div>
 				</div>
 
-				<div 
-					className="card text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
-					<div className="card-title text-center font-bold border-b-4 border-black">
+				<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
+					<div className="text-center font-bold border-b-4 border-black">
 						Points Accrued
 					</div>
 					<div className="mt-5 mx-5 flex justify-center" onClick={clearDetails}>
 						<ProgressBar
-							radius={75}
+							radius={100}
 							progress={50}
 							strokeWidth={15}
 							strokeColor="#5d9cec"
@@ -244,7 +243,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 			</div>
 
-			<div className="details">{detailDisplayStatus}</div>
+			<div>{detailDisplayStatus}</div>
 		</div>
 	);
 };
