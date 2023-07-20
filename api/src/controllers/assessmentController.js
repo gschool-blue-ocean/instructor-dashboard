@@ -15,7 +15,7 @@ export async function getAssessment(req, res, next) {
 export async function getStudentAssessment(req, res, next) {
     try {
         const studentId = req.params.studentId
-        
+
         const result = await db.query(
             'SELECT * FROM assessment WHERE student_id=$1 ORDER BY assessment_id',
             [studentId]
@@ -29,10 +29,11 @@ export async function getStudentAssessment(req, res, next) {
 export async function updatedAssessment(req, res, next) {
     try {
         const assessmentId = req.params.assessmentId
+        const assessmentPercent = req.body.percent
 
         const result = await db.query(
-            'UPDATE assessment SET percent = 100 WHERE assessment_id = $1 RETURNING *',
-            [assessmentId]
+            'UPDATE assessment SET percent = $1 WHERE assessment_id = $2 RETURNING *',
+            [assessmentPercent, assessmentId]
         )
 
         if (result.rowCount === 0) {
