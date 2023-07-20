@@ -86,7 +86,7 @@ function AssessDetails({ studentInfo, getOverview }) {
 												type="number"
 												min={0}
 												max={100}
-												disabled={role === "instructor" ? true : false}
+												disabled={role === "instructor" ? false : true}
 												className="border-2 rounded-md p-2 m-2"
 												value={assessmentData[test.assessment_id] || ""}
 												onChange={handleChange}
