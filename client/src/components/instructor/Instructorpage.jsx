@@ -8,7 +8,7 @@ import Filter from "../Filter/Filter";
 
 const Instructorpage = () => {
 	const navigate = useNavigate();
-	const [cohort, setCohort] = useState("mcsp-21");
+	const [cohort, setCohort] = useState("MCSP-21");
 	const [cohortOverview, setCohortOverview] = useState(null);
 	const [cohortStudents, setCohortStudents] = useState(null);
    
@@ -50,10 +50,10 @@ console.log(cohort)
 	console.log(cohortStudents);
 
 	return (
-		<div>
+		<div className="border-t-2 border-slate-400">
 			{cohortOverview && (
 				<div>
-					<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
+					<p className="text-right mt-3 mr-3 font-bold text-3xl">{cohort}</p>
 					<p className="text-left ml-5 font-bold text-3xl">
 						Welcome back, Instructor
 					</p>
@@ -138,9 +138,9 @@ console.log(cohort)
 							</div>
 						</div>
 					</div>
-
+                    <div className="border-t-2 border-slate-400"></div>
 					{cohortStudents && (
-						<div className="flex flex-wrap mx-3 mt-4">
+						<div className="flex flex-wrap mx-3 mt-4  ">
 							{cohortStudents.map((student) => {
 								return <StudentCard student={student} />;
 							})}

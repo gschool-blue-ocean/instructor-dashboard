@@ -151,6 +151,11 @@ table :is(th, td) {
 table td:nth-child(2) {
   text-align: left;
 }
+ body {
+  background: blue;
+  height: 100vh;
+} 
+
 
 
 /* dont use element selectors use something like student feedback class vs div element app. Use named custom classes then style based on classes or even use tailwind. Other components are styled with. The name of class is not important, the classes be unique i think */

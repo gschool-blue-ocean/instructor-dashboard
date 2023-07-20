@@ -101,7 +101,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
   }, [showSideBar]);
 
   return (
-    <div>
+    <div className="bg-blue-300">
       {showSideBar && <Sidebar setShowSidebar={setShowSideBar} />}
       <header className={`flex p-2 `}>
         <div className="h-10 mr-2 pl-2" onClick={handleLogoClick}>

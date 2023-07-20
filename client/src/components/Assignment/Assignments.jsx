@@ -50,7 +50,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo }) {
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
 					<h1>Assignment Summary :</h1>
-					<div className="mx-auto bg-white drop-shadow-lg">
+					<div className="mx-auto drop-shadow-lg">
 						<h1>Week Assignment ({assignments.length})</h1>
 						<ul>
 							{assignments.map((detail) => (

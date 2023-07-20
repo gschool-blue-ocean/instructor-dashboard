@@ -14,7 +14,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	const [studentName, setStudentName] = useState(
 		studentInfo.first_name ? studentInfo.first_name : studentInfo
 	);
-	const [cohort, setCohort] = useState("MCSP21- March 27, 2023");
+	const [cohort, setCohort] = useState("MCSP-21");
 	const [assignmentsCompletion, setAssignmentCompletion] = useState(71);
 	const [projectCompletion, setProjectCompletion] = useState(84);
 	const [assessmentResults, setAssessmentResults] = useState(94.5);
@@ -109,7 +109,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	}, []);
 
 	return (
-		<div>
+		<div className="border-t-2 border-slate-400" >
 			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
 			<p className="text-left ml-5 font-bold text-3xl">
 				Student Overview for:{" "}
@@ -243,7 +243,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 			</div>
 
-			<div>{detailDisplayStatus}</div>
+			<div className="border-t-2 border-slate-400">{detailDisplayStatus}</div>
 		</div>
 	);
 };
