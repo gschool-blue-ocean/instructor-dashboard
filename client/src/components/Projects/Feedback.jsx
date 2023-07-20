@@ -21,7 +21,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 				setFeedbackData({
 					design: res.data[0].design,
 					quality: res.data[0].quality,
-					feedback: res.data[0].feedback,
+					projectFeedback: res.data[0].feedback,
 					presentation_points: res.data[0].presentation_points,
 				});
 			}
@@ -33,7 +33,7 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 	const [feedbackData, setFeedbackData] = useState({
 		design: 0,
 		quality: 0,
-		feedback: "",
+		projectFeedback: "",
 		presentation_points: 0,
 	});
 
@@ -49,7 +49,9 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 		event.preventDefault();
 
 		try {
-			await axios.patch(`/api/feedback/${projectId}`, feedbackData);
+			console.log(feedbackData);
+
+			await axios.patch(`/api/project/${projectId}`, feedbackData);
 			// Handle the response if needed
 
 			// Do any additional logic or handling after the successful response
@@ -58,7 +60,6 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 		}
 	}
 	console.log(projectFeedback);
-	console.log(feedbackData);
 	return (
 		<section id="feedback" className="w-2/3 p-8 mx-auto">
 			{projectFeedback && (
@@ -122,8 +123,8 @@ function Feedback({ onclickBack, studentInfo, projectId }) {
 								<p>Feedback:</p>
 								<p>
 									<textarea
-										name="feedback"
-										value={feedbackData.feedback}
+										name="projectFeedback"
+										value={feedbackData.projectFeedback}
 										disabled={role === "instructor" ? false : true}
 										onChange={handleChange}
 									/>
