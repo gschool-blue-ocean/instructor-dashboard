@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useRole } from "../../context/authContext";
 
 function handleClick(e) {
 	let id = e.target.dataset.id;
@@ -8,6 +9,8 @@ function handleClick(e) {
 
 function AssignmentDetails({ onclickFeedback, studentInfo, getOverview }) {
 	const [assignments, setAssignments] = useState(null);
+	const role = useRole();
+
 	useEffect(() => {
 		fetchAssignments();
 	}, []);
@@ -61,7 +64,7 @@ function AssignmentDetails({ onclickFeedback, studentInfo, getOverview }) {
 										data-assignment-id={detail.assignment_id}
 										type="checkbox"
 										checked={detail.completed}
-										disabled={false}
+										disabled={role === "instructor" ? false : true}
 										onChange={handleCheckboxChange}
 									/>
 									<p className={detail.completed ? "line-through" : ""}>
