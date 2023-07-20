@@ -49,9 +49,9 @@ function ProjectDetails({ onclickFeedback, studentInfo, getOverview }) {
 					className="mx-auto mt-8 bg-{#f1f5f9}"
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
-					<h1>Project Summary :</h1>
+					<h1 className="font-bold">Project Summary :</h1>
 					<div className="mx-auto bg-{#f1f5f9} drop-shadow-lg p-10">
-						<h1>Class Projects({projects.length})</h1>
+						<h1 className="font-bold">Class Projects({projects.length})</h1>
 						<ul>
 							{projects.map((project) => (
 								<li key={project.project_id}>
@@ -62,6 +62,7 @@ function ProjectDetails({ onclickFeedback, studentInfo, getOverview }) {
 											checked={project.completed}
 											disabled={role === "instructor" ? false : true}
 											onChange={handleCheckboxChange}
+											className="w-3 h-3 transform scale-150"
 										/>
 									</form>
 									<p className={project.completed ? "line-through" : ""}>

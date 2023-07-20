@@ -49,9 +49,9 @@ const Instructorpage = () => {
 	console.log(cohortStudents);
 
 	return (
-		<div className="border-t-2 ">
+		<div className="border-t-2 mx-auto">
 			{cohortOverview && (
-				<div className="bg-[#02497f]">
+				<div className="bg-[#02497f] ">
 					<p className="text-right font-bold text-3xl text-gray-200 mr-4">
 						{cohort}
 					</p>
@@ -63,7 +63,7 @@ const Instructorpage = () => {
 						Track, manage and forecast cohort performance
 					</p>
 					<Filter onCohortSelection={onCohortSelection} />
-					<div className="flex bg-[#02497f]">
+					<div className="flex bg-[#02497f] justify-center pb-4">
 						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844]">
 							<div className="text-center font-bold text-xl border-b-4 border-black">
 								Assignments Completion
@@ -143,7 +143,7 @@ const Instructorpage = () => {
 				</div>
 			)}
 			{cohortStudents && (
-				<div className="flex flex-wrap p-4 ">
+				<div className="flex flex-wrap p-4 w-3/4 mx-auto max-w-[1200px]">
 					{cohortStudents.map((student) => {
 						return <StudentCard student={student} />;
 					})}

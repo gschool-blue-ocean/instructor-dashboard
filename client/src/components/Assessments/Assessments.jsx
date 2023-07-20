@@ -65,11 +65,14 @@ function AssessDetails({ studentInfo, getOverview }) {
 					style={{ maxWidth: "600px", minWidth: "344px" }}
 				>
 					<h1 className="font-bold">Assessment Summary :</h1>
-					<div className="mx-auto bg-{#f1f5f9} drop-shadow-lg p-6">
+					<div className="mx-auto bg-{#f1f5f9} drop-shadow-lg p-10">
 						<h1 className="font-bold"> Assessments ({assessments.length})</h1>
 						<ul>
 							{assessments.map((test) => (
-								<li className="mb-6 border-b-2" key={test.assessment_id}>
+								<li
+									className="mb-6 border-b-4 border-gray-400"
+									key={test.assessment_id}
+								>
 									<p>{test.assessment_name}</p>
 									<form
 										onSubmit={(event) =>

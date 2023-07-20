@@ -118,7 +118,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	}, []);
 
 	return (
-		<div className="border-t-2 border-slate-400  bg-[#02497f]">
+		<div className="border-t-2 border-slate-400  bg-[#02497f] ">
 			<p className="text-right m-3 font-bold text-3xl text-gray-200">
 				{cohort}
 			</p>
@@ -131,7 +131,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				Track, manage and forecast your performance
 			</p>
 
-			<div className="flex ">
+			<div className="flex justify-center pb-4">
 				<div
 					className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844] cursor-pointer"
 					onClick={() => {
