@@ -5,6 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Filter from "../Filter/Filter";
 import { UserAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import galvanizeLogo from "../../Images/galvanize_logo.png";
 
 const Header = ({ showSideBar, setShowSideBar }) => {
   const [firstDropdownVisible, setFirstDropdownVisible] = useState(false);
@@ -103,10 +104,10 @@ const Header = ({ showSideBar, setShowSideBar }) => {
   return (
     <div className="bg-blue-300">
       {showSideBar && <Sidebar setShowSidebar={setShowSideBar} />}
-      <header className={`flex p-2 `}>
+      <header className={`flex p-2 bg-[#02497f]`}>
         <div className="h-10 mr-2 pl-2" onClick={handleLogoClick}>
           <img
-            src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
+            src={galvanizeLogo}
             alt="logo"
             className="h-10"
           />

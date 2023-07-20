@@ -50,20 +50,20 @@ console.log(cohort)
 	console.log(cohortStudents);
 
 	return (
-		<div className="border-t-2 border-slate-400">
+		<div className="border-t-2 ">
 			{cohortOverview && (
-				<div>
-					<p className="text-right mt-3 mr-3 font-bold text-3xl">{cohort}</p>
-					<p className="text-left ml-5 font-bold text-3xl">
+				<div className="bg-[#02497f]">
+					<p className="text-right font-bold text-3xl text-gray-200 ml-4">{cohort}</p>
+					<p className="text-left ml-5 font-bold text-3xl text-gray-200">
 						Welcome back, Instructor
 					</p>
 
-					<p className="text-left ml-5 text-xl text-gray-400 font-bold">
+					<p className="text-left ml-5 text-xl text-gray-400 font-bold ">
 						Track, manage and forecast cohort performance
 					</p>
                     <Filter onCohortSelection={onCohortSelection}/>
-					<div className="flex ">
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96">
+					<div className="flex bg-[#02497f]">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844]">
 							<div className="text-center font-bold text-xl border-b-4 border-black">
 								Assignments Completion
 							</div>
@@ -88,7 +88,7 @@ console.log(cohort)
 							</div>
 						</div>
 
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 ">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844]">
 							<div className="text-center font-bold border-b-4 border-black">
 								Project Completion
 							</div>
@@ -113,7 +113,7 @@ console.log(cohort)
 							</div>
 						</div>
 
-						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 ">
+						<div className="text-xl rounded-3xl border-solid border-4 border-black py-8 m-2 h-1/4 w-96 bg-[#db8844]">
 							<div className="text-center font-bold border-b-4 border-black">
 								Assessment Results
 							</div>
@@ -138,16 +138,18 @@ console.log(cohort)
 							</div>
 						</div>
 					</div>
-                    <div className="border-t-2 border-slate-400"></div>
-					{cohortStudents && (
-						<div className="flex flex-wrap mx-3 mt-4  ">
+                    <div className="border-t-2 border-slate-400 "></div>
+					
+				</div>
+				
+			)}
+			{cohortStudents && (
+						<div className="flex flex-wrap p-4 ">
 							{cohortStudents.map((student) => {
 								return <StudentCard student={student} />;
 							})}
 						</div>
 					)}
-				</div>
-			)}
 		</div>
 	);
 };

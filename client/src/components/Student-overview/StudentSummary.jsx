@@ -109,9 +109,9 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	}, []);
 
 	return (
-		<div className="border-t-2 border-slate-400" >
+		<div className="border-t-2 border-slate-400  bg-[#02497f]" >
 			<p className="text-right m-3 font-bold text-3xl">{cohort}</p>
-			<p className="text-left ml-5 font-bold text-3xl">
+			<p className="text-left ml-5 font-bold text-3xl text-gray-200">
 				Student Overview for:{" "}
 				{studentInfo.first_name + " " + studentInfo.last_name}
 			</p>
@@ -243,7 +243,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 				</div>
 			</div>
 
-			<div className="border-t-2 border-slate-400">{detailDisplayStatus}</div>
+			<div className="border-t-2 border-slate-400 bg-gray-200">{detailDisplayStatus}</div>
 		</div>
 	);
 };

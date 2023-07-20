@@ -73,7 +73,7 @@ const App = () => {
 	}
 	if (role === "student") {
 		return (
-			<div>
+			<div className="">
 				<h1 className="text-center text-3xl font-bold"></h1>
 				<div style={containerStyle}>
 					<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
@@ -108,7 +108,7 @@ const App = () => {
 	}
 	if (role === "instructor") {
 		return (
-			<div>
+			<div className="bg-gray-200">
 				<h1 className="text-center text-3xl font-bold"></h1>
 				<div style={containerStyle}>
 					<Header showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
