@@ -185,13 +185,12 @@ export async function getStudentProject(req, res, next) {
 }
 
 export async function getStudentOverview(req, res, next) {
-    try {
-        const studentId = req.params.studentId
-        const totalAssignments = assignmentNames.length
-        const totalProjects = projectNames.length
+  try {
+    const studentId = req.params.studentId;
+    const totalAssignments = assignmentNames.length;
+    const totalProjects = projectNames.length;
 
-        const getProjectTotal = `SELECT COUNT(*) AS project_total FROM project WHERE student_id = $1 AND completed = true`
-
+    const getProjectTotal = `SELECT COUNT(*) AS project_total FROM project WHERE student_id = $1 AND completed = true`;
 
     const getAssessmentAverage = `SELECT AVG(percent) AS average_percentage FROM assessment WHERE student_id=$1`;
 

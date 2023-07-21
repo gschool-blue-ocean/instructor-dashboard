@@ -33,7 +33,6 @@ function LogIn({ updateStudentId, updateStudentHeader }) {
     }
   };
 
-
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
