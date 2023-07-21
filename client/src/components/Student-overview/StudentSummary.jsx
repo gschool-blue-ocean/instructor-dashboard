@@ -38,6 +38,7 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 			console.log(e.message);
 		}
 	};
+
 	function getOverview() {
 		fetch(`/api/student/overview/${studentInfo.student_id}`)
 			.then((response) => response.json())
@@ -58,15 +59,17 @@ const StudentOverview = ({ studentInfo, updateStudentInfo }) => {
 	}
 
 	useEffect(() => {
-		console.log(id);
 		if (id) {
 			console.log("getting student info...");
 			loadStudentIdIfNone();
 		}
+	}, [id]);
+
+	useEffect(() => {
 		if (studentInfo.student_id) {
 			getOverview();
 		}
-	}, []);
+	}, [studentInfo]);
 
 	function detailDisplay() {
 		setDetailDisplayStatus(
