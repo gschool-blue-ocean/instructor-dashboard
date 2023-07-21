@@ -6,7 +6,6 @@
 
 - [Description](#description)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
@@ -68,9 +67,6 @@
 - `start` - Starts the production server.
 
 - `test` - Runs tests.
-
-<h2 id="usage" style="color: #17A2B8; text-align: center;">Usage</h2>
-Explain how to use your project. Provide code examples and describe any configuration or settings users might need to adjust.
 
 <h2 id="features" style="color: #17A2B8; text-align:center">Features</h2>
 <ul>
